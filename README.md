@@ -22,3 +22,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# 開発環境の立ち上げ方
+
+```
+$ docker-compose build
+$ docker-compose run web bundle exec rails webpacker:install
+$ docker-compose run web bundle exec rails db:create
+$ docker-compose up
+```
