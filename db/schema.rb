@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_05_02_031547) do
+ActiveRecord::Schema.define(version: 2020_05_02_060251) do
 
   create_table "albums", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
-    t.string "hash"
+    t.string "album_hash"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -27,10 +26,6 @@ ActiveRecord::Schema.define(version: 2020_05_02_031547) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["album_id"], name: "index_pictures_on_album_id"
   end
-
-  add_foreign_key "pictures", "albums"
-=======
-ActiveRecord::Schema.define(version: 2020_05_02_035001) do
 
   create_table "sns_credentials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "provider"
@@ -59,6 +54,6 @@ ActiveRecord::Schema.define(version: 2020_05_02_035001) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "pictures", "albums"
   add_foreign_key "sns_credentials", "users"
->>>>>>> sumie
 end
