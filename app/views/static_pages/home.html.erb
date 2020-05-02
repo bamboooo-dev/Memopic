@@ -1,0 +1,7 @@
+<h1>Home#index</h1>
+
+<% if user_signed_in? %>
+<%= current_user.email %>
+<% end %>
+
+<%= link_to 'Signin with Google', user_google_oauth2_omniauth_authorize_path %>
