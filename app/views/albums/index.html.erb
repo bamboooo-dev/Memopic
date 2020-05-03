@@ -1,1 +1,16 @@
 <h1>My Albums</h1>
+<div>
+  <%= form_with(model: @album_form, url: albums_path) do |form| %>
+    <%= form.text_field :name %>
+    <%= form.file_field :picture_name %>
+    <%= form.text_field :album_hash %>
+    <%= form.submit "登録"%>
+  <% end %>
+</div>
+<div>
+  <%@albums.each do |album|%>
+    <div>
+    <%= render partial: "album", locals: { album: album.name }%>
+    </div>
+  <%end%>
+</div>
