@@ -1,4 +1,4 @@
-class AlbumForm < ApplicationRecord
+class AlbumForm
   include ActiveModel::Model
 
   attr_accessor :name, :album_hash, :picture_name
