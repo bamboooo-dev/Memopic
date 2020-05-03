@@ -1,8 +1,12 @@
 class AlbumsController < ApplicationController
+
   def index
-    @albums = Album.all
-    @album_form = AlbumForm.new
+    if user_signed_in?
+      @albums = Album.all
+      @album_form = AlbumForm.new
+    end
   end
+
   def create
     @album_form = AlbumForm.new(album_params)
     if @album_form.save
@@ -11,6 +15,7 @@ class AlbumsController < ApplicationController
       redirect_to pictures_index_path
     end
   end
+
   def show
     
   end

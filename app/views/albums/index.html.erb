@@ -1,16 +1,25 @@
 <h1>My Albums</h1>
-<div>
-  <%= form_with(model: @album_form, url: albums_path) do |form| %>
-    <%= form.text_field :name %>
-    <%= form.file_field :picture_name %>
-    <%= form.text_field :album_hash %>
-    <%= form.submit "登録"%>
+
+<% if user_signed_in? %>
+  <%= current_user.email %>
+  <%= link_to 'ログアウト', logout_path %>
+  <div>
+    <%= form_with(model: @album_form, url: albums_path) do |form| %>
+      <%= form.text_field :name %>
+      <%= form.file_field :picture_name %>
+      <%= form.text_field :album_hash %>
+      <%= form.submit "登録"%>
+    <% end %>
+  </div>
+  <div>
+    <%@albums.each do |album|%>
+      <div>
+      <%= render partial: "album", locals: { album: album }%>
+      </div>
+    <%end%>
+  </div>
+<% else %>
+  <%= link_to user_google_oauth2_omniauth_authorize_path do %>
+    <%= image_tag 'btn_google_signin_light_normal_web@2x.png' %>
   <% end %>
-</div>
-<div>
-  <%@albums.each do |album|%>
-    <div>
-    <%= render partial: "album", locals: { album: album }%>
-    </div>
-  <%end%>
-</div>
+<% end %>
