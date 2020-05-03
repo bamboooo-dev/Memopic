@@ -10,9 +10,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    if session[:provider].present? && session[:uid].present?
+      password = Devise.friendly_token.first(8)
+      @user = User.create!(email: params[:user][:email], password: password, password_confirmation: password)
+      sns = SnsCredential.create(user_id: @user.id,uid: session[:uid], provider: session[:provider])
+    else
+      @user = User.create!(email: params[:user][:email], password: session[:password], password_confirmation: session[:password_confirmation])
+    end
+    redirect_to albums_index_path
+  end
 
   # GET /resource/edit
   # def edit

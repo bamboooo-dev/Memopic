@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 2020_05_02_060251) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "picture_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["picture_id"], name: "index_favorites_on_picture_id"
+    t.index ["user_id", "picture_id"], name: "index_favorites_on_user_id_and_picture_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "pictures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.bigint "album_id", null: false
@@ -34,6 +44,16 @@ ActiveRecord::Schema.define(version: 2020_05_02_060251) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_sns_credentials_on_user_id"
+  end
+
+  create_table "user_albums", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "album_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["album_id"], name: "index_user_albums_on_album_id"
+    t.index ["user_id", "album_id"], name: "index_user_albums_on_user_id_and_album_id", unique: true
+    t.index ["user_id"], name: "index_user_albums_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

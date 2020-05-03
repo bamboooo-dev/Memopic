@@ -2,7 +2,10 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :sns_credentials, dependent: :destroy
-
+  has_many :user_albums
+  has_many :albums, through: :user_albums
+  has_many :favorites
+  has_many :pictures, through: :favorites
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :trackable,
@@ -14,7 +17,7 @@ class User < ApplicationRecord
       if user.present?
         sns = SnsCredential.create(
           uid: auth.uid,
-         provider: auth.provider,
+          provider: auth.provider,
           user_id: user.id
         )
       else
