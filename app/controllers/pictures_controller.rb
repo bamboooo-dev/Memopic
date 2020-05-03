@@ -4,8 +4,17 @@ class PicturesController < ApplicationController
     @picture = Picture.new
   end
   def create
-    @picture = Picture.create(picture_params)
+    album = Album.new(
+      name: 'test',
+      album_hash: 'test_hash'
+    )
+    album.save
+    @picture = album.pictures.build(picture_params)
+    if @picture.save
     redirect_to pictures_index_path
+    else
+    redirect_to albums_index_path
+    end
   end
 
   private
