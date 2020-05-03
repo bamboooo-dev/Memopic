@@ -17,7 +17,7 @@ class User < ApplicationRecord
       if user.present?
         sns = SnsCredential.create(
           uid: auth.uid,
-         provider: auth.provider,
+          provider: auth.provider,
           user_id: user.id
         )
       else
