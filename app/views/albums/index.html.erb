@@ -1,11 +1,21 @@
 <h1>My Albums</h1>
-<div>
-  <%= form_with(model: @album_form, url: albums_path) do |form| %>
-    <%= form.text_field :name %>
-    <%= form.file_field :picture_name %>
-    <%= form.submit "登録"%>
+<% if user_signed_in? %>
+  <%= current_user.email %>
+  <%= link_to 'ログアウト', logout_path %>
+  <div>
+    <div>
+      <%= form_with(model: @album_form, url: albums_path) do |form| %>
+        <%= form.text_field :name %>
+        <%= form.file_field :picture_name %>
+        <%= form.submit "登録"%>
+      <% end %>
+    </div>
+    <div>
+      <%= render @albums %>
+    </div>
+  </div>
+<% else %>
+  <%= link_to user_google_oauth2_omniauth_authorize_path do %>
+    <%= image_tag 'btn_google_signin_light_normal_web@2x.png' %>
   <% end %>
-</div>
-<div>
-  <%= render @albums %>
-</div>
+<% end %>

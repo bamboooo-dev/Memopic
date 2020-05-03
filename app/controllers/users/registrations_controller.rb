@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       @user = User.create!(email: params[:user][:email], password: session[:password], password_confirmation: session[:password_confirmation])
     end
-    redirect_to albums_index_path
+    redirect_to albums_path
   end
 
   # GET /resource/edit

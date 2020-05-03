@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root to: 'albums#index'
+
   resources :albums, only: [:index, :create, :show]
   get 'static_pages/home'
   devise_for :users, controllers: {
