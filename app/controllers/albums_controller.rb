@@ -5,19 +5,21 @@ class AlbumsController < ApplicationController
   end
   def create
     @album_form = AlbumForm.new(album_params)
-    if @album_form.save
-      redirect_to('/pictures/index')
+    if album = @album_form.save
+      redirect_to album
     else
-      redirect_to pictures_index_path
+      redirect_to albums_path
     end
   end
   def show
-    
+    @album = Album.find(params[:id])
+    @album_name = @album.name
+    @pictures = @album.pictures
   end
 
   private
 
     def album_params
-      params.require(:album_form).permit(:name, :album_hash, :picture_name)
+      params.require(:album_form).permit(:name, :picture_name)
     end
 end
