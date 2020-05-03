@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  get 'albums/index'
+  resources :albums, only: [:index, :create, :show]
   get 'pictures/index'
-  post 'pictures/create'
   get 'static_pages/home'
   devise_for :users, controllers: {
     sessions: 'users/sessions',

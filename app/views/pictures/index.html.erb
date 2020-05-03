@@ -1,7 +1,3 @@
 <h1>My Albums</h1>
-<%= form_for(@picture, url: pictures_create_path) do |f| %>
-  <%= f.file_field :name %>
-  <%= f.submit "送信", class: "btn btn-primary" %>
-<% end %>
 
 <%= render @pictures %>
