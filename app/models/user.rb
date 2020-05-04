@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :user_albums
   has_many :albums, through: :user_albums
   has_many :favorites
+  has_many :favoring, through: :favorites, source: :picture
   has_many :pictures, through: :favorites
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -57,4 +58,17 @@ class User < ApplicationRecord
     end
     return { user: user ,sns: sns}
   end
+
+  def favor(picture)
+    favoring << picture
+  end
+
+  def favoring?(picture)
+    favoring.include?(picture)
+  end
+
+  def unfavor(picture)
+    favorites.find_by(picture_id: picture.id).destroy
+  end
+
 end
