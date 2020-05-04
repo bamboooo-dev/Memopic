@@ -1,1 +1,25 @@
-<li><%= image_tag picture.picture_name.url %></li>
+<div class="picture">
+  <%= image_tag picture.picture_name.url %>
+  <div class="info">
+    <div id="favorite" class="favorite">
+      <% if current_user %>
+        <% if current_user.favoring?(picture) %>
+          <%= render 'unlike', picture: picture %>
+        <% else %>
+          <%= render 'like', picture: picture %>
+        <% end %>
+      <% else %>
+        <%= render 'like', picture: picture %>
+      <% end %>
+    </div>
+    <span id="favorite-count-{{.FileName}}" style="color:white;"></span>
+  </div>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.5.0.min.js"
+  integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+  var imgWidth = $('img').width();
+  $('.info').width(imgWidth);
+</script>

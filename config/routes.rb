@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  root to: 'albums#index'
+  devise_scope :user do
+    root "users/sessions#new"
+  end
 
   resources :albums, only: [:index, :create, :show]
   get 'static_pages/home'
@@ -16,4 +18,6 @@ Rails.application.routes.draw do
     get "login", :to => "users/sessions#new"
     get "logout", :to => "users/sessions#destroy"
   end
+
+  resources :favorites, only: [:create, :destroy]
 end
