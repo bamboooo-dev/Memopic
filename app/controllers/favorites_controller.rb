@@ -4,12 +4,18 @@ class FavoritesController < ApplicationController
   def create
     @picture = Picture.find(params[:picture_id])
     current_user.favor(@picture)
-    redirect_to @picture.album
+    respond_to do |format|
+      format.html { redirect_to @picture.album }
+      format.js
+    end
   end
 
   def destroy
     @picture = Picture.find(params[:id])
     current_user.unfavor(@picture)
-    redirect_to @picture.album
+    respond_to do |format|
+      format.html { redirect_to @picture.album }
+      format.js
+    end
   end
 end
