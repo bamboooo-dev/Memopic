@@ -5,7 +5,7 @@ class AlbumForm
 
   validates :name, presence: true
 
-  def save
+  def save(user)
     return false if invalid?
     album = Album.new(name: name, album_hash: SecureRandom.alphanumeric(20))
 
@@ -13,6 +13,7 @@ class AlbumForm
       album.pictures.new(picture_name: picture)
     end
     album.save
+    album.users << user
     return album
   end
 end

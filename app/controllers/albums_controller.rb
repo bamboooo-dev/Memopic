@@ -2,14 +2,14 @@ class AlbumsController < ApplicationController
 
   def index
     if user_signed_in?
-      @albums = Album.all
+      @albums = current_user.albums
       @album_form = AlbumForm.new
     end
   end
 
   def create
     @album_form = AlbumForm.new(album_params)
-    if album = @album_form.save
+    if album = @album_form.save(current_user)
       redirect_to album
     else
       redirect_to albums_path
