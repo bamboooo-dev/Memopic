@@ -1,8 +1,10 @@
 class AlbumsController < ApplicationController
+  include AlbumsHelper
 
   def index
     if user_signed_in?
       @albums = current_user.albums
+      @thumbpics = pick_thumbpic
       @album_form = AlbumForm.new
     end
   end

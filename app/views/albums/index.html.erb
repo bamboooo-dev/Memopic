@@ -13,7 +13,9 @@
       <% end %>
     </div>
     <div class="albums">
-      <%= render @albums %>
+      <% @albums.zip(@thumbpics).each do |album, thumbpic| %>
+        <%= render partial: "album" ,locals: {album: album, thumbpic: thumbpic} %>
+      <% end %>
     </div>
   </div>
 <% end %>
