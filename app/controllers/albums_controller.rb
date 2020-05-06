@@ -17,7 +17,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @album = Album.find(params[:id])
+    @album = Album.find_by!(album_hash: params[:album_hash])
     @pictures = @album.pictures
   end
 
