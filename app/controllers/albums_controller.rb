@@ -1,10 +1,9 @@
 class AlbumsController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
 
   def index
-    if user_signed_in?
-      @albums = current_user.albums
-      @album_form = AlbumForm.new
-    end
+    @albums = current_user.albums
+    @album_form = AlbumForm.new
   end
 
   def create

@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_scope :user do
-    root "users/sessions#new"
-  end
+  root 'albums#index'
 
   resources :albums, only: [:index, :create, :show]
   get 'static_pages/home'
