@@ -18,13 +18,12 @@ class AlbumsController < ApplicationController
 
   def show
     @album = Album.find(params[:id])
-    @album_name = @album.name
     @pictures = @album.pictures
   end
 
   private
 
     def album_params
-      params.require(:album_form).permit(:name, {picture_name: []})
+      params.require(:album_form).permit(:name, {pictures: []})
     end
 end
