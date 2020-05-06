@@ -6,7 +6,7 @@
     <div>
       <%= form_with(model: @album_form, url: albums_path) do |form| %>
         <%= form.text_field :name %>
-        <%= form.file_field :picture_name, :multiple => true %>
+        <%= form.file_field :pictures, :multiple => true %>
         <%= form.submit "登録"%>
       <% end %>
     </div>
