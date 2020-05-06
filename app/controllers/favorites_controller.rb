@@ -3,6 +3,7 @@ class FavoritesController < ApplicationController
 
   def create
     @picture = Picture.find(params[:picture_id])
+    current_user.join(@picture.album) unless current_user.joining?(@picture.album)
     current_user.favor(@picture)
     respond_to do |format|
       format.html { redirect_to @picture.album }
