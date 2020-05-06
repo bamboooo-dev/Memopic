@@ -1,1 +1,8 @@
-<li><%= link_to album.name, album %></li>
+<%= link_to album do %>
+  <div class="card">
+    <div class="thumbnail">
+      <%= image_tag thumbpic.picture_name.url, class: 'thumbimg'%>
+    </div>
+    <span class="link"><%= album.name %></span>
+  </div>
+<% end %>

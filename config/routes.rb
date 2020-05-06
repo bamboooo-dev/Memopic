@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'albums#index'
 
-  resources :albums, only: [:index, :create, :show]
+  resources :albums, only: [:index, :create, :show], param: :album_hash
   get 'static_pages/home'
   devise_for :users, controllers: {
     sessions: 'users/sessions',

@@ -1,17 +1,21 @@
-<h1>My Albums</h1>
+<h1 id="title">My Albums</h1>
 <% if user_signed_in? %>
-  <%= current_user.email %>
-  <%= link_to 'ログアウト', logout_path %>
-  <div>
-    <div>
+  <div class="main-content">
+    <div class="user-info">
+      <%= current_user.email %>
+      <%= link_to 'ログアウト', logout_path %>
+    </div>
+    <div class="album_form">
       <%= form_with(model: @album_form, url: albums_path) do |form| %>
         <%= form.text_field :name %>
         <%= form.file_field :pictures, :multiple => true %>
         <%= form.submit "登録"%>
       <% end %>
     </div>
-    <div>
-      <%= render @albums %>
+    <div class="albums">
+      <% @albums.zip(@thumbpics).each do |album, thumbpic| %>
+        <%= render partial: "album" ,locals: {album: album, thumbpic: thumbpic} %>
+      <% end %>
     </div>
   </div>
 <% end %>

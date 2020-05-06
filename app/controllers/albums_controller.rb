@@ -1,8 +1,12 @@
 class AlbumsController < ApplicationController
+
+  include AlbumsHelper
+
   before_action :authenticate_user!, only: [:index, :create]
 
   def index
     @albums = current_user.albums
+    @thumbpics = pick_thumbpic
     @album_form = AlbumForm.new
   end
 
@@ -16,7 +20,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @album = Album.find(params[:id])
+    @album = Album.find_by!(album_hash: params[:album_hash])
     @pictures = @album.pictures
   end
 
