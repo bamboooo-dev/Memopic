@@ -1,7 +1,7 @@
-<div class="picture">
+<div class="picture-box">
   <%= image_tag picture.picture_name.url %>
   <div class="info">
-    <div id="favorite_<%= picture.id %>" class="favorite">
+    <div id="favorite-<%= picture.id %>" class="favorite">
       <% if current_user %>
         <% if current_user.favoring?(picture) %>
           <%= render 'pictures/unlike', picture: picture %>
@@ -12,14 +12,9 @@
         <%= render 'pictures/before_login_like', picture: picture %>
       <% end %>
     </div>
-    <span id="favorite-count-{{.FileName}}" style="color:white;"></span>
   </div>
 </div>
 <script
   src="https://code.jquery.com/jquery-3.5.0.min.js"
   integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
   crossorigin="anonymous"></script>
-<script type="text/javascript">
-  var imgWidth = $('img').width();
-  $('.info').width(imgWidth);
-</script>

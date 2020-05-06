@@ -1,5 +1,6 @@
 <%= link_to favorite_path(picture.id), method: :delete, remote: true do %>
   <span style="color:white">
-    <i class="fas fa-heart fa-2x"></i>
+    <i class="fas fa-heart"></i>
+    <%= picture.favoriters.count %>
   </span>
 <% end %>

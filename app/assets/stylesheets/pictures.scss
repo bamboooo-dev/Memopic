@@ -1,15 +1,23 @@
 // Place all the styles related to the Pictures controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.picture{
+.picture-box{
   position: relative;
+  display: inline-block;
+  img{
+    display: block;
+  }
 }
 .favorite{
   display: inline-block;
   margin-left: 10px;
+  span{
+    font-size: 24px;
+  }
 }
 .info{
   position: absolute;
-  top: 86.5%;
+  bottom: 0;
+  width: 100%;
   background: rgba(0, 0, 0, 0.3);
 }

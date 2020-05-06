@@ -1,5 +1,6 @@
 <%= link_to favorites_path(picture_id: picture.id), method: :post do %>
   <span style="color:white">
-    <i class="far fa-heart fa-2x"></i>
+    <i class="far fa-heart"></i>
+    <%= picture.favoriters.count %>
   </span>
 <% end %>
