@@ -1,1 +1,8 @@
-<li><%= link_to album.name, album %></li>
+<%= link_to album do %>
+    <div class="card">
+      <div class="thumbnail">
+        <img src="https://www.tabikobo.com/special/zekkei/images/main.jpg" class="thumbimg">
+      </div>
+      <span class="link"><%= album.name %></span>
+    </div>
+<% end %>
