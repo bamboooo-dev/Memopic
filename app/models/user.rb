@@ -71,4 +71,12 @@ class User < ApplicationRecord
     favorites.find_by(picture_id: picture.id).destroy
   end
 
+  def join(album)
+    albums << album
+  end
+
+  def joining?(album)
+    albums.include?(album)
+  end
+
 end

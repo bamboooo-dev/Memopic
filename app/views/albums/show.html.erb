@@ -1,5 +1,10 @@
-<h1><%= @album.name %></h1>
-<div>
+<h1 id="album-title"><%= @album.name %></h1>
+<% if current_user && current_user.joining?(@album) %>
+  <%= link_to '参加中', '/', class: "disabled btn-gradient-radius" %>
+<% else %>
+  <%= link_to '参加する', user_albums_path(album_id: @album.id), method: :post, class: "btn-gradient-radius" %>
+<% end %>
+<div class="pictures-wrapper">
   <%= render @pictures %>
 </div>
 <script src="https://kit.fontawesome.com/81a1ab3943.js" crossorigin="anonymous"></script>
