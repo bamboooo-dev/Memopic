@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 # 画像アップロードのためのgem
 gem 'carrierwave'
-gem 'fog'
+gem 'fog-aws'
 gem 'rmagick'
 
 gem 'devise'
