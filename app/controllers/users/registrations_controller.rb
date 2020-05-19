@@ -18,6 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       @user = User.create!(email: params[:user][:email], password: session[:password], password_confirmation: session[:password_confirmation])
     end
+    sign_in(@user)
     redirect_to albums_path
   end
 
