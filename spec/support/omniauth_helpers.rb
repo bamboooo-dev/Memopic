@@ -7,7 +7,8 @@ module OmniauthHelpers
       uid: '1234',
       info: {
         name: 'mockuser',
-        image: "https://test.com/test.png"
+        image: "https://test.com/test.png",
+        email: 'test@gmail.com'
       }
       })
   end

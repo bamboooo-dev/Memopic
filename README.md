@@ -12,6 +12,10 @@ $ docker-compose exec web rails db:create
 $ docker-compose exec web rails db:migrate
 ```
 
+# テスト方法
+```
+$ docker-compose exec web rspec
+```
 # デプロイ方法
 ```
 $ heroku container:push web
