@@ -40,6 +40,9 @@ Capybara.register_driver :headless_chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options)
 end
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::ControllerHelpers, type: :view
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

@@ -9,6 +9,8 @@ class AlbumForm
     return false if invalid?
     album = Album.new(name: name, album_hash: SecureRandom.alphanumeric(20))
 
+    return false if pictures.nil?
+
     pictures.each do |picture|
       album.pictures.new(picture_name: picture)
     end

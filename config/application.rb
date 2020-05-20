@@ -17,5 +17,6 @@ module Gopicture
     # the framework and any gems in your application.
     config.hosts << '.herokuapp.com'
     config.hosts << '127.0.0.1'
+    config.hosts << '.example.com'
   end
 end
