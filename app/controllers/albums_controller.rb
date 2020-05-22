@@ -2,8 +2,9 @@ class AlbumsController < ApplicationController
 
   include AlbumsHelper
 
-  before_action :authenticate_user!, only: [:index, :create]
-
+  before_action :authenticate_user!, only: [:index, :create, :destroy]
+  before_action :confirm_sharer, only: [:destroy]
+  
   def index
     @albums = current_user.albums
     @thumbpics = pick_thumbpic
@@ -24,9 +25,19 @@ class AlbumsController < ApplicationController
     @pictures = @album.pictures
   end
 
+  def destroy
+    Album.find_by(album_hash: params[:album_hash]).destroy
+    redirect_to albums_url
+  end
+
   private
 
     def album_params
       params.require(:album_form).permit(:name, {pictures: []})
+    end
+
+    def confirm_sharer
+      @album = Album.find_by(album_hash: params[:album_hash])
+      redirect_to(albums_url) unless @album.users.include?(current_user)
     end
 end

@@ -4,6 +4,10 @@
 <% else %>
   <%= link_to '参加する', user_albums_path(album_id: @album.id), method: :post, class: "btn-gradient-radius" %>
 <% end %>
+<%= link_to 'アルバム一覧に戻る', albums_path %>
+<% if @album.users.include?(current_user) %>
+| <%= link_to 'このアルバムを削除する', @album, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+<% end %>
 <div class="pictures-wrapper">
   <%= render @pictures %>
 </div>
