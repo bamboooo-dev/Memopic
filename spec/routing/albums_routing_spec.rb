@@ -17,5 +17,14 @@ RSpec.describe AlbumsController, type: :routing do
     it "routes to #destroy" do
       expect(delete: "/albums/1").to route_to("albums#destroy", album_hash: "1")
     end
+
+    it "routes to #edit" do
+      expect(get: "/albums/1/edit").to route_to("albums#edit", album_hash: "1")
+    end
+
+    it "routes to #update" do
+      expect(patch: "/albums/1").to route_to("albums#update", album_hash: "1")
+    end
+
   end
 end

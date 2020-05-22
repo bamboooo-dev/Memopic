@@ -18,4 +18,17 @@ class AlbumForm
     album.users << user
     return album
   end
+
+  def update(album)
+    if album.update(name: name)
+      return true if pictures.nil?
+      pictures.each do | picture |
+        album.pictures.new(picture_name: picture)
+      end
+      album.save
+      return true
+    else
+      return false
+    end
+  end
 end

@@ -11,6 +11,7 @@ RSpec.describe "/albums", type: :request do
 
   let(:valid_album_name){ "test_album" }
   let(:picture){ build(:picture, picture_name: Rack::Test::UploadedFile.new(Rails.root.join('spec/factories/test.jpg'), 'image/jpeg')) }
+  let(:update_picture){ build(:picture, picture_name: Rack::Test::UploadedFile.new(Rails.root.join('spec/factories/update.png'), 'image/png')) }
   let(:invalid_album_name) { "" }
 
   describe "GET /index" do
@@ -72,35 +73,41 @@ RSpec.describe "/albums", type: :request do
     end
   end
 
-  # describe "PATCH /update" do
-  #   context "with valid parameters" do
-  #     let(:new_attributes) {
-  #       skip("Add a hash of attributes valid for your model")
-  #     }
-  #
-  #     it "updates the requested album" do
-  #       album = Album.create! valid_attributes
-  #       patch album_url(album), params: { album: new_attributes }
-  #       album.reload
-  #       skip("Add assertions for updated state")
-  #     end
-  #
-  #     it "redirects to the album" do
-  #       album = Album.create! valid_attributes
-  #       patch album_url(album), params: { album: new_attributes }
-  #       album.reload
-  #       expect(response).to redirect_to(album_url(album))
-  #     end
-  #   end
-  #
-  #   context "with invalid parameters" do
-  #     it "renders a successful response (i.e. to display the 'edit' template)" do
-  #       album = Album.create! valid_attributes
-  #       patch album_url(album), params: { album: invalid_attributes }
-  #       expect(response).to be_successful
-  #     end
-  #   end
-  # end
+  describe "PATCH /update" do
+    context "with valid parameters" do
+
+      it "updates the requested album" do
+        @album = create(:album, users: [ @user ], pictures: [ picture ])
+        expect {
+          patch album_url(@album), params: { album_form: { name: "アップデート", pictures: [ update_picture ] } }
+          @album.reload
+        }.to change(@album.pictures, :count).by(1)
+        expect(@album.name).to eq "アップデート"
+      end
+
+      it "updates with no picture" do
+        @album = create(:album, users: [ @user ], pictures: [ picture ])
+        patch album_url(@album), params: { album_form: { name: "アップデート", pictures: [] } }
+        @album.reload
+        expect(@album.name).to eq "アップデート"
+      end
+
+      it "redirects to the album" do
+        @album = create(:album, users: [ @user ], pictures: [ picture ])
+        patch album_url(@album), params: { album_form: { name: "アップデート", pictures: [ update_picture ] } }
+        expect(response).to redirect_to(album_url(@album))
+      end
+
+    end
+
+    context "with invalid parameters" do
+      it "renders a successful response (i.e. to display the 'edit' template)" do
+        @album = create(:album, users: [ @user ], pictures: [ picture ])
+        patch album_url(@album), params: { album_form: { name: "", pictures: [ update_picture ] } }
+        expect(response).to redirect_to edit_album_url(@album)
+      end
+    end
+  end
 
   describe "DELETE /albums/:album_hash" do
     it "destroys the correct user's requested album" do
