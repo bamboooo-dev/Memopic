@@ -12,6 +12,9 @@
         <%= render 'pictures/before_login_like', picture: picture %>
       <% end %>
     </div>
+    <div id="comment-<%= picture.id %>" class="comment">
+      <%= render 'pictures/comment' %>
+    </div>
   </div>
 </div>
 <script
