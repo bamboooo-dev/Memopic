@@ -1,5 +1,5 @@
 <div class="picture-box">
-  <%= image_tag picture.picture_name.url %>
+  <%= image_tag picture.picture_name.url ,class: 'js-show-popup'%>
   <div class="info">
     <div id="favorite-<%= picture.id %>" class="favorite">
       <% if current_user %>
