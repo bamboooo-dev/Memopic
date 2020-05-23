@@ -29,7 +29,9 @@ jobs:
           - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
+      - run: rm -rf bin/webpack*
       - run: bundle exec rails webpacker:install
+      - run: bundle exec rails webpacker:compile
       - run: rm ./config/database.yml
       - run: mv ./config/database.yml.ci ./config/database.yml
 
