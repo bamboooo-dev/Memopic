@@ -29,6 +29,7 @@ jobs:
           - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
+      - run: rails webpacker:install
       - run: rm ./config/database.yml
       - run: mv ./config/database.yml.ci ./config/database.yml
 
