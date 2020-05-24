@@ -1,5 +1,5 @@
 <div class="picture-box">
-  <%= image_tag picture.picture_name.url %>
+  <%= image_tag picture.picture_name.url ,class: 'js-show-popup'%>
   <div class="info">
     <div id="favorite-<%= picture.id %>" class="favorite">
       <% if current_user %>
@@ -11,6 +11,9 @@
       <% else %>
         <%= render 'pictures/before_login_like', picture: picture %>
       <% end %>
+    </div>
+    <div id="comment-<%= picture.id %>" class="comment">
+      <%= render 'pictures/comment' %>
     </div>
   </div>
 </div>

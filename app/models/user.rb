@@ -6,7 +6,9 @@ class User < ApplicationRecord
   has_many :albums, through: :user_albums
   has_many :favorites
   has_many :favoring, through: :favorites, source: :picture
+  has_many :comments
   has_many :pictures, through: :favorites
+  has_many :pictures, through: :comments
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :trackable,

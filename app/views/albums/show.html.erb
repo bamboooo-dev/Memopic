@@ -12,4 +12,12 @@
 <div class="pictures-wrapper">
   <%= render @pictures %>
 </div>
+<div class="popup" id="js-popup">
+  <div class="popup-inner">
+    <div class="close-btn" id="js-close-btn"><i style="color:black;"class="fas fa-times"></i></div>
+    <img src="">
+  </div>
+  <div class="black-background" id="js-black-bg"></div>
+</div>
+<%= javascript_pack_tag 'albums/show' %>
 <script src="https://kit.fontawesome.com/81a1ab3943.js" crossorigin="anonymous"></script>
