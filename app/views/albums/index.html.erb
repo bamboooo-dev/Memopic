@@ -1,4 +1,4 @@
-<h1 id="title">My Albums</h1>
+<h1 id="title">Memopic</h1>
 <% if user_signed_in? %>
   <div class="main-content">
     <div class="user-info">
@@ -6,10 +6,29 @@
       <%= link_to 'ログアウト', logout_path %>
     </div>
     <div class="album_form">
-      <%= form_with(model: @album_form, url: albums_path) do |form| %>
-        <%= form.text_field :name %>
-        <%= form.file_field :pictures, :multiple => true %>
-        <%= form.submit "登録"%>
+      <div class="wrapper-button-new-album"><button class="button-new-album">新しいアルバムを作成する</button></div>
+      <%= form_with(model: @album_form, url: albums_path, class: "form-new-album") do |form| %>
+        <div id="album-name-input">
+          <%= form.text_field :name, placeholder: 'タイトルを追加', class: "input-new-album-title", autocomplete:"off" %>
+        </div>
+
+        <label class="file-label">
+          <span class="filelabel" title="ファイルを選択">
+            <span style="color:black">
+              <i class="fas fa-plus-circle"></i>
+            </span>
+            <span style="color: orange">
+              <i class="far fa-images fa-4x"></i>
+            </span>
+          </span>
+          <%= form.file_field :pictures, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: 'file-input' %>
+        </label>
+        <div class="right">
+          <%= button_tag type: 'submit', class: "button-submit" do %>
+            <i class="fas fa-cloud-upload-alt"></i>  アップロードする
+          <% end %>
+        </div>
+
       <% end %>
     </div>
     <div class="albums">
@@ -19,3 +38,23 @@
     </div>
   </div>
 <% end %>
+<script src="https://kit.fontawesome.com/81a1ab3943.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('.button-new-album').on('click', () => {
+      $('.form-new-album').slideToggle(alertFunc);
+    });
+    function alertFunc(){
+      if ($(this).css('display') != 'none') {
+        $(".button-new-album").text("▲ 閉じる");
+        $(".button-new-album").css('color', 'orange')
+        $(".button-new-album").css('background', 'white')
+      }else{
+        $(".button-new-album").text("新しいアルバムを作成する");
+        $(".button-new-album").css('color', '#fff')
+        $(".button-new-album").css('background', 'linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%)')
+      }
+    };
+  });
+</script>

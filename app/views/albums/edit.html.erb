@@ -1,0 +1,11 @@
+<%= form_with(model: @album_form, url: @album, method: :patch) do |f| %>
+  <%= f.text_field :name %>
+<div class="album_form">
+    <%= f.file_field :pictures, :multiple => true, accept: 'image/png,image/gif,image/jpeg' %>
+    <%= f.submit '完了' %>
+    <div class="pictures-wrapper">
+      <%= render @pictures %>
+    </div>
+  <% end %>
+</div>
+<script src="https://kit.fontawesome.com/81a1ab3943.js" crossorigin="anonymous"></script>

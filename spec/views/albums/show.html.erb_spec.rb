@@ -16,6 +16,7 @@ RSpec.describe "albums/show", type: :view do
     render
     expect(rendered).to have_link('アルバム一覧に戻る', href: albums_path)
     expect(rendered).to have_link('このアルバムを削除する', href: album_path(album))
+    expect(rendered).to have_link('このアルバムを編集する', href: edit_album_path(album))
   end
 
   it "don't render link to destroy album for unsharer" do
@@ -23,5 +24,6 @@ RSpec.describe "albums/show", type: :view do
     render
     expect(rendered).to have_link('アルバム一覧に戻る', href: albums_path)
     expect(rendered).not_to have_link('このアルバムを削除する', href: album_path(album))
+    expect(rendered).not_to have_link('このアルバムを編集する', href: edit_album_path(album))
   end
 end
