@@ -33,7 +33,7 @@ RSpec.describe "/albums", type: :request do
     it "renders ordered by count of favorites" do
       update_picture.favorites << favorite
       get album_path(album)
-      expect(assigns(:pictures)).to match([update_picture, picture])
+      expect(assigns(:top_pictures)).to match([update_picture, picture])
     end
   end
 

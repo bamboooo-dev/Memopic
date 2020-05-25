@@ -54,6 +54,11 @@ a.disabled {
 .pictures-wrapper {
   margin-top: 30px;
 }
+.top-pictures{
+  display: grid;
+  grid-template-rows: 300px 300px ;
+  grid-template-columns: 40% 30% 30%;
+}
 .btn-gradient-radius {
   display: inline-block;
   padding: 7px 20px;
