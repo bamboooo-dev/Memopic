@@ -22,7 +22,7 @@ class AlbumsController < ApplicationController
 
   def show
     @album = Album.find_by!(album_hash: params[:album_hash])
-    @pictures = @album.pictures
+    @pictures =  @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc')
   end
 
   def edit
