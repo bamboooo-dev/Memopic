@@ -22,7 +22,14 @@ class AlbumsController < ApplicationController
 
   def show
     @album = Album.find_by!(album_hash: params[:album_hash])
-    @pictures = @album.pictures
+    @pictures =  @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc')
+    @top_pictures = @pictures.take(5)
+    @bottom_pictures =
+      if @pictures.length > 5
+        @pictures[5..-1]
+      else
+        []
+      end
   end
 
   def edit

@@ -10,7 +10,12 @@
 |  <%= link_to 'このアルバムを編集する', edit_album_path(@album) %>
 <% end %>
 <div class="pictures-wrapper">
-  <%= render @pictures %>
+  <div class="top-pictures">
+    <%= render @top_pictures %>
+  </div>
+  <div class="bottom-pictures">
+    <%= render @bottom_pictures %>
+  </div>
 </div>
 <div class="popup" id="js-popup">
   <div class="popup-inner">

@@ -8,7 +8,8 @@ RSpec.describe "albums/show", type: :view do
 
   before(:each) do
     assign(:album, album)
-    assign(:pictures, album.pictures)
+    assign(:top_pictures, album.pictures)
+    assign(:bottom_pictures, [])
   end
 
   it "renders link to destroy album for sharer" do
