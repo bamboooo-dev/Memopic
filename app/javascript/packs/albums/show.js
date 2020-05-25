@@ -3,16 +3,20 @@ function popupImage() {
   if(!popup) return;
 
   $('.js-show-popup').on("click", function(){
-    var imgsrc = $(this).attr('src');
-    $('.popup-inner').find('img').attr('src',imgsrc);
+    if($(this).prop('tagName') == 'IMG'){
+      var imgsrc = $(this).attr('src');
+      $('.popup-inner').find('img').attr('src',imgsrc);
+    }
     popup.classList.toggle('is-show');
   });
 
   $('#js-close-btn').on("click", function(){
+    $('.popup-content').html('<img>');
     popup.classList.toggle('is-show');
   });
 
   $('#js-black-bg').on("click", function(){
+    $('.popup-content').html('<img>');
     popup.classList.toggle('is-show');
   });
 }
