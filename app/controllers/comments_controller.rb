@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:create, :destroy]
 
   def index
     @picture = Picture.find(params[:picture_id])
@@ -16,6 +16,15 @@ class CommentsController < ApplicationController
     @comment = @picture.comments.new(comment_params)
     @comment.user_id = current_user.id
     @comment.save
+    respond_to do |format|
+      format.html { redirect_to @picture.album }
+      format.js
+    end
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
     respond_to do |format|
       format.html { redirect_to @picture.album }
       format.js
