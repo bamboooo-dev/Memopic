@@ -2,7 +2,7 @@
 <% if user_signed_in? %>
   <div class="main-content">
     <div class="user-info">
-      <%= current_user.email %>
+      <%= current_user.nickname %>
       <%= link_to 'ログアウト', logout_path %>
     </div>
     <div class="album_form">
