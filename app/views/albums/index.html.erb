@@ -23,6 +23,7 @@
           </span>
           <%= form.file_field :pictures, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: 'file-input' %>
         </label>
+        <span class='file-count'>画像が選択されていません</span>
         <div class="right">
           <%= button_tag type: 'submit', class: "button-submit", data: { disable_with: "アップロード中" } do %>
             <i class="fas fa-cloud-upload-alt"></i>  アップロードする
@@ -56,5 +57,17 @@
         $(".button-new-album").css('background', 'linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%)')
       }
     };
+  });
+</script>
+<script type="text/javascript">
+$(function () {
+  $('.file-input').on('change', function (e) {
+      let fileCount = $(this).get(0).files.length
+      if(fileCount > 0){
+        $('.file-count').text(String(fileCount) + '個の画像が選択されています');
+      }else{
+        $('.file-count').text('画像が選択されていません');
+      }
+    });
   });
 </script>
