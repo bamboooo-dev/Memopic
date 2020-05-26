@@ -1,1 +1,3 @@
-$('.popup-content').html("<%= j(render 'comments/comment_area', {picture: @picture, comments: @comments}) %>");
+if ($('.popup-comment').find('.comment_content').length < 1) {
+  $('.popup-comment').append("<%= j(render 'comments/comment_area', {picture: @picture, comments: @comments}) %>");
+}

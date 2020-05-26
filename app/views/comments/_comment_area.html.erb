@@ -1,7 +1,7 @@
 <div class='comment_content'>
   <%= render comments %>
 </div>
-<div>
+<div class='comment-form'>
   <%= form_with url: comments_path(picture_id: picture.id), remote: true do |f| %>
       <%= f.text_area :content, id: 'comment_form' %>
       <%= f.submit "送信" %>
