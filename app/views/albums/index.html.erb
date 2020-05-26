@@ -24,7 +24,7 @@
           <%= form.file_field :pictures, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: 'file-input' %>
         </label>
         <div class="right">
-          <%= button_tag type: 'submit', class: "button-submit" do %>
+          <%= button_tag type: 'submit', class: "button-submit", data: { disable_with: "アップロード中" } do %>
             <i class="fas fa-cloud-upload-alt"></i>  アップロードする
           <% end %>
         </div>
