@@ -1,7 +1,6 @@
-<% if comments?(picture) %>
-  <h1>まだコメントがありません</h1>
-<% else %>
-  <% comments.each do |comment| %>
-  <%= comment.content %>
-  <% end %>
+<%= link_to comments_path(picture_id: picture.id), class: 'js-show-popup', method: :get, remote: true do %>
+  <span style="color:white;">
+    <i class="far fa-comment"></i>
+    <%= picture.comments.count %>
+  </span>
 <% end %>

@@ -13,12 +13,7 @@
       <% end %>
     </div>
     <div id="comment-<%= picture.id %>" class="comment">
-      <%= link_to comments_path(picture_id: picture.id), class: 'js-show-popup', method: :get, remote: true do %>
-        <span style="color:white;">
-          <i class="far fa-comment"></i>
-          <%= picture.comments.count %>
-        </span>
-      <% end %>
+      <%= render 'pictures/comment', picture: picture %>
     </div>
   </div>
 </div>
