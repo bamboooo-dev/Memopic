@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to @picture.album }
+      format.html { redirect_to @comment.picture.album }
       format.js
     end
   end

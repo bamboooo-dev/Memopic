@@ -4,8 +4,8 @@ class Picture < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favoriters, through: :favorites, source: :user
   has_many :comments, dependent: :destroy
-end
 
-  def comments?(picture)
-    picture.comments.empty?
+  def has_comments?
+    comments.empty?
   end
+end

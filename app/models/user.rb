@@ -81,4 +81,7 @@ class User < ApplicationRecord
     albums.include?(album)
   end
 
+  def commented?(comment)
+    user = comment.user
+  end
 end

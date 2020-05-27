@@ -1,6 +1,6 @@
 <li id="comment-<%= comment.id %>">
   <%= comment.content %>
-  <% if comment?(comment, current_user) %>
+  <% if comment.commenter?(current_user) %>
     <%= link_to comment_path(id: comment.id), method: :delete, remote: true, data: { confirm: '削除してよろしいですか？' }  do %>
       <i class="fas fa-trash-alt"></i>
     <% end %>
