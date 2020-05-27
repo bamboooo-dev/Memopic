@@ -1,3 +1,29 @@
 // Place all the styles related to the comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.look_comments {
+  cursor: pointer;
+}
+.comment_content {
+  
+}
+.comments {
+  background-color: #f0f2f5;
+  border-radius: 15px;
+  list-style: none;
+  display: flex;
+  margin-bottom: 20px;
+}
+.commenter {
+  font-weight: bold;
+  padding-right: 10px;
+}
+.comment_delete {
+  margin-top: 15px;
+  margin-left: 10px;
+}
+.comment-date {
+  padding-left: 20px;
+  font-size: 12px;
+  padding-top: 20px;
+}

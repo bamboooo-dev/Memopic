@@ -139,8 +139,9 @@ a.disabled {
   max-width: 700px;
   height: 40%;
   padding: 50px;
-  background-color: #efede8;
+  background-color: #ffffff;
   z-index: 2;
+  overflow-y: scroll;
 }
 .popup-inner img {
   width: 100%;
@@ -255,7 +256,8 @@ a.disabled {
     max-width: 700px;
     height: 60%;
     padding: 50px;
-    background-color: #efede8;
+    background-color: #ffffff;
     z-index: 2;
+    overflow-y: scroll;
   }
 }
