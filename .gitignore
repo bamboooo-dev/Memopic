@@ -17,6 +17,9 @@
 !/tmp/pids/.keep
 !/tmp/sockets/
 !/tmp/sockets/.keep
+/tmp/images/*
+!/tmp/images/
+!/tmp/images/.keep
 
 # Ignore uploaded files in development.
 /storage/*
