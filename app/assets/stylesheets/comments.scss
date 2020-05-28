@@ -4,9 +4,6 @@
 .look_comments {
   cursor: pointer;
 }
-.comment_content {
-  
-}
 .comments {
   background-color: #f0f2f5;
   border-radius: 15px;
@@ -17,13 +14,34 @@
 .commenter {
   font-weight: bold;
   padding-right: 10px;
+  flex-basis: 20%;
 }
-.comment_delete {
+.comment-content {
+  flex-basis: 45%;
+  flex-wrap: wrap;
+  word-break: break-all;
+}
+.comment-delete {
   margin-top: 15px;
   margin-left: 10px;
+  flex-basis: 5%;
 }
 .comment-date {
   padding-left: 20px;
   font-size: 12px;
   padding-top: 20px;
+  flex-basis: 30%;
+}
+.comment_form_text {
+  font-size: 13px;
+  padding-left: 20px;
+  border-radius: 15px;
+  border: 0;
+  background-color: #f0f2f5;
+  height: 30px;
+  width: 100%;
+}
+.comment_form_submit {
+  float: right;
+  margin-top: 5px;
 }

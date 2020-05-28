@@ -1,5 +1,5 @@
 <div class="picture-box">
-  <%= link_to comments_path(picture_id: picture.id), method: :get, remote: true do %>
+  <%= link_to comments_path(picture_id: picture.id, content: 'img'), method: :get, remote: true do %>
     <%= image_tag picture.picture_name.url, class: 'js-show-popup' %>
   <% end %>
   <div class="info">

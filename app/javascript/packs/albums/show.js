@@ -7,7 +7,6 @@ function popupImage() {
       $('.popup-content').prepend('<img>');
       var imgsrc = $(this).attr('src');
       $('.popup-content').find('img').attr('src',imgsrc);
-      $('.comment_content').css('display','none');
     }
     popup.classList.toggle('is-show');
   });

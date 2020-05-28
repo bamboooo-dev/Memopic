@@ -1,4 +1,4 @@
-<%= link_to comments_path(picture_id: picture.id), class: 'js-show-popup', method: :get, remote: true do %>
+<%= link_to comments_path(picture_id: picture.id, content: 'icon'), class: 'js-show-popup', method: :get, remote: true do %>
   <span style="color:white;">
     <i class="far fa-comment"></i>
     <%= picture.comments.count %>

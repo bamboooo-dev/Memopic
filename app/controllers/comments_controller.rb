@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   def index
     @picture = Picture.find(params[:picture_id])
     @comments = @picture.comments.order(created_at: :desc)
+    @content = params[:content]
     respond_to do |format|
       format.html { redirect_to @picture.album }
       format.js
