@@ -1,7 +1,7 @@
 <% if picture.has_comments? %>
-  <p>コメント0件</p>
-<% else %>
   <p class='look_comments'>コメント<%= comments.count %>件を見る</p>
+<% else %>
+  <p>コメント0件</p>
 <% end %>
 <ul class="comment_content">
   <%= render comments %>

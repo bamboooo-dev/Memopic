@@ -6,6 +6,6 @@ class Picture < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   def has_comments?
-    comments.empty?
+    comments.present?
   end
 end
