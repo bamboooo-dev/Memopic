@@ -1,4 +1,4 @@
-<% if comments.count == 0 %>
+<% if picture.has_comments? %>
   <p>コメント0件</p>
 <% else %>
   <p class='look_comments'>コメント<%= comments.count %>件を見る</p>

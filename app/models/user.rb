@@ -82,6 +82,6 @@ class User < ApplicationRecord
   end
 
   def commented?(comment)
-    user = comment.user
+    comments.includes?(comment)
   end
 end
