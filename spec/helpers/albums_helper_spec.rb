@@ -11,7 +11,7 @@ RSpec.describe AlbumsHelper do
     it "render a valid thumbnails" do
       @albums = [ create(:album, :with_favorites, users: [ @user ], pictures: [ picture ]) ]
       include AlbumsHelper
-      expect(pick_thumbpic).to eq [ @albums[0].pictures[1] ]
+      expect(pick_thumbpic).to eq [ @albums.first.pictures.second ]
     end
   end
 end

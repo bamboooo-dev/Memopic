@@ -18,5 +18,6 @@ module Memopic
     config.hosts << '.herokuapp.com'
     config.hosts << '127.0.0.1'
     config.hosts << '.example.com'
+    config.time_zone = 'Tokyo'
   end
 end

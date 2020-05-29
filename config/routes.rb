@@ -2,7 +2,12 @@ Rails.application.routes.draw do
 
   root 'albums#index'
 
-  resources :albums, param: :album_hash
+  resources :albums, param: :album_hash do
+    member do
+      get '/export', to: 'albums#export'
+    end
+  end
+
   get 'static_pages/home'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -17,6 +22,7 @@ Rails.application.routes.draw do
     get "logout", :to => "users/sessions#destroy"
   end
 
+  resources :comments, only: [:index, :create, :destroy]
   resources :favorites, only: [:create, :destroy]
   resources :user_albums, only: [:create]
 end

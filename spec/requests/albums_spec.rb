@@ -22,10 +22,18 @@ RSpec.describe "/albums", type: :request do
   end
 
   describe "GET /show" do
+    let!(:album){ create(:album, users: [ @user ], pictures: [  picture, update_picture ]) }
+    let(:favorite){ create(:favorite) }
+
     it "renders a successful response" do
-      @album = create(:album, users: [ @user ], pictures: [ picture ])
-      get album_path(@album)
+      get album_path(album)
       expect(response).to be_successful
+    end
+
+    it "renders ordered by count of favorites" do
+      update_picture.favorites << favorite
+      get album_path(album)
+      expect(assigns(:top_pictures)).to match([update_picture, picture])
     end
   end
 
