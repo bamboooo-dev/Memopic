@@ -31,6 +31,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'carrierwave'
 gem 'fog-aws'
 gem 'rmagick'
+gem 'aws-sdk-rails'
+gem 'aws-sdk-s3'
+gem "mini_magick"
 
 gem 'devise'
 gem 'omniauth'

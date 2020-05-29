@@ -2,7 +2,12 @@ Rails.application.routes.draw do
 
   root 'albums#index'
 
-  resources :albums, param: :album_hash
+  resources :albums, param: :album_hash do
+    member do
+      get '/export', to: 'albums#export'
+    end
+  end
+
   get 'static_pages/home'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
