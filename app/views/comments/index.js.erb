@@ -1,0 +1,22 @@
+if ($('.popup-comment').find('.comment_content').length < 1) {
+  <% if @content == 'img' %>
+    $('.popup-comment').append("<%= j(render 'comments/comment_area_img', {picture: @picture, comments: @comments}) %>");
+    $('.comment_content').css('display','none');
+    lookComments();
+    postComment();
+  <% elsif @content == 'icon' %>
+    $('.popup-comment').append("<%= j(render 'comments/comment_area_icon', {picture: @picture, comments: @comments}) %>");
+  <% end %>
+}
+
+function lookComments() {
+  $('.look_comments').on("click", function(){
+    $(this).next('.comment_content').slideToggle();
+  });
+}
+
+function postComment() {
+  $('.comment_form_submit').on("click", function(){
+    $('.comment_content').css('display','block');
+  });
+}
