@@ -1,3 +1,5 @@
+require 'aws-sdk-s3'
+
 class AlbumsController < ApplicationController
 
   include AlbumsHelper
@@ -22,7 +24,14 @@ class AlbumsController < ApplicationController
 
   def show
     @album = Album.find_by!(album_hash: params[:album_hash])
-    @pictures = @album.pictures
+    @pictures =  @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc')
+    @top_pictures = @pictures.take(5)
+    @bottom_pictures =
+      if @pictures.length > 5
+        @pictures[5..-1]
+      else
+        []
+      end
   end
 
   def edit
@@ -44,6 +53,26 @@ class AlbumsController < ApplicationController
   def destroy
     Album.find_by(album_hash: params[:album_hash]).destroy
     redirect_to albums_url
+  end
+
+  def export
+    s3 = Aws::S3::Resource.new(
+      access_key_id: ENV["AWS_S3_ACCESS_KEY_ID"],
+      secret_access_key: ENV["AWS_S3_SECRET_ACCESS_KEY"],
+      region: ENV["AWS_REGION"]
+    )
+    @album = Album.find_by(album_hash: params[:album_hash])
+    pictures = @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc').take(4)
+    picture_paths = []
+    pictures.each do |picture|
+      picture_path = "#{Rails.root}/tmp/images/#{picture.picture_name.identifier}"
+      if !File.exist?(picture_path)
+        s3.bucket(ENV["AWS_S3_BUCKET"]).object(picture.picture_name.current_path).get(response_target: picture_path)
+      end
+      picture_paths.push picture_path
+    end
+    collaged_image_path = collage(picture_paths)
+    send_file collaged_image_path
   end
 
   private

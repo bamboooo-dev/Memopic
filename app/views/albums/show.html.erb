@@ -7,10 +7,16 @@
 <%= link_to 'アルバム一覧に戻る', albums_path %>
 <% if @album.users.include?(current_user) %>
 | <%= link_to 'このアルバムを削除する', @album, method: :delete, data: { confirm: "本当に削除しますか？" } %>
-|  <%= link_to 'このアルバムを編集する', edit_album_path(@album) %>
+| <%= link_to 'このアルバムを編集する', edit_album_path(@album) %>
+| <%= link_to 'コラージュしてエクスポート', export_album_path(@album), target: :_blank %>
 <% end %>
 <div class="pictures-wrapper">
-  <%= render @pictures %>
+  <div class="top-pictures">
+    <%= render @top_pictures %>
+  </div>
+  <div class="bottom-pictures">
+    <%= render @bottom_pictures %>
+  </div>
 </div>
 <div class="popup" id="js-popup">
   <div class="popup-inner">

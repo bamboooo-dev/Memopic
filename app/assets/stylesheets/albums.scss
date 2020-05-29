@@ -15,6 +15,7 @@ button{
   transition: .4s;
   outline:0;
   margin-top: 10px;
+  cursor: pointer;
 }
 button:hover{
   background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
@@ -47,12 +48,21 @@ a.disabled {
   height: 40px;
   width: 200px;
   font-size: 16px;
+  &:disabled{
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
 }
 .button-new-album{
   font-size: 18px;
 }
 .pictures-wrapper {
   margin-top: 30px;
+}
+.top-pictures{
+  display: grid;
+  grid-template-rows: 300px 300px ;
+  grid-template-columns: 40% 30% 30%;
 }
 .btn-gradient-radius {
   display: inline-block;

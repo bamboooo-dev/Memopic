@@ -13,6 +13,11 @@ COPY Gemfile Gemfile.lock $APP_ROOT/
 RUN bundle install
 COPY . $APP_ROOT
 
+RUN rm -rf bin/webpack*
+RUN rm -rf config/webpacker.yml
+RUN bundle exec rails webpacker:install
+RUN bundle exec rails webpacker:compile
+
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
