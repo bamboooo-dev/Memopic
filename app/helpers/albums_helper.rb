@@ -43,6 +43,7 @@ module AlbumsHelper
         c.geometry "+7+7"
       end
     end
+    result_image.strip
     result_image.write collaged_image_path
     collaged_image_path
   end
