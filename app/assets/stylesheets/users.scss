@@ -7,6 +7,9 @@ h1{
 hr{
   border-top: gray;
 }
+a{
+  color: blue;
+}
 .login-form{
   padding: 20px;
   width: 400px;
@@ -25,13 +28,17 @@ hr{
 .box-password {
   margin-bottom: 22px;
 }
-.box-email label, .box-password label {
+.box-password-confirmation {
+  margin-top: -25px;
+  margin-bottom: 22px;
+}
+.box-email label, .box-password label, .box-password-confirmation label{
   font-weight: 700;
   font-size: 13px;
   padding-left: 2px;
   padding-bottom: 2px;
 }
-.box-email input[type="email"], .box-password input[type="password"] {
+.box-email input[type="email"], .box-password input[type="password"], .box-password-confirmation input[type="password"] {
   border-style: none;
   box-sizing: border-box;
   width: 100%;
