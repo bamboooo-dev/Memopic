@@ -10,14 +10,14 @@
         <div class="column-left">
           <%= f.label :email %><br />
         </div>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
       </div>
 
       <div class="box-password">
         <div class="column-left">
           <%= f.label :password %><br />
         </div>
-        <%= f.password_field :password, autocomplete: "current-password" %>
+        <%= f.password_field :password, autocomplete: "current-password", required: true %>
       </div>
       <div class="box-login">
         <% if devise_mapping.rememberable? %>
