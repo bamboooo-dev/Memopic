@@ -7,6 +7,14 @@
     </h3>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="box-nickname">
+        <div class="column-left">
+          <%= f.label :nickname, 'ニックネーム' %><br />
+        </div>
+        <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", required: true %>
+      </div>
+
       <div class="box-email">
         <div class="column-left">
           <%= f.label :email %><br />
