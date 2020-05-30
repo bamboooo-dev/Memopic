@@ -32,13 +32,13 @@ a{
   margin-top: -25px;
   margin-bottom: 22px;
 }
-.box-email label, .box-password label, .box-password-confirmation label{
+.box-nickname label, .box-email label, .box-password label, .box-password-confirmation label{
   font-weight: 700;
   font-size: 13px;
   padding-left: 2px;
   padding-bottom: 2px;
 }
-.box-email input[type="email"], .box-password input[type="password"], .box-password-confirmation input[type="password"] {
+.box-nickname input, .box-email input, .box-password input, .box-password-confirmation input{
   border-style: none;
   box-sizing: border-box;
   width: 100%;
