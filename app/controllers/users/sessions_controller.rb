@@ -2,7 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   before_action :reset_session_before_login, only: [:create]
-  protect_from_forgery except: :create
+  protect_from_forgery except: [:create, :new]
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

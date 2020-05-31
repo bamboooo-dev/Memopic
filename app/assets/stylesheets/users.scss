@@ -68,3 +68,17 @@ a{
   cursor: pointer;
   background: #f0c14b;
 }
+.alert {
+  border-radius: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #FF4C10;
+  background-color: #FCE8E6;
+}
+.notice {
+  border-radius: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #00A69F;
+  background-color: #DDF2F2;
+}
