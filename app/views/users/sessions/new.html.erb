@@ -1,23 +1,23 @@
-<h1>My Album</h1>
+<h1>Memopic</h1>
 
 <div class="login-form">
   <div class="login-basic">
     <h3>
-      My Albumのアカウントでログイン
+      Memopic のアカウントでログイン
     </h3>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="box-email">
         <div class="column-left">
           <%= f.label :email %><br />
         </div>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
       </div>
 
       <div class="box-password">
         <div class="column-left">
           <%= f.label :password %><br />
         </div>
-        <%= f.password_field :password, autocomplete: "current-password" %>
+        <%= f.password_field :password, autocomplete: "current-password", required: true %>
       </div>
       <div class="box-login">
         <% if devise_mapping.rememberable? %>

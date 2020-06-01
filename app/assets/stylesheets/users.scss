@@ -7,6 +7,9 @@ h1{
 hr{
   border-top: gray;
 }
+a{
+  color: blue;
+}
 .login-form{
   padding: 20px;
   width: 400px;
@@ -25,13 +28,17 @@ hr{
 .box-password {
   margin-bottom: 22px;
 }
-.box-email label, .box-password label {
+.box-password-confirmation {
+  margin-top: -25px;
+  margin-bottom: 22px;
+}
+.box-nickname label, .box-email label, .box-password label, .box-password-confirmation label{
   font-weight: 700;
   font-size: 13px;
   padding-left: 2px;
   padding-bottom: 2px;
 }
-.box-email input[type="email"], .box-password input[type="password"] {
+.box-nickname input, .box-email input, .box-password input, .box-password-confirmation input{
   border-style: none;
   box-sizing: border-box;
   width: 100%;
@@ -60,4 +67,18 @@ hr{
 .box-login input[type="submit"]:hover {
   cursor: pointer;
   background: #f0c14b;
+}
+.alert {
+  border-radius: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #FF4C10;
+  background-color: #FCE8E6;
+}
+.notice {
+  border-radius: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #00A69F;
+  background-color: #DDF2F2;
 }
