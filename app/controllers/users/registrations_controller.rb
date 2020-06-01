@@ -16,7 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @user = User.create!(nickname: params[:user][:nickname], email: params[:user][:email], password: password, password_confirmation: password)
       sns = SnsCredential.create(user_id: @user.id,uid: session[:uid], provider: session[:provider])
     else
-      @user = User.create!(nickname: params[:user][:nickname], email: params[:user][:email], password: session[:password], password_confirmation: session[:password_confirmation])
+      @user = User.create!(nickname: params[:user][:nickname], email: params[:user][:email], password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
     end
     sign_in(@user)
     redirect_to albums_path

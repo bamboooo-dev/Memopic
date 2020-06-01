@@ -1,16 +1,29 @@
-<h2><%= t('.forgot_your_password') %></h2>
+<h1><%= t('.forgot_your_password') %></h1>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="login-form">
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="actions">
-    <%= f.submit t('.send_me_reset_password_instructions') %>
-  </div>
-<% end %>
+    <div class="box-email">
+      <div class="column-left">
+        <%= f.label :email %><br />
+      </div>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <div class="box-login">
+      <div class="actions">
+        <%= f.submit t('.send_me_reset_password_instructions') %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+
+</div>
+<style media="screen">
+  body{
+    background-color: #efede8;
+  }
+</style>

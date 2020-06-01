@@ -1,9 +1,9 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to t(".sign_in"), new_session_path(resource_name) %><br />
+  <%= link_to t("ログインはこちら"), new_session_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to t(".sign_up"), new_registration_path(resource_name) %><br />
+  <%= link_to t("アカウント登録はこちら"), new_registration_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
@@ -18,8 +18,17 @@
   <%= link_to t('.didn_t_receive_unlock_instructions'), new_unlock_path(resource_name) %><br />
 <% end %>
 
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to t('.sign_in_with_provider', provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(resource_name, provider) %><br />
+<hr>
+
+<div class="login-others">
+  <h3>
+    他のアカウントでログイン
+  </h3>
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <%= link_to omniauth_authorize_path(resource_name, provider) do %>
+        <%= image_tag 'btn_google_signin_light_normal_web@2x.png', :alt => 'Google Signin' %>
+      <% end %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
