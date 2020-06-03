@@ -25,7 +25,11 @@
   <%- if devise_mapping.omniauthable? %>
     <%- resource_class.omniauth_providers.each do |provider| %>
       <%= link_to omniauth_authorize_path(resource_name, provider) do %>
-        <%= image_tag 'btn_google_signin_light_normal_web@2x.png', :alt => 'Google Signin' %>
+        <% if provider == :google_oauth2 %>
+          <%= image_tag 'btn_google_signin_light_normal_web@2x.png', :alt => 'Google Signin' %>
+        <% elsif provider == :line %>
+          <%= image_tag 'line.png', :alt => 'Line Signin' %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

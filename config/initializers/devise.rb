@@ -31,10 +31,7 @@ Devise.setup do |config|
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
   require 'devise/orm/active_record'
-  config.omniauth :google_oauth2,
-                  ENV['GOOGLE_CLIENT_ID'],
-                  ENV['GOOGLE_CLIENT_SECRET'],
-                  skip_jwt: true
+
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for
@@ -263,7 +260,12 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-
+  require Rails.root.join('lib', 'omni_auth', 'strategies', 'line')
+  config.omniauth :google_oauth2,
+                  ENV['GOOGLE_CLIENT_ID'],
+                  ENV['GOOGLE_CLIENT_SECRET'],
+                  skip_jwt: true
+  config.omniauth :line, ENV['LINE_KEY'], ENV['LINE_SECRET'], strategy_class: OmniAuth::Strategies::Line
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
