@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get "logout", :to => "users/sessions#destroy"
   end
 
+  post '/callback', to: 'linebot#callback'
   resources :comments, only: [:index, :create, :destroy]
   resources :favorites, only: [:create, :destroy]
   resources :user_albums, only: [:create]
