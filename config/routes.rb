@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post '/callback', to: 'linebot#callback'
+  
   get 'static_pages/home'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -22,7 +24,6 @@ Rails.application.routes.draw do
     get "logout", :to => "users/sessions#destroy"
   end
 
-  post '/callback', to: 'linebot#callback'
   resources :comments, only: [:index, :create, :destroy]
   resources :favorites, only: [:create, :destroy]
   resources :user_albums, only: [:create]
