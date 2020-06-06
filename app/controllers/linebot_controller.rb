@@ -31,35 +31,30 @@ class LinebotController < ApplicationController
     events = client.parse_events_from(body)
 
     events.each { |event|
-      text = event.message['text']
+      text = event['message']['text']
       userId = event['source']['userId']
-      # nowHash = {}
-
 
       if PseudoSession.getStatus(userId).blank?
-        PseudoSession.putStatus(userId, "0", "")
-        # nowHash = PseudoSession.getStatus(userId)
-      # else
-      #   # nowHash = PseudoSession.getStatus(userId)
+        PseudoSession.putStatus(userId, '0', '')
       end
 
-      if PseudoSession.readContext(userId) == "0"
+      if PseudoSession.readContext(userId) == '0'
         if text.eql?('アルバム')
-          PseudoSession.updateContext(userId, "1")
+          PseudoSession.updateContext(userId, '1')
           client.reply_message(event['replyToken'], template)
         end
-      elsif PseudoSession.readContext(userId) == "1"
+      elsif PseudoSession.readContext(userId) == '1'
         if text.eql?('アルバムを作成する')
           PseudoSession.updateContext(userId, '2')
-          reply_text(event, "アルバム名を教えてください！中止するときは「中止」と言ってください。")
+          reply_text(event, 'アルバム名を教えてください！中止するときは「中止」と言ってください。')
         elsif text.eql?('アルバムを作成しない')
           PseudoSession.updateContext(userId, '0')
-          reply_text(event, "またの機会に〜")
+          reply_text(event, 'またの機会に〜')
         end
-      elsif PseudoSession.readContext(userId) == "2"
+      elsif PseudoSession.readContext(userId) == '2'
         if text.eql?('中止')
           PseudoSession.updateContext(userId, '0')
-          reply_text(event, "またの機会に〜")
+          reply_text(event, 'またの機会に〜')
         elsif text
           PseudoSession.updateContext(userId, '3')
           PseudoSession.updateAlbumName(userId, text)
