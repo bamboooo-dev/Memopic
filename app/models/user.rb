@@ -12,10 +12,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :trackable,
-         :omniauthable, omniauth_providers: %i(google_oauth2)
+         :omniauthable, omniauth_providers: %i[google_oauth2 line]
 
   def self.without_sns_data(auth)
-    user = User.where(email: auth.info.email).first
+    email = auth.info.email ? auth.info.email : "#{auth.uid}-#{auth.provider}@example.com"
+    user = User.where(email: email).first
 
       if user.present?
         sns = SnsCredential.create(
@@ -26,7 +27,7 @@ class User < ApplicationRecord
       else
         user = User.new(
           nickname: auth.info.name,
-          email: auth.info.email,
+          email: email,
         )
         sns = SnsCredential.new(
           uid: auth.uid,
