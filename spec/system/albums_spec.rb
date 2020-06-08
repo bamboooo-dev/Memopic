@@ -26,6 +26,7 @@ RSpec.describe "Album index page", type: :system do
 
     it 'アルバムを作成できる', js: true do
       click_button '新しいアルバムを作成する'
+      sleep 3
       fill_in 'タイトルを追加', with: 'テストアルバム'
       file_path = Rails.root.join('spec', 'factories', 'test.jpg')
       attach_file('album_form_pictures', file_path, make_visible: true)
