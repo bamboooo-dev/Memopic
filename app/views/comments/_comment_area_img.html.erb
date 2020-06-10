@@ -6,9 +6,4 @@
 <ul class="comment_content">
   <%= render comments %>
 </ul>
-<div class='comment-form'>
-  <%= form_with url: comments_path(picture_id: picture.id), remote: true do |f| %>
-      <%= f.text_field :content, placeholder: 'コメントする...', id: 'comment_form', class: 'comment_form_text' %>
-      <%= f.submit "投稿する", class: 'comment_form_submit' %>
-  <% end %>
-</div>
+<%= render 'form', picture: picture %>

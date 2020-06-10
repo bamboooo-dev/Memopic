@@ -39,6 +39,7 @@ Capybara.register_driver :headless_chrome do |app|
   end
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options)
 end
+Capybara.default_max_wait_time = 5
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request

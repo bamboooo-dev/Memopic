@@ -1,5 +1,5 @@
 <div class="picture-box" id="picture-box-<%= picture_counter %>">
-  <%= link_to comments_path(picture_id: picture.id, content: 'img'), method: :get, remote: true do %>
+  <%= link_to comments_path(picture_id: picture.id, clicked: 'img'), method: :get, remote: true do %>
     <%= image_tag picture.picture_name.url, class: 'js-show-popup' %>
   <% end %>
   <div class="info">
@@ -15,7 +15,12 @@
       <% end %>
     </div>
     <div id="comment-<%= picture.id %>" class="comment">
-      <%= render 'pictures/comment', picture: picture %>
+      <%= link_to comments_path(picture_id: picture.id, clicked: 'icon'), class: 'js-show-popup', method: :get, remote: true do %>
+        <span style="color:white;">
+          <i class="far fa-comment"></i>
+          <%= picture.comments.count %>
+        </span>
+      <% end %>
     </div>
   </div>
 </div>

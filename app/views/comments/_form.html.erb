@@ -1,0 +1,6 @@
+<div class='comment-form'>
+  <%= form_with url: comments_path(picture_id: picture.id), remote: true do |f| %>
+      <%= f.text_field :content, placeholder: 'コメントする...', id: 'comment_form', class: 'comment_form_text', required: true %>
+      <%= f.submit "投稿する", class: 'comment_form_submit' %>
+  <% end %>
+</div>
