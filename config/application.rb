@@ -19,6 +19,6 @@ module Memopic
     config.hosts << '127.0.0.1'
     config.hosts << '.example.com'
     config.time_zone = 'Tokyo'
-    config.hosts << "0d13d5c4a25a.ngrok.io"
+    config.hosts << '.ngrok.io'
   end
 end
