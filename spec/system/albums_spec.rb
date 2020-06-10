@@ -7,6 +7,7 @@ RSpec.describe "Album index page", type: :system do
       Rails.application.env_config['omniauth.auth'] = set_omniauth :google_oauth2
       visit root_path
       click_on 'Google Signin'
+      sleep 3
       click_button 'アカウント登録'
     end
 

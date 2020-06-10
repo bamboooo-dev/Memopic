@@ -56,7 +56,7 @@ RSpec.describe "albums/show", type: :view do
 
       it 'コメントボタンが表示されている' do
         render
-        expect(rendered).to have_link nil, href: comments_path(picture_id: picture.id, content: 'icon')
+        expect(rendered).to have_link nil, href: comments_path(picture_id: picture.id, clicked: 'icon')
       end
 
     end
@@ -104,7 +104,7 @@ RSpec.describe "albums/show", type: :view do
 
       it 'コメントボタンが表示されている' do
         render
-        expect(rendered).to have_link nil, href: comments_path(picture_id: picture.id, content: 'icon')
+        expect(rendered).to have_link nil, href: comments_path(picture_id: picture.id, clicked: 'icon')
       end
 
     end

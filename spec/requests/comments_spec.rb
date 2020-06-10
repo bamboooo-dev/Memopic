@@ -16,8 +16,8 @@ RSpec.describe "Comments", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      get comments_path(picture_id: picture.id)
-      expect(response).to be_successful
+      get comments_path(picture_id: picture.id, clicked: 'icon')
+      expect(response).to redirect_to(album_url(picture.album))
     end
   end
 

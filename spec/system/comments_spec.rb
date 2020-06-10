@@ -7,6 +7,7 @@ RSpec.describe "Comment page", type: :system do
       Rails.application.env_config['omniauth.auth'] = set_omniauth :google_oauth2
       visit root_path
       click_on 'Google Signin'
+      expect(page).to have_content 'アカウント登録'
       click_button 'アカウント登録'
       click_button '新しいアルバムを作成する'
       sleep 3

@@ -1,11 +1,11 @@
 if ($('.popup-comment').find('.comment_content').length < 1) {
-  <% if @content == 'img' %>
-    $('.popup-comment').append("<%= j(render 'comments/comment_area_img', {picture: @picture, comments: @comments}) %>");
+  <% if @clicked == 'img' %>
+    $('.popup-comment').append("<%= j(render 'comment_area_img', {picture: @picture, comments: @comments}) %>");
     $('.comment_content').css('display','none');
     lookComments();
     postComment();
-  <% elsif @content == 'icon' %>
-    $('.popup-comment').append("<%= j(render 'comments/comment_area_icon', {picture: @picture, comments: @comments}) %>");
+  <% elsif @clicked == 'icon' %>
+    $('.popup-comment').append("<%= j(render 'comment_area_icon', {picture: @picture, comments: @comments}) %>");
   <% end %>
 }
 
