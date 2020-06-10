@@ -73,7 +73,7 @@ RSpec.describe "Comment page", type: :system do
       sleep 3
       find('a.comment-delete').click
       expect{
-        page.accept_confirm '削除してよろしいですか？'
+        page.dismiss_confirm '削除してよろしいですか？'
         expect(page).to have_content 'テストコメント'
       }.not_to change(Comment, :count)
       expect(page).to have_content 'mockuser'
