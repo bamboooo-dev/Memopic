@@ -10,6 +10,8 @@ services:
       - 4306:3306
 
   web:
+    stdin_open: true
+    tty: true
     build: .
     container_name: album
     command: bash -c "rm -f tmp/pids/server.pid &&

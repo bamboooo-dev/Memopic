@@ -11,6 +11,12 @@ class PseudoSession
     @@statusHash.store(user_id, {"context"=>context, "album_name"=>album_name})
   end
 
+  def self.deleteStatus(user_id)
+    if @@statusHash.has_key?(user_id)
+      @@statusHash.delete(user_id)
+    end
+  end
+
   def self.readContext(user_id)
     if @@statusHash.has_key?(user_id)
       @@statusHash[user_id]["context"]
@@ -30,7 +36,7 @@ class PseudoSession
   end
 
   def self.updateAlbumName(user_id, album_name)
-    if @@statusHash["user_id"] == user_id
+    if @@statusHash.has_key?(user_id)
       @@statusHash[user_id]["album_name"] = album_name
     end
   end

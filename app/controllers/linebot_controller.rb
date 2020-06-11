@@ -30,11 +30,12 @@ class LinebotController < ApplicationController
 
     events = client.parse_events_from(body)
 
+
     events.each { |event|
       text = event['message']['text']
       userId = event['source']['userId']
 
-      if PseudoSession.getStatus(userId).blank?
+      if PseudoSession.getStatus(userId).nil?
         PseudoSession.putStatus(userId, '0', '')
       end
 
@@ -42,24 +43,56 @@ class LinebotController < ApplicationController
         if text.eql?('アルバム')
           PseudoSession.updateContext(userId, '1')
           client.reply_message(event['replyToken'], template)
+        else
+          PseudoSession.deleteStatus(userId)
         end
       elsif PseudoSession.readContext(userId) == '1'
         if text.eql?('アルバムを作成する')
           PseudoSession.updateContext(userId, '2')
           reply_text(event, 'アルバム名を教えてください！中止するときは「中止」と言ってください。')
         elsif text.eql?('アルバムを作成しない')
-          PseudoSession.updateContext(userId, '0')
           reply_text(event, 'またの機会に〜')
+          PseudoSession.deleteStatus(userId)
+        else
+          PseudoSession.deleteStatus(userId)
         end
       elsif PseudoSession.readContext(userId) == '2'
         if text.eql?('中止')
-          PseudoSession.updateContext(userId, '0')
+          PseudoSession.deleteStatus(userId)
           reply_text(event, 'またの機会に〜')
         elsif text
           PseudoSession.updateContext(userId, '3')
           PseudoSession.updateAlbumName(userId, text)
-          reply_text(event, "#{text}ですね！アルバムに入れる写真を送ってください！")
+          Album.create(name: text, album_hash: SecureRandom.alphanumeric(20))
+          reply_text(event, "#{text}ですね！アルバムに入れる写真を送ってください！全て送信が完了したら「終わり」と送信してください！")
+        else
+          PseudoSession.deleteStatus(userId)
         end
+      elsif PseudoSession.readContext(userId) == '3'
+        if event['message']['type'] == 'image'
+          messageId = event["message"]["id"]
+          response = client.get_message_content(messageId)
+          album = Album.find_by(name: PseudoSession.getStatus(userId)['album_name'])
+          output_path = Rails.root.to_s + '/tmp/albums/file.jpg'
+
+          File.open(output_path, 'w+b') do |fp|
+            fp.write(response.body)
+          end
+
+          picture = ActionDispatch::Http::UploadedFile.new(
+            filename: SecureRandom.alphanumeric(10) + ".jpg",
+            type: 'image/jpeg',
+            tempfile: File.open(output_path)
+          )
+          album.pictures.create(picture_name: picture)
+
+        elsif text.eql?('終わり')
+          album = Album.find_by(name: PseudoSession.getStatus(userId)['album_name'])
+          reply_text(event, "アルバム完成！ => https://83c59b02e1e9.ngrok.io/albums/#{album.album_hash}")
+          PseudoSession.deleteStatus(userId)
+        end
+      else
+        PseudoSession.deleteStatus(userId)
       end
     }
 
