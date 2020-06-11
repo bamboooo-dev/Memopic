@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   def index
     @picture = Picture.find(params[:picture_id])
     @comments = @picture.comments.order(created_at: :desc)
-    @content = params[:content]
+    @clicked = params[:clicked]
     respond_to do |format|
       format.html { redirect_to @picture.album }
       format.js
@@ -13,10 +13,11 @@ class CommentsController < ApplicationController
 
   def create
     @picture = Picture.find(params[:picture_id])
-    current_user.join(@picture.album) unless current_user.joining?(@picture.album)
     @comment = @picture.comments.new(comment_params)
     @comment.user_id = current_user.id
-    @comment.save
+    if @comment.save
+      current_user.join(@picture.album) unless current_user.joining?(@picture.album)
+    end
     respond_to do |format|
       format.html { redirect_to @picture.album }
       format.js
@@ -25,7 +26,9 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.destroy
+    if @comment.commenter?(current_user)
+      @comment.destroy
+    end
     respond_to do |format|
       format.html { redirect_to @comment.picture.album }
       format.js

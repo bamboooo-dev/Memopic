@@ -19,5 +19,41 @@ RSpec.describe "Users through OmniAuth", type: :system do
         expect(page).to have_content 'ログアウト'
       end
     end
+
+    context "lineでのログイン" do
+
+      before do
+        OmniAuth.config.mock_auth[:line] = nil
+        Rails.application.env_config['omniauth.auth'] = set_omniauth :line
+        visit root_path
+      end
+
+      it "「LINEでログイン」をクリックすると登録画面が出てきて登録できてログインできる", js: true do
+        click_on 'Line Signin'
+        expect(page).to have_selector 'input'
+        expect {
+          click_button 'アカウント登録'
+        }.to change(User, :count).by(1)
+        expect(page).to have_content 'ログアウト'
+      end
+    end
+
+    context "OAuthが渡ってこない場合"
+
+      before do
+        Rails.application.env_config["omniauth.auth"] = nil
+        visit root_path
+      end
+
+      it "「Sing in with Google」をクリックしてもホームに戻される", js: true do
+        click_on 'Google Signin'
+        expect(page).to have_content 'アカウント登録もしくはログインしてください。'
+      end
+
+      it "「LINEでログイン」をクリックしてもホームに戻される", js: true do
+        click_on 'Line Signin'
+        expect(page).to have_content 'アカウント登録もしくはログインしてください。'
+      end
+
   end
 end
