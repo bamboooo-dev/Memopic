@@ -88,7 +88,7 @@ class LinebotController < ApplicationController
 
         elsif text.eql?('終わり')
           album = Album.find_by(name: PseudoSession.getStatus(userId)['album_name'])
-          reply_text(event, "アルバム完成！ => https://83c59b02e1e9.ngrok.io/albums/#{album.album_hash}")
+          reply_text(event, "アルバム完成！ => hhttps://memopic.herokuapp.com/albums/#{album.album_hash}")
           PseudoSession.deleteStatus(userId)
         end
       else
