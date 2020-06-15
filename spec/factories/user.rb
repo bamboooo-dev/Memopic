@@ -6,6 +6,13 @@ FactoryBot.define do
     nickname { "test" }
   end
 
+  factory :second_user, class: User do
+    email { "second@gmail.com" }
+    password { "password" }
+    password_confirmation { "password" }
+    nickname { "second" }
+  end
+
   factory :incorrect_user, class: User do
     email { "incorrect@gmail.com" }
     password { "password" }

@@ -140,4 +140,13 @@ RSpec.describe "/albums", type: :request do
       expect(response).to redirect_to(albums_url)
     end
   end
+
+  describe "GET /export" do
+    let!(:album){ create(:album, users: [ @user ], pictures: [  picture, update_picture ]) }
+
+    it "responses successfully" do
+      get export_album_path(album)
+      expect(response).to be_successful
+    end
+  end
 end

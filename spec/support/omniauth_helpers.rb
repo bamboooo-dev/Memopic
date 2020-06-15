@@ -10,6 +10,6 @@ module OmniauthHelpers
         image: "https://test.com/test.png",
         email: 'test@gmail.com'
       }
-      })
+    })
   end
 end

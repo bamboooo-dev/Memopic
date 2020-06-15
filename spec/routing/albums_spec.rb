@@ -26,5 +26,9 @@ RSpec.describe AlbumsController, type: :routing do
       expect(patch: "/albums/1").to route_to("albums#update", album_hash: "1")
     end
 
+    it "routes to #export" do
+      expect(get: "/albums/1/export").to route_to("albums#export", album_hash: "1")
+    end
+
   end
 end

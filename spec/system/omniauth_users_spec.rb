@@ -37,5 +37,23 @@ RSpec.describe "Users through OmniAuth", type: :system do
         expect(page).to have_content 'ログアウト'
       end
     end
+
+    context "OAuthが渡ってこない場合"
+
+      before do
+        Rails.application.env_config["omniauth.auth"] = nil
+        visit root_path
+      end
+
+      it "「Sing in with Google」をクリックしてもホームに戻される", js: true do
+        click_on 'Google Signin'
+        expect(page).to have_content 'アカウント登録もしくはログインしてください。'
+      end
+
+      it "「LINEでログイン」をクリックしてもホームに戻される", js: true do
+        click_on 'Line Signin'
+        expect(page).to have_content 'アカウント登録もしくはログインしてください。'
+      end
+
   end
 end
