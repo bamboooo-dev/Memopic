@@ -35,8 +35,6 @@ gem 'aws-sdk-rails'
 gem 'aws-sdk-s3'
 gem "mini_magick"
 
-gem 'line-bot-api'
-
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
