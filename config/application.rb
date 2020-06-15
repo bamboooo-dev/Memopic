@@ -18,7 +18,6 @@ module Memopic
     config.hosts << '.herokuapp.com'
     config.hosts << '127.0.0.1'
     config.hosts << '.example.com'
-    config.autoload_paths += %W(#{config.root}/lib/linebot)
     config.time_zone = 'Tokyo'
     config.hosts << '.ngrok.io'
   end

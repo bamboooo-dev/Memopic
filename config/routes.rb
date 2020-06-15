@@ -8,8 +8,6 @@ Rails.application.routes.draw do
     end
   end
 
-  post '/callback', to: 'linebot#callback'
-  
   get 'static_pages/home'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
