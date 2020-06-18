@@ -3,6 +3,11 @@ require 'pseudo_session'
 
 class LinebotController < ApplicationController
 
+  UNDO    = 0
+  CREATE  = 1
+  NAME    = 2
+  PICTURE = 3
+
   protect_from_forgery :except => [:callback]
 
   def client
@@ -36,45 +41,43 @@ class LinebotController < ApplicationController
       userId = event['source']['userId']
 
       if PseudoSession.getStatus(userId).nil?
-        PseudoSession.putStatus(userId, '0', '')
+        PseudoSession.putStatus(userId, UNDO, nil)
       end
 
-      if PseudoSession.readContext(userId) == '0'
+      case PseudoSession.readContext(userId)
+      when UNDO
         if text.eql?('アルバム')
-          PseudoSession.updateContext(userId, '1')
+          PseudoSession.updateContext(userId, CREATE)
           client.reply_message(event['replyToken'], template)
-        else
-          PseudoSession.deleteStatus(userId)
+          response_success(:linebot, :callback)
         end
-      elsif PseudoSession.readContext(userId) == '1'
+      when CREATE
         if text.eql?('アルバムを作成する')
-          PseudoSession.updateContext(userId, '2')
+          PseudoSession.updateContext(userId, NAME)
           reply_text(event, 'アルバム名を教えてください！中止するときは「中止」と言ってください。')
+          response_success(:linebot, :callback)
         elsif text.eql?('アルバムを作成しない')
           reply_text(event, 'またの機会に〜')
           PseudoSession.deleteStatus(userId)
-        else
-          PseudoSession.deleteStatus(userId)
+          response_success(:linebot, :callback)
         end
-      elsif PseudoSession.readContext(userId) == '2'
+      when NAME
         if text.eql?('中止')
           PseudoSession.deleteStatus(userId)
           reply_text(event, 'またの機会に〜')
         elsif text
-          PseudoSession.updateContext(userId, '3')
-          PseudoSession.updateAlbumName(userId, text)
-          Album.create(name: text, album_hash: SecureRandom.alphanumeric(20))
-          reply_text(event, "#{text}ですね！アルバムに入れる写真を送ってください！全て送信が完了したら「終わり」と送信してください！")
-        else
-          PseudoSession.deleteStatus(userId)
+          PseudoSession.updateContext(userId, PICTURE)
+          album = Album.create(name: text, album_hash: SecureRandom.alphanumeric(20))
+          PseudoSession.updateAlbumID(userId, album.id)
+          reply_text(event, "#{text}ですね！アルバムに入れる写真を送ってください！")
+          response_success(:linebot, :callback)
         end
-      elsif PseudoSession.readContext(userId) == '3'
+      when PICTURE
         if event['message']['type'] == 'image'
           messageId = event["message"]["id"]
           response = client.get_message_content(messageId)
-          album = Album.find_by(name: PseudoSession.getStatus(userId)['album_name'])
-          output_path = Rails.root.to_s + '/tmp/albums/file.jpg'
-
+          album = Album.find( PseudoSession.readAlbumID(userId) )
+          output_path = Rails.root.join('tmp', 'albums', SecureRandom.alphanumeric(10) + ".jpg")
           File.open(output_path, 'w+b') do |fp|
             fp.write(response.body)
           end
@@ -85,14 +88,14 @@ class LinebotController < ApplicationController
             tempfile: File.open(output_path)
           )
           album.pictures.create(picture_name: picture)
-
+          reply_text(event, "画像をアップロードしました！さらに写真を追加するか、「終わり」と送信してアルバムの作成を完了してください")
+          response_success(:linebot, :callback)
         elsif text.eql?('終わり')
-          album = Album.find_by(name: PseudoSession.getStatus(userId)['album_name'])
+          album = Album.find( PseudoSession.readAlbumID(userId) )
           reply_text(event, "アルバム完成！ => " + ENV["URL"] + "/albums/#{album.album_hash}")
           PseudoSession.deleteStatus(userId)
+          response_success(:linebot, :callback)
         end
-      else
-        PseudoSession.deleteStatus(userId)
       end
     }
 
