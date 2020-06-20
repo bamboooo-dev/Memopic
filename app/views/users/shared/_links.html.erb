@@ -26,9 +26,9 @@
     <%- resource_class.omniauth_providers.each do |provider| %>
       <%= link_to omniauth_authorize_path(resource_name, provider) do %>
         <% if provider == :google_oauth2 %>
-          <%= image_tag 'btn_google_signin_light_normal_web@2x.png', :alt => 'Google Signin' %>
+          <%= image_tag 'btn_google_signin_light_normal_web@2x.png', :alt => 'Google Signin', class: 'google_signin' %>
         <% elsif provider == :line %>
-          <%= image_tag 'line.png', :alt => 'Line Signin' %>
+          <%= image_tag 'line.png', :alt => 'Line Signin', class: 'line_signin' %>
         <% end %>
       <% end %>
     <% end %>
