@@ -83,13 +83,29 @@ a{
   background-color: #DDF2F2;
 }
 .google_signin{
-  width: 80%;
+  width: 70%;
 }
 .line_signin{
-  width: 80%;
+  width: 70%;
 }
 @media screen and (max-width: 481px) {
   .login-form{
     width: 80%;
+    a{
+      font-size: 12px;
+    }
+  }
+  .login-basic{
+    h3{
+      font-size: 15px;
+    }
+  }
+  .login-others{
+    h3{
+      font-size: 15px;
+    }
+  }
+  .alert{
+    font-size: 0.8rem;
   }
 }
