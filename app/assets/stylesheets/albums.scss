@@ -20,7 +20,7 @@ button{
 button:hover{
   background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
 }
-a.disabled {
+a.disabled{
   pointer-events: none;
 }
 .input-new-album-title{
@@ -56,15 +56,15 @@ a.disabled {
 .button-new-album{
   font-size: 18px;
 }
-.pictures-wrapper {
+.pictures-wrapper{
   margin-top: 30px;
 }
 .top-pictures{
   display: grid;
-  grid-template-rows: 300px 300px ;
-  grid-template-columns: 40% 30% 30%;
+  grid-template-rows: 250px 200px 200px;
+  grid-template-columns: 20% 20% 20% 20% 20%;
 }
-.btn-gradient-radius {
+.btn-gradient-radius{
   display: inline-block;
   padding: 7px 20px;
   border-radius: 25px;
@@ -73,10 +73,10 @@ a.disabled {
   background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
   transition: .4s;
 }
-.btn-gradient-radius:hover {
+.btn-gradient-radius:hover{
   background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
 }
-.btn-gradient-radius.disabled {
+.btn-gradient-radius.disabled{
   background-image: none;
   background-color: white;
   color: orange;
@@ -84,16 +84,16 @@ a.disabled {
   border-style: solid;
   border-color: orange;
 }
-.user-info {
+.user-info{
   text-align: center;
 }
-.album_form {
+.album_form{
   text-align: center;
 }
-.albums {
+.albums{
   text-align: center;
 }
-.card {
+.card{
   font-size: 20px;
   border-radius: 20px;
   box-shadow: 0 2px 10px #ccc;
@@ -102,19 +102,19 @@ a.disabled {
   margin: 20px 30px 30px 30px;
   position: relative;
 }
-.thumbnail {
+.thumbnail{
   border-radius: 20px;
   background: #000;
   width: 100%;
 }
-.thumbimg {
+.thumbimg{
   display: block;
   opacity: .8;
   width:100%;
   height:170px;
   border-radius:20px;
 }
-.link {
+.link{
   font-size: 22px;
   position: absolute;
   color: white;
@@ -125,7 +125,7 @@ a.disabled {
   margin:0;
   padding:0;
 }
-.popup {
+.popup{
   position: fixed;
   left: 0;
   top: 0;
@@ -136,11 +136,11 @@ a.disabled {
   visibility: hidden;
   transition: .6s;
 }
-.popup.is-show {
+.popup.is-show{
   opacity: 1;
   visibility: visible;
 }
-.popup-inner {
+.popup-inner{
   position: absolute;
   left: 50%;
   top: 50%;
@@ -153,11 +153,11 @@ a.disabled {
   z-index: 2;
   overflow-y: scroll;
 }
-.popup-inner img {
+.popup-inner img{
   width: 100%;
   height: 100%;
 }
-.close-btn {
+.close-btn{
   position: absolute;
   right: 0;
   top: 0;
@@ -167,21 +167,21 @@ a.disabled {
   text-align: center;
   cursor: pointer;
 }
-.close-btn i {
+.close-btn i{
   font-size: 20px;
   color: #333;
 }
-.popup-content {
+.popup-content{
   width: 100%;
   height: 100%;
 }
-.popup-action {
+.popup-action{
   border-top: solid 1px grey;
   border-bottom: solid 1px grey;
   padding: 10px;
   margin-top: 20px;
 }
-.black-background {
+.black-background{
   position: absolute;
   left: 0;
   top: 0;
@@ -219,29 +219,34 @@ a.disabled {
   display: none;
   padding: 10px 10%;
 }
-#album-title {
+#album-title{
   display: inline;
 }
-#title {
+#title{
   font-family: 'Roboto Condensed', sans-serif;
 }
 #album-name-input{
   margin-top: 10px;
 }
 @media screen and (min-width: 481px) {
-  body {
+  body{
     width: 100%;
     max-width: 1000px;
     margin: auto;
   }
-  .albums {
+  .top-pictures{
+    display: grid;
+    grid-template-rows: 300px 300px ;
+    grid-template-columns: 40% 30% 30%;
+  }
+  .albums{
     margin-top: 30px;
     display: grid;
     gap: 30px;
     grid-template-columns:1fr 1fr;
     grid-auto-rows: 200px;
   }
-  .card {
+  .card{
     font-size: 20px;
     border-radius: 20px;
     box-shadow: 0 2px 10px #ccc;
@@ -250,19 +255,19 @@ a.disabled {
     margin: 0px 30px 30px 30px;
     position: relative;
   }
-  .thumbnail {
+  .thumbnail{
     border-radius: 20px;
     background: #000;
     width: 100%;
   }
-  .thumbimg {
+  .thumbimg{
     display: block;
     opacity: .8;
     width:100%;
     height:200px;
     border-radius:20px;
   }
-  .popup-inner {
+  .popup-inner{
     position: absolute;
     left: 50%;
     top: 50%;
