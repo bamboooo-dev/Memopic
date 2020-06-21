@@ -49,17 +49,14 @@ class LinebotController < ApplicationController
         if text.eql?('アルバム')
           PseudoSession.updateContext(userId, CREATE)
           client.reply_message(event['replyToken'], template)
-          response_success(:linebot, :callback)
         end
       when CREATE
         if text.eql?('アルバムを作成する')
           PseudoSession.updateContext(userId, NAME)
           reply_text(event, 'アルバム名を教えてください！中止するときは「中止」と言ってください。')
-          response_success(:linebot, :callback)
         elsif text.eql?('アルバムを作成しない')
           reply_text(event, 'またの機会に〜')
           PseudoSession.deleteStatus(userId)
-          response_success(:linebot, :callback)
         end
       when NAME
         if text.eql?('中止')
@@ -70,10 +67,10 @@ class LinebotController < ApplicationController
           album = Album.create(name: text, album_hash: SecureRandom.alphanumeric(20))
           PseudoSession.updateAlbumID(userId, album.id)
           reply_text(event, "#{text}ですね！アルバムに入れる写真を送ってください！")
-          response_success(:linebot, :callback)
         end
       when PICTURE
         if event['message']['type'] == 'image'
+          PseudoSession.incrementPictureCount(userId)
           messageId = event["message"]["id"]
           response = client.get_message_content(messageId)
           album = Album.find( PseudoSession.readAlbumID(userId) )
@@ -88,17 +85,18 @@ class LinebotController < ApplicationController
             tempfile: File.open(output_path)
           )
           album.pictures.create(picture_name: picture)
-          reply_text(event, "画像をアップロードしました！さらに写真を追加するか、「終わり」と送信してアルバムの作成を完了してください")
-          response_success(:linebot, :callback)
+          PseudoSession.decrementPictureCount(userId)
+          if PseudoSession.readPictureCount(userId) == 0
+            reply_text(event, "画像をアップロードしました！さらに写真を追加するか、「終わり」と送信してアルバムの作成を完了してください")
+          end
         elsif text.eql?('終わり')
           album = Album.find( PseudoSession.readAlbumID(userId) )
           reply_text(event, "アルバム完成！ => " + ENV["URL"] + "/albums/#{album.album_hash}")
           PseudoSession.deleteStatus(userId)
-          response_success(:linebot, :callback)
         end
       end
     }
-
+    response_success(:linebot, :callback)
   end
 
 
