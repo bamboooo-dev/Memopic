@@ -38,42 +38,51 @@ class LinebotController < ApplicationController
 
     events.each { |event|
       text = event['message']['text']
-      userId = event['source']['userId']
 
-      if PseudoSession.getStatus(userId).nil?
-        PseudoSession.putStatus(userId, UNDO, nil)
+      senderID =
+        case event['source']['type']
+        when 'user'
+          event['source']['userId']
+        when 'group'
+          event['source']['groupId']
+        when 'room'
+          event['source']['roomId']
+        end
+
+      if PseudoSession.getStatus(senderID).nil?
+        PseudoSession.putStatus(senderID, UNDO, nil)
       end
 
-      case PseudoSession.readContext(userId)
+      case PseudoSession.readContext(senderID)
       when UNDO
         if text.eql?('アルバム')
-          PseudoSession.updateContext(userId, CREATE)
+          PseudoSession.updateContext(senderID, CREATE)
           client.reply_message(event['replyToken'], template)
         end
       when CREATE
         if text.eql?('アルバムを作成する')
-          PseudoSession.updateContext(userId, NAME)
+          PseudoSession.updateContext(senderID, NAME)
           reply_text(event, 'アルバム名を教えてください！中止するときは「中止」と言ってください。')
         elsif text.eql?('アルバムを作成しない')
           reply_text(event, 'またの機会に〜')
-          PseudoSession.deleteStatus(userId)
+          PseudoSession.deleteStatus(senderID)
         end
       when NAME
         if text.eql?('中止')
-          PseudoSession.deleteStatus(userId)
+          PseudoSession.deleteStatus(senderID)
           reply_text(event, 'またの機会に〜')
         elsif text
-          PseudoSession.updateContext(userId, PICTURE)
+          PseudoSession.updateContext(senderID, PICTURE)
           album = Album.create(name: text, album_hash: SecureRandom.alphanumeric(20))
-          PseudoSession.updateAlbumID(userId, album.id)
+          PseudoSession.updateAlbumID(senderID, album.id)
           reply_text(event, "#{text}ですね！アルバムに入れる写真を送ってください！")
         end
       when PICTURE
         if event['message']['type'] == 'image'
-          PseudoSession.incrementPictureCount(userId)
+          PseudoSession.incrementPictureCount(senderID)
           messageId = event["message"]["id"]
           response = client.get_message_content(messageId)
-          album = Album.find( PseudoSession.readAlbumID(userId) )
+          album = Album.find( PseudoSession.readAlbumID(senderID) )
           output_path = Rails.root.join('tmp', 'albums', SecureRandom.alphanumeric(10) + ".jpg")
           File.open(output_path, 'w+b') do |fp|
             fp.write(response.body)
@@ -85,14 +94,14 @@ class LinebotController < ApplicationController
             tempfile: File.open(output_path)
           )
           album.pictures.create(picture_name: picture)
-          PseudoSession.decrementPictureCount(userId)
-          if PseudoSession.readPictureCount(userId) == 0
+          PseudoSession.decrementPictureCount(senderID)
+          if PseudoSession.readPictureCount(senderID) == 0
             reply_text(event, "画像をアップロードしました！さらに写真を追加するか、「終わり」と送信してアルバムの作成を完了してください")
           end
         elsif text.eql?('終わり')
-          album = Album.find( PseudoSession.readAlbumID(userId) )
+          album = Album.find( PseudoSession.readAlbumID(senderID) )
           reply_text(event, "アルバム完成！ => " + ENV["URL"] + "/albums/#{album.album_hash}")
-          PseudoSession.deleteStatus(userId)
+          PseudoSession.deleteStatus(senderID)
         end
       end
     }
