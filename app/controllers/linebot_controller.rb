@@ -1,5 +1,6 @@
 require 'line/bot'
 require 'pseudo_session'
+require 'tempfile'
 
 class LinebotController < ApplicationController
 
@@ -83,17 +84,18 @@ class LinebotController < ApplicationController
           messageId = event["message"]["id"]
           response = client.get_message_content(messageId)
           album = Album.find( PseudoSession.readAlbumID(senderID) )
-          output_path = Rails.root.join('tmp', 'albums', SecureRandom.alphanumeric(10) + ".jpg")
-          File.open(output_path, 'w+b') do |fp|
-            fp.write(response.body)
-          end
 
-          picture = ActionDispatch::Http::UploadedFile.new(
-            filename: SecureRandom.alphanumeric(10) + ".jpg",
-            type: 'image/jpeg',
-            tempfile: File.open(output_path)
-          )
-          album.pictures.create(picture_name: picture)
+          Tempfile.create(['uploaded','.jpg']) do |f|
+            f.binmode
+            f.write(response.body)
+            picture = ActionDispatch::Http::UploadedFile.new(
+              filename: SecureRandom.alphanumeric(10) + ".jpg",
+              type: 'image/jpeg',
+              tempfile: f
+            )
+            album.pictures.create(picture_name: picture)
+          end
+          
           PseudoSession.decrementPictureCount(senderID)
           if PseudoSession.readPictureCount(senderID) == 0
             reply_text(event, "画像をアップロードしました！さらに写真を追加するか、「終わり」と送信してアルバムの作成を完了してください")
