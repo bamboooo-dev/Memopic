@@ -1,61 +1,61 @@
 class PseudoSession
   @@statusHash = {}
 
-  def self.getStatus(user_id)
-    if @@statusHash.has_key?(user_id)
-      @@statusHash[user_id]
+  def self.getStatus(sender_id)
+    if @@statusHash.has_key?(sender_id)
+      @@statusHash[sender_id]
     end
   end
 
-  def self.putStatus(user_id, context, album_id)
-    @@statusHash.store(user_id, {"context"=>context, "album_id"=>album_id, "picture_count"=>0})
+  def self.putStatus(sender_id, context, album_id)
+    @@statusHash.store(sender_id, {"context"=>context, "album_id"=>album_id, "picture_count"=>0})
   end
 
-  def self.deleteStatus(user_id)
-    if @@statusHash.has_key?(user_id)
-      @@statusHash.delete(user_id)
+  def self.deleteStatus(sender_id)
+    if @@statusHash.has_key?(sender_id)
+      @@statusHash.delete(sender_id)
     end
   end
 
-  def self.readContext(user_id)
-    if @@statusHash.has_key?(user_id)
-      @@statusHash[user_id]["context"]
+  def self.readContext(sender_id)
+    if @@statusHash.has_key?(sender_id)
+      @@statusHash[sender_id]["context"]
     end
   end
 
-  def self.updateContext(user_id, context)
-    if @@statusHash.has_key?(user_id)
-      @@statusHash[user_id]["context"] = context
+  def self.updateContext(sender_id, context)
+    if @@statusHash.has_key?(sender_id)
+      @@statusHash[sender_id]["context"] = context
     end
   end
 
-  def self.readAlbumID(user_id)
-    if @@statusHash.has_key?(user_id)
-      @@statusHash[user_id]["album_id"]
+  def self.readAlbumID(sender_id)
+    if @@statusHash.has_key?(sender_id)
+      @@statusHash[sender_id]["album_id"]
     end
   end
 
-  def self.updateAlbumID(user_id, album_id)
-    if @@statusHash.has_key?(user_id)
-      @@statusHash[user_id]["album_id"] = album_id
+  def self.updateAlbumID(sender_id, album_id)
+    if @@statusHash.has_key?(sender_id)
+      @@statusHash[sender_id]["album_id"] = album_id
     end
   end
 
-  def self.readPictureCount(user_id)
-    if @@statusHash.has_key?(user_id)
-      @@statusHash[user_id]["picture_count"]
+  def self.readPictureCount(sender_id)
+    if @@statusHash.has_key?(sender_id)
+      @@statusHash[sender_id]["picture_count"]
     end
   end
 
-  def self.incrementPictureCount(user_id)
-    if @@statusHash.has_key?(user_id)
-      @@statusHash[user_id]["picture_count"] += 1
+  def self.incrementPictureCount(sender_id)
+    if @@statusHash.has_key?(sender_id)
+      @@statusHash[sender_id]["picture_count"] += 1
     end
   end
 
-  def self.decrementPictureCount(user_id)
-    if @@statusHash.has_key?(user_id)
-      @@statusHash[user_id]["picture_count"] -= 1
+  def self.decrementPictureCount(sender_id)
+    if @@statusHash.has_key?(sender_id)
+      @@statusHash[sender_id]["picture_count"] -= 1
     end
   end
 end
