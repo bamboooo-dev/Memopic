@@ -20,9 +20,6 @@
 /tmp/images/*
 !/tmp/images/
 !/tmp/images/.keep
-tmp/albums/*
-!tmp/albums/
-!/tmp/albums/.keep
 
 # Ignore uploaded files in development.
 /storage/*
