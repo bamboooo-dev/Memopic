@@ -102,7 +102,7 @@ class LinebotController < ApplicationController
           end
         elsif text.eql?('終わり')
           album = Album.find( PseudoSession.readAlbumID(senderID) )
-          reply_text(event, "アルバム完成！ => " + ENV["URL"] + "/albums/#{album.album_hash}")
+          reply_text(event, "アルバム完成！ => " + ENV["URL"] + "/albums/#{album.album_hash}" + '?openExternalBrowser=1')
           PseudoSession.deleteStatus(senderID)
         end
       end
