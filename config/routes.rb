@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # mount_devise_token_auth_for 'User', at: 'auth'
 
   root 'albums#index'
 
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   post '/callback', to: 'linebot#callback'
-  
+
   get 'static_pages/home'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -27,4 +28,11 @@ Rails.application.routes.draw do
   resources :comments, only: [:index, :create, :destroy]
   resources :favorites, only: [:create, :destroy]
   resources :user_albums, only: [:create]
+
+  # API
+  namespace :api do
+    namespace :v1 do
+      mount_devise_token_auth_for 'User', at: 'auth'
+    end
+  end
 end
