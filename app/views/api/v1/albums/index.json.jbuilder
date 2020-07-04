@@ -1,0 +1,1 @@
+json.array! @albums_with_thumpics
