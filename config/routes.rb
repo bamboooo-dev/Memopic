@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth'
       resources :albums, param: :album_hash
+      resources :user_albums, only: [:create]
     end
   end
 end
