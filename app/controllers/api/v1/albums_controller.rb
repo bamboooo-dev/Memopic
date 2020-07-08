@@ -9,25 +9,35 @@ module Api
         @albums = current_user.albums
         @thumpics = pick_thumbpic
         @albums_with_thumpics = @albums.zip(@thumpics)
+        render json: @albums_with_thumpics
       end
 
       # POST /api/v1/albums
       def create
-        @album_form = AlbumForm.new(album_params)
-        @album_form.save(current_user)
+        album = Album.new(name: params[:name], album_hash: SecureRandom.alphanumeric(20))
+        params[:pictures].each do |picture|
+          album.pictures.new(picture_name: picture)
+        end
+        album.save
+        album.users << current_user
       end
 
       # GET /api/v1/albums/:album_hash
       def show
-        @album = Album.find_by!(album_hash: params[:album_hash])
+        picture_data = []
+        @album = Album.preload(:pictures).find_by!(album_hash: params[:album_hash])
         @pictures =  @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc')
-        @top_pictures = @pictures.take(5)
-        @bottom_pictures =
-          if @pictures.length > 5
-              @pictures[5..-1]
-          else
-              []
-          end
+        @pictures.each do |picture|
+          picture_data << {
+            "picture_id" => picture.id,
+            "picture_url" => picture.picture_name.url,
+            "favorite" => {
+              "isFavored" => current_user.favoring?(picture),
+              "favorite_id" => picture.favorites.find_by(user: current_user)&.id 
+            }
+          }
+        end
+        render json: picture_data
       end
 
       # PUT /api/v1/alubms/:album_hash/edit
@@ -37,13 +47,6 @@ module Api
       #   @album_form = AlbumForm.new(name: @album.name)
       # end
 
-
-
-      private
-
-        def album_params
-          params.require(:album_form).permit(:name, {pictures: []})
-        end
     end
   end
 end
