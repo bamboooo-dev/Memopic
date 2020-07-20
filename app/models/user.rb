@@ -11,8 +11,11 @@ class User < ApplicationRecord
   has_many :pictures, through: :comments
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :trackable,
-         :omniauthable, omniauth_providers: %i[google_oauth2 line]
+         :trackable
+
+  include DeviseTokenAuth::Concerns::User
+
+  devise :omniauthable, omniauth_providers: %i[google_oauth2 line]
 
   def self.without_sns_data(auth)
     email = auth.info.email ? auth.info.email : "#{auth.uid}-#{auth.provider}@example.com"

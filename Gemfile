@@ -38,6 +38,7 @@ gem "mini_magick"
 gem 'line-bot-api'
 
 gem 'devise'
+gem 'devise_token_auth'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'dotenv-rails'
