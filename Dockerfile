@@ -16,7 +16,7 @@ RUN mv IPAexfont00401/*.ttf /usr/share/fonts/japanese/TrueType
 
 WORKDIR $APP_ROOT
 COPY Gemfile Gemfile.lock $APP_ROOT/
-RUN bundle install
+RUN bundle install -j 4
 COPY . $APP_ROOT
 
 RUN rm -rf bin/webpack*
