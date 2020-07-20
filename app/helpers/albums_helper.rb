@@ -8,7 +8,7 @@ module AlbumsHelper
         favorite_counts << picture.favoriters.count
       end
       picture_index = favorite_counts.index(favorite_counts.max)
-      thumbpics << pictures[picture_index]
+      thumbpics << pictures[picture_index] if picture_index.present?
     end
     thumbpics
   end
