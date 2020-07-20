@@ -7,9 +7,9 @@ module Api
       # GET /api/v1/albums
       def index
         @albums = current_user.albums
-        @thumpics = pick_thumbpic
-        @albums_with_thumpics = @albums.zip(@thumpics)
-        render json: @albums_with_thumpics
+        thumpics = pick_thumbpic
+        albums_with_thumpics = @albums.zip(thumpics)
+        render json: albums_with_thumpics
       end
 
       # POST /api/v1/albums
@@ -24,16 +24,15 @@ module Api
 
       # GET /api/v1/albums/:album_hash
       def show
-        picture_data = []
-        @album = Album.preload(:pictures).find_by!(album_hash: params[:album_hash])
-        @pictures =  @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc')
-        @pictures.each do |picture|
-          picture_data << {
+        album = Album.preload(:pictures).find_by!(album_hash: params[:album_hash])
+        pictures =  album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc')
+        picture_data = pictures.map do |picture|
+          {
             "picture_id" => picture.id,
             "picture_url" => picture.picture_name.url,
             "favorite" => {
               "isFavored" => current_user.favoring?(picture),
-              "favorite_id" => picture.favorites.find_by(user: current_user)&.id 
+              "favorite_id" => picture.favorites.find_by(user: current_user)&.id
             }
           }
         end
