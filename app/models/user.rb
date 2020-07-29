@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  has_many :sns_credentials, dependent: :destroy
   has_many :user_albums
   has_many :albums, through: :user_albums
   has_many :favorites
@@ -17,52 +16,20 @@ class User < ApplicationRecord
 
   devise :omniauthable, omniauth_providers: %i[google_oauth2 line]
 
-  def self.without_sns_data(auth)
-    email = auth.info.email ? auth.info.email : "#{auth.uid}-#{auth.provider}@example.com"
-    user = User.where(email: email).first
-
-      if user.present?
-        sns = SnsCredential.create(
-          uid: auth.uid,
-          provider: auth.provider,
-          user_id: user.id
-        )
-      else
-        user = User.new(
-          nickname: auth.info.name,
-          email: email,
-        )
-        sns = SnsCredential.new(
-          uid: auth.uid,
-          provider: auth.provider
-        )
-      end
-      return { user: user ,sns: sns}
-    end
-
-  def self.with_sns_data(auth, snscredential)
-    user = User.where(id: snscredential.user_id).first
+  def self.find_oauth(auth)
+    uid = auth.uid
+    provider = auth.provider
+    email = auth.info.email ? auth.info.email : "#{uid}-#{provider}@example.com"
+    user = User.where(email: email, uid: uid, provider: provider).first
     unless user.present?
       user = User.new(
         nickname: auth.info.name,
         email: auth.info.email,
+        uid: uid,
+        provider: provider
       )
     end
-    return {user: user}
-  end
-
-  def self.find_oauth(auth)
-    uid = auth.uid
-    provider = auth.provider
-    snscredential = SnsCredential.where(uid: uid, provider: provider).first
-    if snscredential.present?
-      user = with_sns_data(auth, snscredential)[:user]
-      sns = snscredential
-    else
-      user = without_sns_data(auth)[:user]
-      sns = without_sns_data(auth)[:sns]
-    end
-    return { user: user ,sns: sns}
+    return { user: user }
   end
 
   def favor(picture)

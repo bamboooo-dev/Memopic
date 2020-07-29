@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_135039) do
+ActiveRecord::Schema.define(version: 2020_07_29_152018) do
 
   create_table "album_forms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -55,15 +55,6 @@ ActiveRecord::Schema.define(version: 2020_06_27_135039) do
     t.index ["album_id"], name: "index_pictures_on_album_id"
   end
 
-  create_table "sns_credentials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "provider"
-    t.string "uid"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_sns_credentials_on_user_id"
-  end
-
   create_table "user_albums", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id"
     t.integer "album_id"
@@ -91,7 +82,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_135039) do
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.text "tokens"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email", "provider"], name: "index_users_on_email_and_provider", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
@@ -99,5 +90,4 @@ ActiveRecord::Schema.define(version: 2020_06_27_135039) do
   add_foreign_key "comments", "pictures"
   add_foreign_key "comments", "users"
   add_foreign_key "pictures", "albums"
-  add_foreign_key "sns_credentials", "users"
 end
