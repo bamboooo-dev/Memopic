@@ -36,7 +36,8 @@ module Api
             }
           }
         end
-        render json: picture_data
+        picture_hash = {"album_name" => album.name, "pictures" => picture_data}
+        render json: picture_hash
       end
 
       # PUT /api/v1/alubms/:album_hash/edit
