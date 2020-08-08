@@ -21,5 +21,6 @@ module Memopic
     config.autoload_paths += %W(#{config.root}/lib/linebot)
     config.time_zone = 'Tokyo'
     config.hosts << '.ngrok.io'
+    config.hosts << ENV['HOST']
   end
 end
