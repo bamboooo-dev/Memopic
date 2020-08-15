@@ -26,7 +26,7 @@ module Api
       def show
         album = Album.preload(:pictures).find_by!(album_hash: params[:album_hash])
         pictures =  album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc')
-        picture_data = pictures.map do |picture|
+        pictures_data = pictures.map do |picture|
           {
             "picture_id" => picture.id,
             "picture_url" => picture.picture_name.url,
@@ -36,7 +36,8 @@ module Api
             }
           }
         end
-        render json: picture_data
+        album_data = {"album_name" => album.name, "pictures" => pictures_data}
+        render json: album_data
       end
 
       # PUT /api/v1/alubms/:album_hash/edit
