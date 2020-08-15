@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/health', to: 'health#health'
   post '/callback', to: 'linebot#callback'
 
   get 'static_pages/home'
