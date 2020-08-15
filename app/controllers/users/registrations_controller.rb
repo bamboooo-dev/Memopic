@@ -13,8 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     if session[:provider].present? && session[:uid].present?
       password = Devise.friendly_token.first(8)
-      @user = User.create!(nickname: params[:user][:nickname], email: params[:user][:email], password: password, password_confirmation: password)
-      sns = SnsCredential.create(user_id: @user.id,uid: session[:uid], provider: session[:provider])
+      @user = User.create!(nickname: params[:user][:nickname], email: params[:user][:email], password: password, password_confirmation: password, uid: session[:uid], provider: session[:provider])
     else
       @user = User.create!(nickname: params[:user][:nickname], email: params[:user][:email], password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
     end
