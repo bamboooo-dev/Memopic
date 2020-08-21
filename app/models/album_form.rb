@@ -10,9 +10,13 @@ class AlbumForm
     album = Album.new(name: name, album_hash: SecureRandom.alphanumeric(20))
 
     return false if pictures.nil?
-
-    pictures.each do |picture|
+    
+    pictures.each_with_index do |picture, index|
       album.pictures.new(picture_name: picture)
+      ProgressChannel.broadcast_to(
+        user,
+        percent: (index+1) * 100 / pictures.length
+      )
     end
     album.save
     album.users << user

@@ -28,6 +28,10 @@
           <%= button_tag type: 'submit', class: "button-submit", data: { disable_with: "アップロード中" } do %>
             <i class="fas fa-cloud-upload-alt"></i>  アップロードする
           <% end %>
+          <div class="progress-bar-container">
+            <div class="progress-percentage">0%</div>
+            <progress class="progress" max="100" value="0"></progress>
+          </div>
         </div>
 
       <% end %>
