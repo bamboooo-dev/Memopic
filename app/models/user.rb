@@ -24,7 +24,7 @@ class User < ApplicationRecord
     unless user.present?
       user = User.new(
         nickname: auth.info.name,
-        email: auth.info.email,
+        email: email,
         uid: uid,
         provider: provider
       )
