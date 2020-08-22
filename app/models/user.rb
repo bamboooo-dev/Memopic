@@ -24,7 +24,7 @@ class User < ApplicationRecord
     # 仕様変更によるパッチ
     tmp_user = User.where(email: email, provider: provider).first
     if tmp_user.present? && tmp_user.email == tmp_user.uid
-      tmp_user.update_attribute(uid: uid)
+      tmp_user.update!(uid: uid)
     end
 
     user = User.where(email: email, uid: uid, provider: provider).first
