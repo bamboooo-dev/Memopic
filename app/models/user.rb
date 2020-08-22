@@ -20,11 +20,18 @@ class User < ApplicationRecord
     uid = auth.uid
     provider = auth.provider
     email = auth.info.email ? auth.info.email : "#{uid}-#{provider}@example.com"
+
+    # 仕様変更によるパッチ
+    tmp_user = User.where(email: email, provider: provider).first
+    if tmp_user.present? && tmp_user.email == tmp_user.uid
+      tmp_user.update_attribute(uid: uid)
+    end
+
     user = User.where(email: email, uid: uid, provider: provider).first
     unless user.present?
       user = User.new(
         nickname: auth.info.name,
-        email: auth.info.email,
+        email: email,
         uid: uid,
         provider: provider
       )
