@@ -1,3 +1,4 @@
-@import "tailwindcss/base";
+/* TODO base を import してもうまく動くようにする */ 
+/* @import "tailwindcss/base"; */
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
