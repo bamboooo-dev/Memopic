@@ -8,7 +8,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - 4306:3306
-
+  redis:
+    image: redis:6.0.6
   web:
     build: .
     container_name: album
@@ -20,3 +21,4 @@ services:
       - 3000:3000
     depends_on:
       - db
+      - redis
