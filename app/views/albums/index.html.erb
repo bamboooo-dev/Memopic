@@ -42,6 +42,7 @@
       <% end %>
     </div>
   </div>
+  <div id="map"></div>
 <% end %>
 <script src="https://kit.fontawesome.com/81a1ab3943.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -75,3 +76,38 @@ $(function () {
     });
   });
 </script>
+<script>
+  var map;
+  var infowindow;
+
+  var mapOptions = {
+    center: {lat: 35.4093320, lng: 136.7566470},
+      zoom: 6
+  };
+
+  function initMap() {
+    infowindow = new google.maps.InfoWindow();
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    google.maps.event.addListener(map, "click", function() {infowindow.close();});
+
+    // 任意の位置にマーカーを追加
+    var point = new google.maps.LatLng(35.673264, 139.760668);
+    var marker = create_maker(point, "info", "<img src='/assets/index_page_pc.webp' /><br><p>テキスト</p>");
+
+    var point = new google.maps.LatLng(34.6545182, 135.4289645);
+    var marker = create_maker(point, "info", "<img src='/assets/index_page_pc.webp' /><br><p>テキスト</p>");
+
+    var point = new google.maps.LatLng(35.1709150, 136.8815369);
+    var marker = create_maker(point, "info", "<img src='/assets/index_page_pc.webp' /><br><p>テキスト</p>");
+  }
+  function create_maker(latlng, label, html) {
+    // マーカーを生成
+    var marker = new google.maps.Marker({position: latlng, map: map, title: label});
+    // マーカーをマウスオーバーした時の処理
+    google.maps.event.addListener(marker, "mouseover", function() {
+      infowindow.setContent(html);
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_API_KEY']%>&callback=initMap" async defer></script>
