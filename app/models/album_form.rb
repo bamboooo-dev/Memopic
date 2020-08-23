@@ -42,19 +42,21 @@ class AlbumForm
 
   private
     def get_exif_info(picture)
-
-      ext = File.extname(picture.tempfile).downcase
-      lat, lng, date_time = nil
-      if ext == '.jpg' || ext == '.jpeg'
-        exif = EXIFR::JPEG::new(picture.tempfile)
-        lat = exif.gps.latitude
-        lng = exif.gps.longitude
-        date_time = exif.date_time
-      elsif ext == '.tif' || ext == '.tiff'
-        exif = EXIFR::TIFF::new(picture.tempfile)
-        lat = exif.gps.latitude
-        lng = exif.gps.longitude
-        date_time = exif.date_time
+      begin
+        ext = File.extname(picture.tempfile).downcase
+        if ext == '.jpg' || ext == '.jpeg'
+          exif = EXIFR::JPEG::new(picture.tempfile)
+          lat = exif.gps.latitude
+          lng = exif.gps.longitude
+          date_time = exif.date_time
+        elsif ext == '.tif' || ext == '.tiff'
+          exif = EXIFR::TIFF::new(picture.tempfile)
+          lat = exif.gps.latitude
+          lng = exif.gps.longitude
+          date_time = exif.date_time
+        end
+      rescue NoMethodError
+        lat, lng, date_time = nil
       end
 
       return lat, lng, date_time 
