@@ -91,8 +91,18 @@ $(function () {
     google.maps.event.addListener(map, "click", function() {infowindow.close();});
 
     gon.thumbpics_data.forEach(function(thumbpic_data){
-      const lat = Math.random() * (36 - 34) + 34;
-      const lng = Math.random() * (140 - 132) + 132;
+      
+      // ランダムな初期値
+      let lat = Math.random() * (36 - 34) + 34;
+      let lng = Math.random() * (140 - 132) + 132;
+      // 緯度・経度があればそれを参照する
+      if(thumbpic_data.lat){
+        lat = thumbpic_data.lat;
+      }
+      if(thumbpic_data.lat){
+        lng = thumbpic_data.lng;
+      }
+
       const point = new google.maps.LatLng(lat, lng);
       const html = `
         <a href="albums/${ thumbpic_data.album_hash }">${ thumbpic_data.album_name }
