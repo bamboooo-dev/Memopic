@@ -77,10 +77,10 @@ $(function () {
   });
 </script>
 <script>
-  var map;
-  var infowindow;
+  let map;
+  let infowindow;
 
-  var mapOptions = {
+  const mapOptions = {
     center: {lat: 35.4093320, lng: 136.7566470},
       zoom: 6
   };
@@ -90,21 +90,27 @@ $(function () {
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
     google.maps.event.addListener(map, "click", function() {infowindow.close();});
 
-    // 任意の位置にマーカーを追加
-    var point = new google.maps.LatLng(35.673264, 139.760668);
-    var marker = create_maker(point, "info", "<img src='/assets/index_page_pc.webp' /><br><p>テキスト</p>");
-
-    var point = new google.maps.LatLng(34.6545182, 135.4289645);
-    var marker = create_maker(point, "info", "<img src='/assets/index_page_pc.webp' /><br><p>テキスト</p>");
-
-    var point = new google.maps.LatLng(35.1709150, 136.8815369);
-    var marker = create_maker(point, "info", "<img src='/assets/index_page_pc.webp' /><br><p>テキスト</p>");
+    gon.thumbpics_data.forEach(function(thumbpic_data){
+      const lat = Math.random() * (36 - 34) + 34;
+      const lng = Math.random() * (140 - 132) + 132;
+      const point = new google.maps.LatLng(lat, lng);
+      const html = `
+        <a href="albums/${ thumbpic_data.album_hash }">${ thumbpic_data.album_name }
+          <br>
+          <img src='${ thumbpic_data.thumbpic_url }' class="h-32" />
+        </a>
+      `
+      create_maker(point, html);
+    });
   }
-  function create_maker(latlng, label, html) {
-    // マーカーを生成
-    var marker = new google.maps.Marker({position: latlng, map: map, title: label});
-    // マーカーをマウスオーバーした時の処理
+
+  function create_maker(latlng, html) {
+    const marker = new google.maps.Marker({ position: latlng, map: map });
     google.maps.event.addListener(marker, "mouseover", function() {
+      infowindow.setContent(html);
+      infowindow.open(map, marker);
+    });
+    google.maps.event.addListener(marker, "click", function() {
       infowindow.setContent(html);
       infowindow.open(map, marker);
     });

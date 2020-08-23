@@ -11,6 +11,9 @@ class AlbumsController < ApplicationController
     @albums = current_user.albums
     @thumbpics = pick_thumbpic
     @album_form = AlbumForm.new
+    gon.thumbpics_data = @albums.zip(@thumbpics).map do |album, thumbpic|
+      { album_name: album.name, album_hash: album.album_hash, thumbpic_url: thumbpic.picture_name.url }
+    end
   end
 
   def create
