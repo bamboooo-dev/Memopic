@@ -1,4 +1,9 @@
-<div class="h-60vh bg-orange-gradation">
+<div id="loading" class="w-screen h-screen bg-gray-300 z-50 fixed bg-opacity-75 text-center">
+    <i class="fas fa-volume-up text-6xl" id="volume-up-icon"></i>
+    <h1>音楽が再生されます</h1>
+    <h2 class="inline" id="music-on">ON</h2><h2 class="inline"> / </h2><h2 class="inline" id="music-off">OFF</h2><br>
+</div>
+<div class="h-60vh bg-orange-gradation relative">
     <div>
         <%= link_to 'memopic', root_path, class: 'font-serif-sc text-5xl ml-4 md:ml-10 text-black' %>
     </div>
@@ -11,6 +16,7 @@
         思い出を振り返ってみませんか？<br>
         <span class="font-serif-sc">memopic</span> はプレイリストで旅を記録する新しいサービスです
     </div>
+    <%= audio_tag("driving.mp3", controls: true, id: "top-page-audio" ) %>
     <picture>
         <source media="(max-width: 481px)" srcset="/assets/index_page_phone.webp">
         <img class="absolute index-page-preview" src="/assets/index_page_pc.webp">
@@ -21,3 +27,32 @@
         <span class="font-serif-sc">memopic</span> を使ってみる
     </a>
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+function hideAnnounce(){
+    $('#loading').hide(500);
+}
+$(function () {
+    let bgm = $("#top-page-audio").get(0)
+    bgm.volume = 0.1;
+    $('#music-on').on('click', function(){
+        hideAnnounce();
+        setTimeout( () =>{
+            bgm.play();
+            let timerid = setInterval(()=>{
+                if( (bgm.volume + 0.1) >= 0.5 ){
+                    bgm.volume = 0.5;
+                    clearInterval(timerid);
+                }
+                else{
+                    bgm.volume += 0.1;
+                }
+            }, 500)
+        }, 800)
+    });
+    $('#music-off').on('click', function(){
+        hideAnnounce();
+    });
+});
+</script>
+<script src="https://kit.fontawesome.com/81a1ab3943.js" crossorigin="anonymous"></script>
