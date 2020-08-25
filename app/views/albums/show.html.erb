@@ -26,6 +26,11 @@
         </div>
       <% end %>
     </div>
+    <% if @album.playlists.present? %>
+        <% @album.playlists.each do |playlist|%>
+          <%= link_to playlist.name, playlist.url, target: :_blank %>
+        <% end %>
+      <% end %>
   </div>
 <% end %>
 <div class="pictures-wrapper">
