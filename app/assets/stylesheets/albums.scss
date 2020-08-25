@@ -321,7 +321,11 @@ a.disabled{
   display: flex;
   justify-content: center;
 }
-
+.delete-playlist{
+  position: absolute;
+  right: 0;
+  bottom: -25px;
+}
 @media screen and (min-width: 481px) {
   body{
     width: 100%;

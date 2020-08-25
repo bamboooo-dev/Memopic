@@ -8,6 +8,10 @@ class PlaylistsController < ApplicationController
   end
 
   def destroy
+    playlist = Playlist.find(params[:id])
+    album = playlist.album
+    playlist.destroy!
+    redirect_to album
   end
 
   private
