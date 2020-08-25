@@ -6,7 +6,7 @@ class Playlist < ApplicationRecord
   validate :validate_playlist_url
 
   def validate_playlist_url
-    unless url.include?('https://open.spotify.com') && url.include?('https://music.apple.com')
+    unless url.include?('https://open.spotify.com') || url.include?('https://music.apple.com')
       errors.add(:url, "に登録できるのはSpotifyまたはAppleMusicのプレイリストだけです") 
     end
   end
