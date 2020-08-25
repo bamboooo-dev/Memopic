@@ -26,23 +26,7 @@
       <% end %>
     </div>
     <div id="playlists">
-      <% if @playlists.present? %>
-        <% @playlists.each do |playlist|%>
-          <%= link_to playlist.url, target: :_blank do%>
-            <div class="playlist-img-wrap">
-              <% if playlist.url.include?('https://open.spotify.com') %>
-                <%= image_tag 'spotify.jpg', :size => '150x150', :class => 'soptify-image' %>
-              <% elsif playlist.url.include?('https://music.apple.com') %>
-                <%= image_tag 'AppleMusic.png', :size => '150x150', :class => 'applemusic-image' %>
-              <% end %>
-              <p><%= playlist.name %></p>
-              <%= link_to playlist_path(id: playlist.id), class: 'delete-playlist', method: :delete, data: { confirm: 'このプレイリストを削除してよろしいですか？' }  do %>
-                <i class="fas fa-trash-alt"></i>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-      <% end %>
+      <%= render @playlists %>
     </div>
 <% end %>
 <div class="pictures-wrapper">
