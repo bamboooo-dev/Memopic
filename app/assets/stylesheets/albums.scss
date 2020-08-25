@@ -40,6 +40,40 @@ a.disabled{
   outline: 0;
   border-bottom: 1px solid blue;
 }
+.input-new-playlist-link{
+  width: 100%;
+  height: 40px;
+  position: relative;
+  bottom: 10px;
+  font-size: 21px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
+}
+.input-new-playlist-link:hover{
+  border-bottom: 1px solid #dadec0;
+}
+.input-new-playlist-link:focus{
+  outline: 0;
+  border-bottom: 1px solid blue;
+}
+.input-new-playlist-name{
+  width: 100%;
+  height: 40px;
+  position: relative;
+  bottom: 10px;
+  font-size: 20px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
+}
+.input-new-playlist-name:hover{
+  border-bottom: 1px solid #dadec0;
+}
+.input-new-playlist-name:focus{
+  outline: 0;
+  border-bottom: 1px solid blue;
+}
 .button-submit{
   display: inline-block;
   border-radius: 5px;
@@ -54,6 +88,9 @@ a.disabled{
   }
 }
 .button-new-album{
+  font-size: 18px;
+}
+.button-new-playlist{
   font-size: 18px;
 }
 .pictures-wrapper{
@@ -88,6 +125,9 @@ a.disabled{
   text-align: center;
 }
 .album_form{
+  text-align: center;
+}
+.playlist_form{
   text-align: center;
 }
 .albums{
@@ -219,6 +259,10 @@ a.disabled{
   display: none;
   padding: 10px 10%;
 }
+.form-new-playlist-link{
+  display: none;
+  padding: 10px 10%;
+}
 #album-title{
   display: inline;
 }
@@ -226,6 +270,12 @@ a.disabled{
   font-family: 'Roboto Condensed', sans-serif;
 }
 #album-name-input{
+  margin-top: 10px;
+}
+#playlist-link-input{
+  margin-top: 10px;
+}
+#playlist-name-input{
   margin-top: 10px;
 }
 @media screen and (min-width: 481px) {
