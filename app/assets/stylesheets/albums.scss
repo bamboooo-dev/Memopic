@@ -320,6 +320,7 @@ a.disabled{
 #playlists{
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .delete-playlist{
   position: absolute;
@@ -377,5 +378,9 @@ a.disabled{
     background-color: #ffffff;
     z-index: 2;
     overflow-y: scroll;
+  }
+  #playlists{
+    display: flex;
+    justify-content: center;
   }
 }
