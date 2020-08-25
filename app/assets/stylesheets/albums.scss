@@ -45,7 +45,7 @@ a.disabled{
   height: 40px;
   position: relative;
   bottom: 10px;
-  font-size: 21px;
+  font-size: 15px;
   border: none;
   border-bottom: 1px solid transparent;
   transition: .3s cubic-bezier(0.4,0,0.2,1) all;
@@ -62,7 +62,7 @@ a.disabled{
   height: 40px;
   position: relative;
   bottom: 10px;
-  font-size: 20px;
+  font-size: 15px;
   border: none;
   border-bottom: 1px solid transparent;
   transition: .3s cubic-bezier(0.4,0,0.2,1) all;
@@ -87,11 +87,27 @@ a.disabled{
     cursor: not-allowed;
   }
 }
+.button-playlist-submit{
+  display: inline-block;
+  border-radius: 5px;
+  border: 0;
+  color: white;
+  height: 40px;
+  width: 130px;
+  font-size: 16px;
+  &:disabled{
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  margin: 0 !important;
+}
 .button-new-album{
   font-size: 18px;
 }
 .button-new-playlist{
-  font-size: 18px;
+  font-size: 16px;
+  padding: 0 !important;
+  width: 80% !important;
 }
 .pictures-wrapper{
   margin-top: 30px;
@@ -278,6 +294,34 @@ a.disabled{
 #playlist-name-input{
   margin-top: 10px;
 }
+.playlist-img-wrap{
+  background-color: #000000;
+  margin: 20px;
+  width: 150px;
+  height: 150px;
+  position: relative;
+}
+.playlist-img-wrap p{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  color: #ffffff;
+  font-size: 18px;
+}
+.playlist-img-wrap img{
+  display: block;
+  opacity: 0.7;
+}
+#playlists{
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (min-width: 481px) {
   body{
     width: 100%;

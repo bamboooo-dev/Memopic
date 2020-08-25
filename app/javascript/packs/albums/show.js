@@ -37,7 +37,7 @@ $(function () {
       $(".button-new-playlist").css('color', 'orange')
       $(".button-new-playlist").css('background', 'white')
     }else{
-      $(".button-new-playlist").text("プレイリスト");
+      $(".button-new-playlist").text("プレイリストを追加する");
       $(".button-new-playlist").css('color', '#fff')
       $(".button-new-playlist").css('background', 'linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%)')
     }

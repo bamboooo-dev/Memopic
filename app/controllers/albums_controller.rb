@@ -33,6 +33,7 @@ class AlbumsController < ApplicationController
         []
       end
     @playlist = Playlist.new
+    @playlists = @album.playlists
   end
 
   def edit

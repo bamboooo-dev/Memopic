@@ -9,9 +9,8 @@
 | <%= link_to 'このアルバムを削除する', @album, method: :delete, data: { confirm: "本当に削除しますか？" } %>
 | <%= link_to 'このアルバムを編集する', edit_album_path(@album) %>
 | <%= link_to 'コラージュしてエクスポート', export_album_path(@album), target: :_blank %>
-  <div>
     <div class="playlist_form">
-      <div class="wrapper-button-new-playlist"><button class="button-new-playlist">プレイリスト</button></div>
+      <div class="wrapper-button-new-playlist"><button class="button-new-playlist">プレイリストを追加する</button></div>
       <%= form_with(model: @playlist, url: playlists_path(album_id: @album.id), class: "form-new-playlist-link") do |form| %>
         <div id="playlist-name-input">
           <%= form.text_field :name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name", autocomplete:"off", required: true %>
@@ -20,18 +19,30 @@
           <%= form.text_field :url, placeholder: 'プレイリストのリンクを設定', class: "input-new-playlist-link", autocomplete:"off", required: true %>
         </div>
         <div class="right">
-          <%= button_tag type: 'submit', class: "button-submit", data: { disable_with: "アップロード中" } do %>
-            <i class="fas fa-headphones-alt"></i></i>  設定する
+          <%= button_tag type: 'submit', class: "button-playlist-submit", data: { disable_with: "保存中" } do %>
+            <i class="fas fa-headphones-alt"></i>  追加する
           <% end %>
         </div>
       <% end %>
     </div>
-    <% if @album.playlists.present? %>
-        <% @album.playlists.each do |playlist|%>
-          <%= link_to playlist.name, playlist.url, target: :_blank %>
+    <div id="playlists">
+      <% if @playlists.present? %>
+        <% @playlists.each do |playlist|%>
+          <%= link_to playlist.url, target: :_blank do%>
+            <div class="playlist-img-wrap">
+              <% if playlist.url.include?('open.spotify.com') %>
+                <%= image_tag 'spotify.jpg', :size => '150x150', :class => 'soptify-image' %>
+              <% elsif playlist.url.include?('music.apple.com') %>
+                <%= image_tag 'AppleMusic.png', :size => '150x150', :class => 'applemusic-image' %>
+              <% else %>
+                <%= image_tag 'line.png', :size => '150x150' %>
+              <% end %>
+              <p><%= playlist.name %></p>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
-  </div>
+    </div>
 <% end %>
 <div class="pictures-wrapper">
   <div class="top-pictures">
