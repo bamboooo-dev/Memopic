@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
   include DeviseTokenAuth::Concerns::User
 
-  devise :omniauthable, omniauth_providers: %i[google_oauth2 line]
+  devise :omniauthable, omniauth_providers: %i[spotify google_oauth2 line]
 
   def self.find_oauth(auth)
     uid = auth.uid
