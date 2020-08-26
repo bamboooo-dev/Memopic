@@ -100,6 +100,7 @@ a.disabled{
   height: 40px;
   width: 130px;
   font-size: 16px;
+  background: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
   &:disabled{
     opacity: 0.3;
     cursor: not-allowed;
@@ -110,9 +111,21 @@ a.disabled{
   font-size: 18px;
 }
 .button-new-playlist{
+  width: 70%;
+  display: inline-block;
+  padding: 7px 20px;
+  border: 1px;
+  border-style: solid;
+  border-color: orange;
+  border-radius: 25px;
+  text-decoration: none;
+  color: #FFF;
+  background: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+  transition: .4s;
+  outline:0;
+  margin-top: 10px;
   font-size: 16px;
   padding: 0 !important;
-  width: 80% !important;
 }
 .pictures-wrapper{
   margin-top: 30px;
