@@ -1,10 +1,7 @@
-audio{
-    width: 100px;
-}
 #volume-up-icon{
     margin-top: 35vh;
 }
-#top-page-audio{
+#audio-button{
     position: absolute;
     left: 20px;
     bottom: 10px;
@@ -48,9 +45,6 @@ audio{
 @media screen and (min-width: 481px) {
     .index-page-preview{
         right: 10vw;
-    }
-    audio{
-        width: 273px; // これが max
     }
 }
 @media screen and (min-width: 1024px) {

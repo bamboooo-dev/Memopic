@@ -1,7 +1,7 @@
 <div id="loading" class="w-screen h-screen bg-gray-300 z-50 fixed bg-opacity-75 text-center">
     <i class="fas fa-volume-up text-6xl" id="volume-up-icon"></i>
     <h1>音楽が再生されます</h1>
-    <h2 class="inline" id="music-on">ON</h2><h2 class="inline"> / </h2><h2 class="inline" id="music-off">OFF</h2><br>
+    <h2 class="inline cursor-pointer" id="music-on">ON</h2><h2 class="inline"> / </h2><h2 class="inline cursor-pointer" id="music-off">OFF</h2><br>
 </div>
 <div class="h-60vh bg-orange-gradation relative">
     <div>
@@ -16,7 +16,8 @@
         思い出を振り返ってみませんか？<br>
         <span class="font-serif-sc">memopic</span> はプレイリストで旅を記録する新しいサービスです
     </div>
-    <%= audio_tag("driving.mp3", controls: true, id: "top-page-audio" ) %>
+    <i class="fas text-3xl cursor-pointer" id="audio-button"></i>
+    <%= audio_tag("driving.mp3", id: "top-page-audio", loop: true ) %>
     <picture>
         <source media="(max-width: 481px)" srcset="/assets/index_page_phone.webp">
         <img class="absolute index-page-preview" src="/assets/index_page_pc.webp">
@@ -35,23 +36,25 @@ function hideAnnounce(){
 $(function () {
     let bgm = $("#top-page-audio").get(0)
     bgm.volume = 0.1;
+    $('#audio-button').on('click', function(){
+        if($(this).hasClass('fa-volume-up')){
+            bgm.pause();
+            $(this).removeClass('fa-volume-up');
+            $(this).addClass('fa-volume-mute');
+        }else if($(this).hasClass('fa-volume-mute')){
+            bgm.play();
+            $(this).removeClass("fa-volume-mute");
+            $(this).addClass("fa-volume-up");
+        }
+    });
     $('#music-on').on('click', function(){
         hideAnnounce();
-        setTimeout( () =>{
-            bgm.play();
-            let timerid = setInterval(()=>{
-                if( (bgm.volume + 0.1) >= 0.5 ){
-                    bgm.volume = 0.5;
-                    clearInterval(timerid);
-                }
-                else{
-                    bgm.volume += 0.1;
-                }
-            }, 500)
-        }, 800)
+        $('#audio-button').addClass('fa-volume-up');
+        bgm.play();
     });
     $('#music-off').on('click', function(){
         hideAnnounce();
+        $('#audio-button').addClass('fa-volume-mute');
     });
 });
 </script>
