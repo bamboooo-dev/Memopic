@@ -9,6 +9,25 @@
 | <%= link_to 'このアルバムを削除する', @album, method: :delete, data: { confirm: "本当に削除しますか？" } %>
 | <%= link_to 'このアルバムを編集する', edit_album_path(@album) %>
 | <%= link_to 'コラージュしてエクスポート', export_album_path(@album), target: :_blank %>
+    <div class="playlist_form">
+      <div class="wrapper-button-new-playlist"><button class="button-new-playlist">プレイリストを追加する</button></div>
+      <%= form_with(model: @playlist, url: playlists_path(album_id: @album.id), class: "form-new-playlist-link") do |form| %>
+        <div id="playlist-name-input">
+          <%= form.text_field :name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name", autocomplete:"off", required: true %>
+        </div>
+        <div id="playlist-link-input">
+          <%= form.text_field :url, placeholder: 'プレイリストのリンクを設定', class: "input-new-playlist-link", autocomplete:"off", required: true %>
+        </div>
+        <div class="right">
+          <%= button_tag type: 'submit', class: "button-playlist-submit", data: { disable_with: "保存中" } do %>
+            <i class="fas fa-headphones-alt"></i>  追加する
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div id="playlists">
+      <%= render @playlists %>
+    </div>
 <% end %>
 <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 <div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" data-url="<%= request.url %>" data-color="default" data-size="large" data-count="true" style="display: none;"></div>

@@ -266,6 +266,14 @@ Devise.setup do |config|
                   ENV['GOOGLE_CLIENT_SECRET'],
                   skip_jwt: true
   config.omniauth :line, ENV['LINE_KEY'], ENV['LINE_SECRET'], strategy_class: OmniAuth::Strategies::Line
+  config.omniauth :spotify,
+                  ENV['SPOTIFY_CLIENT_ID'],
+                  ENV['SPOTIFY_CLIENT_SECRET'],
+                  scope: %w(
+                    playlist-read-private
+                    user-read-private
+                    user-read-email
+                  ).join(' ')
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

@@ -10,6 +10,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_for(:line)
   end
 
+  def spotify
+    callback_for(:spotify)
+  end
+
   def callback_for(provider)
     @omniauth = request.env['omniauth.auth']
     info = User.find_oauth(@omniauth)

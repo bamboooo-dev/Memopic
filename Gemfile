@@ -41,6 +41,7 @@ gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-spotify'
 gem 'dotenv-rails'
 
 gem 'devise-i18n'
