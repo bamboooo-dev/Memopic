@@ -5,7 +5,7 @@ RSpec.describe "Album index page", type: :system do
     before do
       OmniAuth.config.mock_auth[:google_oauth2] = nil
       Rails.application.env_config['omniauth.auth'] = set_omniauth :google_oauth2
-      visit root_path
+      visit login_path
       click_on 'Google Signin'
       sleep 3
       click_button 'アカウント登録'
@@ -22,7 +22,7 @@ RSpec.describe "Album index page", type: :system do
 
     it 'ログアウトできる', js: true do
       click_on 'ログアウト'
-      expect(page).to have_content 'ログイン', wait: 5
+      expect(page).to have_content 'memopic を使ってみる', wait: 5
     end
 
     it 'アルバムを作成できる', js: true do

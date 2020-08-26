@@ -10,6 +10,8 @@
 | <%= link_to 'このアルバムを編集する', edit_album_path(@album) %>
 | <%= link_to 'コラージュしてエクスポート', export_album_path(@album), target: :_blank %>
 <% end %>
+<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+<div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" data-url="<%= request.url %>" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
 <div class="pictures-wrapper">
   <div class="top-pictures">
     <%= render @top_pictures %>

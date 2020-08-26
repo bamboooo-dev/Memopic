@@ -84,6 +84,11 @@
     }
   }
 }
+.popup-content{
+  img{
+    object-fit: contain;
+  }
+}
 
 @media screen and (min-width: 481px) {
   .top-pictures{

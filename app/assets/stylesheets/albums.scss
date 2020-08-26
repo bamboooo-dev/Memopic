@@ -1,7 +1,10 @@
 // Place all the styles related to the Albums controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-button{
+p{
+  margin: 0;
+}
+.button-new-album{
   width: 85%;
   display: inline-block;
   padding: 7px 20px;
@@ -16,9 +19,9 @@ button{
   outline:0;
   margin-top: 10px;
   cursor: pointer;
-}
-button:hover{
-  background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
+  &:hover{
+    background: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
+  }
 }
 a.disabled{
   pointer-events: none;
@@ -48,6 +51,8 @@ a.disabled{
   height: 40px;
   width: 200px;
   font-size: 16px;
+  background: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+  cursor: pointer;
   &:disabled{
     opacity: 0.3;
     cursor: not-allowed;
@@ -125,6 +130,9 @@ a.disabled{
   margin:0;
   padding:0;
 }
+.line-it-button{
+  margin-top: 10px;
+}
 .popup{
   position: fixed;
   left: 0;
@@ -148,7 +156,7 @@ a.disabled{
   width: 70%;
   max-width: 700px;
   height: 40%;
-  padding: 50px;
+  padding: 10px;
   background-color: #ffffff;
   z-index: 2;
   overflow-y: scroll;
@@ -228,11 +236,13 @@ a.disabled{
 #album-name-input{
   margin-top: 10px;
 }
+#map{
+  height: 60vh;
+}
 @media screen and (min-width: 481px) {
   body{
     width: 100%;
-    max-width: 1000px;
-    margin: auto;
+    margin: 0;
   }
   .top-pictures{
     display: grid;
@@ -275,7 +285,7 @@ a.disabled{
     width: 70%;
     max-width: 700px;
     height: 60%;
-    padding: 50px;
+    padding: 30px;
     background-color: #ffffff;
     z-index: 2;
     overflow-y: scroll;

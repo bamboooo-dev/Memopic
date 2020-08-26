@@ -1,3 +1,6 @@
+require 'exifr/jpeg'
+require 'exifr/tiff'
+
 class AlbumForm
   include ActiveModel::Model
 
@@ -12,7 +15,8 @@ class AlbumForm
     return false if pictures.nil?
     
     pictures.each_with_index do |picture, index|
-      album.pictures.new(picture_name: picture)
+      lat, lng, date_time = get_exif_info(picture)
+      album.pictures.new(picture_name: picture, latitude: lat, longitude: lng, taken_at: date_time)
       ProgressChannel.broadcast_to(
         user,
         percent: (index+1) * 100 / pictures.length
@@ -35,4 +39,26 @@ class AlbumForm
       return false
     end
   end
+
+  private
+    def get_exif_info(picture)
+      begin
+        ext = File.extname(picture.tempfile).downcase
+        if ext == '.jpg' || ext == '.jpeg'
+          exif = EXIFR::JPEG::new(picture.tempfile)
+          lat = exif.gps.latitude
+          lng = exif.gps.longitude
+          date_time = exif.date_time
+        elsif ext == '.tif' || ext == '.tiff'
+          exif = EXIFR::TIFF::new(picture.tempfile)
+          lat = exif.gps.latitude
+          lng = exif.gps.longitude
+          date_time = exif.date_time
+        end
+      rescue NoMethodError
+        lat, lng, date_time = nil
+      end
+
+      return lat, lng, date_time 
+    end
 end
