@@ -1,7 +1,10 @@
 // Place all the styles related to the Albums controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-button{
+p{
+  margin: 0;
+}
+.button-new-album{
   width: 85%;
   display: inline-block;
   padding: 7px 20px;
@@ -16,9 +19,9 @@ button{
   outline:0;
   margin-top: 10px;
   cursor: pointer;
-}
-button:hover{
-  background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
+  &:hover{
+    background: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
+  }
 }
 a.disabled{
   pointer-events: none;
@@ -40,6 +43,40 @@ a.disabled{
   outline: 0;
   border-bottom: 1px solid blue;
 }
+.input-new-playlist-link{
+  width: 100%;
+  height: 40px;
+  position: relative;
+  bottom: 10px;
+  font-size: 15px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
+}
+.input-new-playlist-link:hover{
+  border-bottom: 1px solid #dadec0;
+}
+.input-new-playlist-link:focus{
+  outline: 0;
+  border-bottom: 1px solid blue;
+}
+.input-new-playlist-name{
+  width: 100%;
+  height: 40px;
+  position: relative;
+  bottom: 10px;
+  font-size: 15px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
+}
+.input-new-playlist-name:hover{
+  border-bottom: 1px solid #dadec0;
+}
+.input-new-playlist-name:focus{
+  outline: 0;
+  border-bottom: 1px solid blue;
+}
 .button-submit{
   display: inline-block;
   border-radius: 5px;
@@ -48,13 +85,47 @@ a.disabled{
   height: 40px;
   width: 200px;
   font-size: 16px;
+  background: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+  cursor: pointer;
   &:disabled{
     opacity: 0.3;
     cursor: not-allowed;
   }
 }
+.button-playlist-submit{
+  display: inline-block;
+  border-radius: 5px;
+  border: 0;
+  color: white;
+  height: 40px;
+  width: 130px;
+  font-size: 16px;
+  background: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+  &:disabled{
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  margin: 0 !important;
+}
 .button-new-album{
   font-size: 18px;
+}
+.button-new-playlist{
+  width: 70%;
+  display: inline-block;
+  padding: 7px 20px;
+  border: 1px;
+  border-style: solid;
+  border-color: orange;
+  border-radius: 25px;
+  text-decoration: none;
+  color: #FFF;
+  background: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+  transition: .4s;
+  outline:0;
+  margin-top: 10px;
+  font-size: 16px;
+  padding: 0 !important;
 }
 .pictures-wrapper{
   margin-top: 30px;
@@ -88,6 +159,9 @@ a.disabled{
   text-align: center;
 }
 .album_form{
+  text-align: center;
+}
+.playlist_form{
   text-align: center;
 }
 .albums{
@@ -125,6 +199,9 @@ a.disabled{
   margin:0;
   padding:0;
 }
+.line-it-button{
+  margin-top: 10px;
+}
 .popup{
   position: fixed;
   left: 0;
@@ -148,7 +225,7 @@ a.disabled{
   width: 70%;
   max-width: 700px;
   height: 40%;
-  padding: 50px;
+  padding: 10px;
   background-color: #ffffff;
   z-index: 2;
   overflow-y: scroll;
@@ -219,6 +296,10 @@ a.disabled{
   display: none;
   padding: 10px 10%;
 }
+.form-new-playlist-link{
+  display: none;
+  padding: 10px 10%;
+}
 #album-title{
   display: inline;
 }
@@ -228,11 +309,52 @@ a.disabled{
 #album-name-input{
   margin-top: 10px;
 }
+#playlist-link-input{
+  margin-top: 10px;
+}
+#playlist-name-input{
+  margin-top: 10px;
+}
+.playlist-img-wrap{
+  background-color: #000000;
+  margin: 20px;
+  width: 150px;
+  height: 150px;
+  position: relative;
+}
+.playlist-img-wrap p{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  color: #ffffff;
+  font-size: 18px;
+}
+.playlist-img-wrap img{
+  display: block;
+  opacity: 0.7;
+}
+#playlists{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.delete-playlist{
+  position: absolute;
+  right: 0;
+  bottom: -25px;
+}
+#map{
+  height: 60vh;
+}
 @media screen and (min-width: 481px) {
   body{
     width: 100%;
-    max-width: 1000px;
-    margin: auto;
+    margin: 0;
   }
   .top-pictures{
     display: grid;
@@ -275,9 +397,13 @@ a.disabled{
     width: 70%;
     max-width: 700px;
     height: 60%;
-    padding: 50px;
+    padding: 30px;
     background-color: #ffffff;
     z-index: 2;
     overflow-y: scroll;
+  }
+  #playlists{
+    display: flex;
+    justify-content: center;
   }
 }

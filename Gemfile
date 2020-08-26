@@ -41,6 +41,7 @@ gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-spotify'
 gem 'dotenv-rails'
 
 gem 'devise-i18n'
@@ -49,6 +50,12 @@ gem 'devise-i18n-views'
 gem 'rails-i18n'
 
 gem 'rails-controller-testing'
+
+gem 'redis'
+
+gem 'gon'
+
+gem 'exifr'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

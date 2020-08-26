@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'albums#index'
+  root 'static_pages#top'
 
   resources :albums, param: :album_hash do
     member do
@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get '/health', to: 'health#health'
   post '/callback', to: 'linebot#callback'
 
-  get 'static_pages/home'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: "users/registrations",
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
     get "logout", :to => "users/sessions#destroy"
   end
 
+  resources :playlists, only: [:create, :destroy]
   resources :comments, only: [:index, :create, :destroy]
   resources :favorites, only: [:create, :destroy]
   resources :user_albums, only: [:create]
