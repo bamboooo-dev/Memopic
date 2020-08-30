@@ -32,7 +32,7 @@ class AlbumsController < ApplicationController
 
   def show
     @album = Album.find_by!(album_hash: params[:album_hash])
-    @pictures =  @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc')
+    @pictures =  @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc').order(created_at: :desc)
     @top_pictures = @pictures.take(5)
     @bottom_pictures =
       if @pictures.length > 5
@@ -46,7 +46,7 @@ class AlbumsController < ApplicationController
 
   def edit
     @album = Album.find_by(album_hash: params[:album_hash])
-    @pictures = @album.pictures
+    @pictures = @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc').order(created_at: :desc)
     @album_form = AlbumForm.new(name: @album.name)
   end
 
