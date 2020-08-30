@@ -15,6 +15,9 @@
 .h-60vh{
     height: 60vh;
 }
+.h-40vh{
+    height: 40vh;
+}
 .font-serif-sc{
     font-family: "Noto Serif SC", serif;
 }
@@ -26,42 +29,37 @@
     font-weight: 700;
 }
 .catch-copy{
-    top: 20vh;
+    top: 20%;
     left: 5vw;
 }
 .description{
-    top: 33vh;
+    top: 40%;
     left: 8vw
 }
 .index-page-preview{
-    width: 40%;
+    height: 50%;
     right: 15vw;
-    top: 43vh;
+    top: 70%;
 }
 .button-use-memopic{
     border-color: #FFA500;
     background: #FFA500;
 }
+.top-links{
+    top: 50%;
+}
 @media screen and (min-width: 481px) {
     .index-page-preview{
         right: 10vw;
     }
-}
-@media screen and (min-width: 1024px) {
     .catch-copy{
         left: 10vw;
     }
+}
+// Tailwind md:
+@media screen and (min-width: 768px) {
     .description{
         left: 15vw;
-        top: 43vh;
-    }
-    .index-page-preview{
-        top: 40vh;
-        right: 10vw;
-    }
-}
-@media screen and (min-width: 2000px){
-    .index-page-preview{
-        width: 30%;
+        top: 60%;
     }
 }
