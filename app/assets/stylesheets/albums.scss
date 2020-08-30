@@ -130,11 +130,6 @@ a.disabled{
 .pictures-wrapper{
   margin-top: 30px;
 }
-.top-pictures{
-  display: grid;
-  grid-template-rows: 250px 200px 200px;
-  grid-template-columns: 20% 20% 20% 20% 20%;
-}
 .btn-gradient-radius{
   display: inline-block;
   padding: 7px 20px;
@@ -224,29 +219,19 @@ a.disabled{
   transform: translate(-50%,-50%);
   width: 70%;
   max-width: 700px;
-  height: 40%;
   padding: 10px;
   background-color: #ffffff;
   z-index: 2;
   overflow-y: scroll;
-}
-.popup-inner img{
-  width: 100%;
-  height: 100%;
+  img{
+    width: 100%;
+  }
 }
 .close-btn{
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  text-align: center;
-  cursor: pointer;
-}
-.close-btn i{
-  font-size: 20px;
-  color: #333;
+  i{
+    font-size: 20px;
+    color: #333;
+  }
 }
 .popup-content{
   width: 100%;
@@ -356,11 +341,6 @@ a.disabled{
     width: 100%;
     margin: 0;
   }
-  .top-pictures{
-    display: grid;
-    grid-template-rows: 300px 300px ;
-    grid-template-columns: 40% 30% 30%;
-  }
   .albums{
     margin-top: 30px;
     display: grid;
@@ -396,7 +376,6 @@ a.disabled{
     transform: translate(-50%,-50%);
     width: 70%;
     max-width: 700px;
-    height: 60%;
     padding: 30px;
     background-color: #ffffff;
     z-index: 2;
