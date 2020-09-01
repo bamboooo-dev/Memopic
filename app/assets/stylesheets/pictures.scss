@@ -54,7 +54,7 @@
 @media screen and (min-width: 481px) {
   .pictures-wrapper{
     .top-pictures{
-      grid-template-rows: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(25vh, 1fr));
       .picture-box{
         background-color: black;
         img{

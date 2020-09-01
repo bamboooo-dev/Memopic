@@ -14,6 +14,7 @@ class AlbumsController < ApplicationController
     gon.thumbpics_data = @albums.zip(@thumbpics).map do |album, thumbpic|
       { album_name: album.name,
         album_hash: album.album_hash,
+        playlists: album.playlists,
         thumbpic_url: thumbpic.picture_name.url,
         lat: thumbpic.latitude,
         lng: thumbpic.longitude,
