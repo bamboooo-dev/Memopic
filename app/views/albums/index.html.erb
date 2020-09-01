@@ -1,4 +1,4 @@
-<h1 id="title">Memopic</h1>
+<h1 class="font-serif-sc">memopic</h1>
 <% if user_signed_in? %>
   <div class="main-content">
     <div class="user-info">
@@ -36,13 +36,13 @@
 
       <% end %>
     </div>
-    <div class="albums">
+    <div id="map" class="md:mx-20 my-5 md:my-10"></div>
+    <div class="albums text-center">
       <% @albums.zip(@thumbpics).each do |album, thumbpic| %>
         <%= render partial: "album" ,locals: {album: album, thumbpic: thumbpic} %>
       <% end %>
     </div>
   </div>
-  <div id="map" class="md:mx-20 md:my-10"></div>
 <% end %>
 <script src="https://kit.fontawesome.com/81a1ab3943.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
