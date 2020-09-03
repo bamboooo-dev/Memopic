@@ -29,9 +29,11 @@
       </div>
     <% end %>
   </div>
-  <div id="playlists">
-    <%= render @playlists %>
-  </div>
+  <% unless @playlists.nil? %>
+    <div id="playlists">
+      <%= render @playlists %>
+    </div>
+  <% end %>
 <% end %>
 <div class="pictures-wrapper">
   <div class="top-pictures grid grid-cols-2 md:grid-cols-3">
@@ -42,9 +44,9 @@
   </div>
 </div>
 <div class="popup" id="js-popup">
-  <div class="popup-inner">
+  <div class="popup-main max-h-90vh">
     <div class="close-btn text-right cursor-pointer" id="js-close-btn"><i style="color:black;"class="fas fa-times"></i></div>
-    <div class="popup-content">
+    <div class="popup-content text-center">
       <div class="popup-comment">
       </div>
     </div>
