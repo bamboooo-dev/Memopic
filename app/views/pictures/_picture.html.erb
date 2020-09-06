@@ -1,9 +1,9 @@
-<div class="picture-box" id="picture-box-<%= picture_counter %>">
+<div class="picture-box inline-block m-px relative" id="picture-box-<%= picture_counter %>">
   <%= link_to comments_path(picture_id: picture.id, clicked: 'img'), method: :get, remote: true do %>
-    <%= image_tag picture.picture_name.url, class: 'js-show-popup' %>
+    <%= image_tag picture.picture_name.url, class: 'js-show-popup mx-auto block object-cover' %>
   <% end %>
-  <div class="info">
-    <div id="favorite-<%= picture.id %>" class="favorite">
+  <div class="info absolute bottom-0 w-full bg-black bg-opacity-25">
+    <div id="favorite-<%= picture.id %>" class="favorite inline-block">
       <% if current_user %>
         <% if current_user.favoring?(picture) %>
           <%= render 'pictures/unlike', picture: picture %>
@@ -14,7 +14,7 @@
         <%= render 'pictures/before_login_like', picture: picture %>
       <% end %>
     </div>
-    <div id="comment-<%= picture.id %>" class="comment">
+    <div id="comment-<%= picture.id %>" class="comment inline-block">
       <%= link_to comments_path(picture_id: picture.id, clicked: 'icon'), class: 'js-show-popup', method: :get, remote: true do %>
         <span style="color:white;">
           <i class="far fa-comment"></i>
