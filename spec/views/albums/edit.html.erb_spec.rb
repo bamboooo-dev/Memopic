@@ -14,7 +14,7 @@ RSpec.describe "albums/edit", type: :view do
   it "renders button to update album for sharer" do
     sign_in user
     render
-    expect(rendered).to have_button('完了')
+    expect(rendered).to have_selector('.fa-check')
   end
   
 end
