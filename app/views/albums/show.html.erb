@@ -25,10 +25,10 @@
     <div class="wrapper-button-new-playlist"><button class="button-new-playlist">プレイリストを追加する</button></div>
     <%= form_with(model: @playlist, url: playlists_path(album_id: @album.id), class: "form-new-playlist-link") do |form| %>
       <div id="playlist-name-input">
-        <%= form.text_field :name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name", autocomplete:"off", required: true %>
+        <%= form.text_field :name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name", required: true %>
       </div>
       <div id="playlist-link-input">
-        <%= form.text_field :url, placeholder: 'プレイリストのリンクを設定', class: "input-new-playlist-link", autocomplete:"off", required: true %>
+        <%= form.text_field :url, placeholder: 'プレイリストのリンクを設定', class: "input-new-playlist-link", required: true %>
       </div>
       <div class="right">
         <%= button_tag type: 'submit', class: "button-playlist-submit", data: { disable_with: "保存中" } do %>
