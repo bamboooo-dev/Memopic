@@ -4,7 +4,7 @@
 <% else %>
   <%= link_to '参加する', user_albums_path(album_id: @album.id), method: :post, class: "btn-gradient-radius" %>
 <% end %>
-<%= link_to albums_path do %>
+<%= link_to albums_path, class: "back-to-home" do %>
   <span style="font-size: 20px; color: Dodgerblue;"><i class="fas fa-home p-2"></i></span>
 <% end %>
 <% if @album.users.include?(current_user) %>

@@ -12,6 +12,8 @@ RSpec.describe "/albums", type: :request do
   let(:valid_album_name){ "test_album" }
   let(:picture){ build(:picture, picture_name: Rack::Test::UploadedFile.new(Rails.root.join('spec/factories/test.jpg'), 'image/jpeg')) }
   let(:update_picture){ build(:picture, picture_name: Rack::Test::UploadedFile.new(Rails.root.join('spec/factories/update.png'), 'image/png')) }
+  let(:playlist_name){ "test_playlist_name" }
+  let(:playlist_url){ "https://music.apple.com/jp/playlist/test" }
   let(:invalid_album_name) { "" }
 
   describe "GET /index" do
@@ -43,7 +45,9 @@ RSpec.describe "/albums", type: :request do
         expect {
           post albums_path, params: { album_form: {
               name: valid_album_name,
-              pictures: [ picture ]
+              pictures: [ picture ],
+              playlist_name: playlist_name,
+              playlist_url: playlist_url
             }
           }
         }.to change(Album, :count).by(1)
@@ -52,7 +56,9 @@ RSpec.describe "/albums", type: :request do
       it "redirects to the created album" do
         post albums_path, params: { album_form: {
             name: valid_album_name,
-            pictures: [ picture ]
+            pictures: [ picture ],
+            playlist_name: playlist_name,
+            playlist_url: playlist_url
           }
         }
         expect(response).to redirect_to(album_url(Album.last))
