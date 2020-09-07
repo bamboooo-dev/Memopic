@@ -24,6 +24,8 @@
           <%= form.file_field :pictures, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: 'file-input', required: true %>
         </label>
         <span class='file-count'>画像が選択されていません</span>
+          <%= form.text_field :playlist_name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name" %>
+          <%= form.text_field :playlist_url, placeholder: 'プレイリストのURLを追加', class: "input-new-playlist-link" %>
         <div class="right">
           <%= button_tag type: 'submit', class: "button-submit", data: { disable_with: "アップロード中" } do %>
             <i class="fas fa-cloud-upload-alt"></i>  アップロードする

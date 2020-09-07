@@ -89,7 +89,7 @@ class AlbumsController < ApplicationController
   private
 
     def album_params
-      params.require(:album_form).permit(:name, {pictures: []})
+      params.require(:album_form).permit(:name, {pictures: []}, :playlist_name, :playlist_url)
     end
 
     def confirm_sharer

@@ -4,23 +4,31 @@
 <% else %>
   <%= link_to '参加する', user_albums_path(album_id: @album.id), method: :post, class: "btn-gradient-radius" %>
 <% end %>
-<%= link_to 'アルバム一覧に戻る', albums_path %>
-<% if @album.users.include?(current_user) %>
-  | <%= link_to 'このアルバムを削除する', @album, method: :delete, data: { confirm: "本当に削除しますか？" } %>
-  | <%= link_to 'このアルバムを編集する', edit_album_path(@album) %>
-  | <%= link_to 'コラージュしてエクスポート', export_album_path(@album), target: :_blank %>
+<%= link_to albums_path, class: "back-to-home" do %>
+  <span style="font-size: 20px; color: Dodgerblue;"><i class="fas fa-home p-2"></i></span>
 <% end %>
-|<div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" data-url="<%= request.url %>" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
+<% if @album.users.include?(current_user) %>
+  <%= link_to @album, method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+    <span style="font-size: 20px; color: Dodgerblue;"><i class="fas fa-trash p-2"></i></span>
+  <% end %>
+  <%= link_to edit_album_path(@album) do %>
+    <span style="font-size: 20px; color: Dodgerblue;"><i class="fas fa-edit p-2"></i></span>
+  <% end %>
+  <%= link_to export_album_path(@album), target: :_blank do %>
+    <span style="font-size: 20px; color: Dodgerblue;"><i class="fas fa-download p-2"></i></span>
+  <% end %>
+<% end %>
+<div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" data-url="<%= request.url %>" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
 <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 <% if @album.users.include?(current_user) %>
   <div class="playlist_form">
     <div class="wrapper-button-new-playlist"><button class="button-new-playlist">プレイリストを追加する</button></div>
     <%= form_with(model: @playlist, url: playlists_path(album_id: @album.id), class: "form-new-playlist-link") do |form| %>
       <div id="playlist-name-input">
-        <%= form.text_field :name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name", autocomplete:"off", required: true %>
+        <%= form.text_field :name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name", required: true %>
       </div>
       <div id="playlist-link-input">
-        <%= form.text_field :url, placeholder: 'プレイリストのリンクを設定', class: "input-new-playlist-link", autocomplete:"off", required: true %>
+        <%= form.text_field :url, placeholder: 'プレイリストのリンクを設定', class: "input-new-playlist-link", required: true %>
       </div>
       <div class="right">
         <%= button_tag type: 'submit', class: "button-playlist-submit", data: { disable_with: "保存中" } do %>
@@ -29,11 +37,11 @@
       </div>
     <% end %>
   </div>
-  <% unless @playlists.nil? %>
-    <div id="playlists">
-      <%= render @playlists %>
-    </div>
-  <% end %>
+<% end %>
+<% unless @playlists.nil? %>
+  <div id="playlists">
+    <%= render @playlists %>
+  </div>
 <% end %>
 <div class="pictures-wrapper">
   <div class="top-pictures grid grid-cols-2 md:grid-cols-3">
