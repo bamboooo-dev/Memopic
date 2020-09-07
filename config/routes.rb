@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'static_pages#top'
+  get '/howto', to: 'static_pages#howto'
 
   resources :albums, param: :album_hash do
     member do
