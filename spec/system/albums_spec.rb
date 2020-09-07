@@ -38,7 +38,7 @@ RSpec.describe "Album index page", type: :system do
       }.to change(Album, :count).by(1)
       expect(page).to have_content 'テストアルバム'
       expect(page).to have_selector 'img'
-      click_link 'アルバム一覧に戻る'
+      find('.back-to-home').click
       expect(page).to have_content '新しいアルバムを作成する'
       expect(page).to have_selector 'img'
       expect(page).to have_content 'テストアルバム'

@@ -4,7 +4,7 @@ require 'exifr/tiff'
 class AlbumForm
   include ActiveModel::Model
 
-  attr_accessor :name, :pictures
+  attr_accessor :name, :pictures, :playlist_name, :playlist_url
 
   validates :name, presence: true
 
@@ -13,7 +13,9 @@ class AlbumForm
     album = Album.new(name: name, album_hash: SecureRandom.alphanumeric(20))
 
     return false if pictures.nil?
-    
+
+    playlist = Playlist.create(name: playlist_name, url: playlist_url)
+
     pictures.each_with_index do |picture, index|
       lat, lng, date_time = get_exif_info(picture)
       album.pictures.new(picture_name: picture, latitude: lat, longitude: lng, taken_at: date_time)
@@ -23,7 +25,10 @@ class AlbumForm
       )
     end
     album.save
+
     album.users << user
+    album.playlists << playlist
+
     return album
   end
 

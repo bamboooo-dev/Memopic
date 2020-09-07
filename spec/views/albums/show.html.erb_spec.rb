@@ -21,7 +21,7 @@ RSpec.describe "albums/show", type: :view do
 
       it '一覧に戻るリンクがある' do
         render
-        expect(rendered).to have_link 'アルバム一覧に戻る', href: albums_path
+        expect(rendered).to have_link nil, href: albums_path
       end
 
       it "参加中のマークがある" do
@@ -31,17 +31,17 @@ RSpec.describe "albums/show", type: :view do
 
       it "アルバムを削除するリンクがある" do
         render
-        expect(rendered).to have_link 'このアルバムを削除する', href: album_path(album)
+        expect(rendered).to have_link nil, href: album_path(album)
       end
 
       it "アルバムを編集するリンクがある" do
         render
-        expect(rendered).to have_link 'このアルバムを編集する', href: edit_album_path(album)
+        expect(rendered).to have_link nil, href: edit_album_path(album)
       end
 
       it "エクスポートするリンクがある" do
         render
-        expect(rendered).to have_link 'コラージュしてエクスポート', href: export_album_path(album)
+        expect(rendered).to have_link nil, href: export_album_path(album)
       end
 
       it '画像が表示されている' do
@@ -69,7 +69,7 @@ RSpec.describe "albums/show", type: :view do
 
       it '一覧に戻るリンクがある' do
         render
-        expect(rendered).to have_link 'アルバム一覧に戻る', href: albums_path
+        expect(rendered).to have_link nil, href: albums_path
       end
 
       it "参加するリンクがある" do

@@ -14,6 +14,7 @@ class AlbumsController < ApplicationController
     gon.thumbpics_data = @albums.zip(@thumbpics).map do |album, thumbpic|
       { album_name: album.name,
         album_hash: album.album_hash,
+        playlists: album.playlists,
         thumbpic_url: thumbpic.picture_name.url,
         lat: thumbpic.latitude,
         lng: thumbpic.longitude,
@@ -32,7 +33,7 @@ class AlbumsController < ApplicationController
 
   def show
     @album = Album.find_by!(album_hash: params[:album_hash])
-    @pictures =  @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc')
+    @pictures =  @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc').order(created_at: :desc)
     @top_pictures = @pictures.take(5)
     @bottom_pictures =
       if @pictures.length > 5
@@ -46,7 +47,7 @@ class AlbumsController < ApplicationController
 
   def edit
     @album = Album.find_by(album_hash: params[:album_hash])
-    @pictures = @album.pictures
+    @pictures = @album.pictures.left_joins(:favorites).group(:id).order('count(user_id) desc').order(created_at: :desc)
     @album_form = AlbumForm.new(name: @album.name)
   end
 
@@ -88,7 +89,7 @@ class AlbumsController < ApplicationController
   private
 
     def album_params
-      params.require(:album_form).permit(:name, {pictures: []})
+      params.require(:album_form).permit(:name, {pictures: []}, :playlist_name, :playlist_url)
     end
 
     def confirm_sharer

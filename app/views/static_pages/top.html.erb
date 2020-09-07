@@ -6,6 +6,7 @@
 <div class="h-60vh bg-orange-gradation relative">
     <div>
         <%= link_to 'memopic', root_path, class: 'font-serif-sc text-5xl ml-4 md:ml-10 text-black' %>
+        <span class='text-xs md:text-xl float-right mr-2 md:mr-6 my-8 md:my-6 text-black'>使い方は<%= link_to 'こちら', howto_path %></span>
     </div>
     <div class="text-center inline-block text-2xl md:text-5xl font-noto-sans-jp-bold catch-copy absolute">
         旅の思い出を<br>プレイリストで振り返ろう
@@ -14,19 +15,23 @@
         旅行中ドライブで聴いてた曲<br>
         あの時流行っていた、好きだった曲から<br>
         思い出を振り返ってみませんか？<br>
-        <span class="font-serif-sc">memopic</span> はプレイリストで旅を記録する新しいサービスです
+        <span class="font-serif-sc">memopic</span> はプレイリストで旅を記録する
+        <br>
+        新しいサービスです
     </div>
     <i class="fas text-3xl cursor-pointer" id="audio-button"></i>
     <%= audio_tag("driving.mp3", id: "top-page-audio", loop: true ) %>
     <picture>
-        <source media="(max-width: 481px)" srcset="/assets/index_page_phone.webp">
+        <source media="(max-width: 480px)" srcset="/assets/index_page_phone.webp">
         <img class="absolute index-page-preview" src="/assets/index_page_pc.webp">
     </picture>
 </div>
-<div class="mt-56 text-center text-2xl">
-    <a href="/albums" class="button-use-memopic border rounded-full p-4 font-noto-sans-jp text-black">
-        <span class="font-serif-sc">memopic</span> を使ってみる
-    </a>
+<div class="h-40vh text-center text-2xl">
+    <div class="top-links relative">
+        <a href="/albums" class="button-use-memopic border rounded-full p-4 font-noto-sans-jp text-black">
+            <span class="font-serif-sc">memopic</span> を使ってみる
+        </a>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
