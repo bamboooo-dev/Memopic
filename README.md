@@ -4,7 +4,7 @@
 memopic は旅に行った思い出を、プレイリストと写真で記録できるサービスです
 
 ↓サイトはこちら  
-[memorip](https://www.memorip.net)
+[memopic](https://www.memopic.net)
 
 <p align="center">
 <img src="assets/top.png" alt="Front readme image" width=960>
@@ -22,8 +22,10 @@ memopic は旅に行った思い出を、プレイリストと写真で記録で
 ## 各種アプリ
 - LINE アカウント
 <img src="assets/line.png" alt="Front readme image" width=480>
-- iOS 版
+
+- iOS 版  
 https://apps.apple.com/jp/app/memopic/id1527852844
+
 - Android版  
 https://play.google.com/store/apps/details?id=com.memopic
 

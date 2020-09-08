@@ -1,4 +1,7 @@
-<h1 class="font-serif-sc">memopic</h1>
+<header style="height: 69px">
+  <%= link_to 'memopic', root_path, class: 'font-serif-sc text-5xl ml-4 md:ml-10 text-black' %>
+  <span class="float-right mr-4 md:mr-12">使い方は<%= link_to 'こちら', howto_path, style: 'line-height: 69px;' %></span>
+</header>
 <% if user_signed_in? %>
   <div class="main-content">
     <div class="user-info">
