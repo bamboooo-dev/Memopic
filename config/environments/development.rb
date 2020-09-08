@@ -15,6 +15,9 @@ Rails.application.configure do
   #IPアドレスをホワイトリストに
   config.web_console.whitelisted_ips = ENV['IP_ADDRESS']
 
+  # httpからhttpsをリダイレクトさせる設定
+  config.force_ssl = true
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
