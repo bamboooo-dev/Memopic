@@ -1,6 +1,16 @@
 // Place all the styles related to the Albums controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+body{
+  margin: 0;
+}
+header{
+  background-color: #FFB649;
+  #navbar-divider{
+    border: 0;
+    border-top: 1px solid black;
+  }
+}
 p{
   margin: 0;
 }
@@ -138,9 +148,6 @@ a.disabled{
   border: 1px;
   border-style: solid;
   border-color: orange;
-}
-.user-info{
-  text-align: center;
 }
 .album_form{
   text-align: center;
@@ -347,5 +354,10 @@ a.disabled{
   }
   .popup-main{
     width: 70%;
+  }
+}
+@media screen and (min-width: 768px) {
+  #pictures-input{
+    height: calc(100% - 29px);
   }
 }

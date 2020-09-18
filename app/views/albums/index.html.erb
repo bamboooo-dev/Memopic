@@ -1,13 +1,25 @@
 <header>
-  <%= link_to 'memopic', root_path, class: 'font-serif-sc text-5xl ml-4 md:ml-10 text-black' %>
-  <span class="float-right mr-4 md:mr-12">使い方は<%= link_to 'こちら', howto_path, style: 'line-height: 69px;' %></span>
+  <div class='flex justify-between items-center'>
+    <%= link_to 'memopic', root_path, class: 'font-serif-sc text-5xl ml-4 mb-3 md:ml-10 text-black' %>
+    <div>
+      <button id='hamburger-button' class='mr-3 bg-transparent border-none cursor-pointer outline-none appearance-none'>
+        <svg class="h-8 w-8 fill-current" viewBox="0 0 24 24">
+            <path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/>
+        </svg>                       
+      </button>
+    </div>
+  </div>
+  <div id='menu' class='hidden'>
+    <ul class='list-none px-4'>
+      <li><%= link_to '使い方', howto_path, class: 'block px-8 py-2 text-black' %></li>
+      <hr id='navbar-divider'>
+      <li><span class='block px-8 py-2'><%= current_user.nickname %></span></li>
+      <li><%= link_to 'ログアウト', logout_path, class: 'block px-8 py-2 text-black' %></li>
+    </ul>
+  </div>
 </header>
 <% if user_signed_in? %>
-  <div class="main-content">
-    <div class="user-info">
-      <%= current_user.nickname %>
-      <%= link_to 'ログアウト', logout_path %>
-    </div>
+  <div class="main-content p-2 mt-2">
     <div class="album_form">
       <div class="wrapper-button-new-album">
         <button class="button-new-album">新しいアルバムを作成する</button>
@@ -16,28 +28,38 @@
         <div id="album-name-input">
           <%= form.text_field :name, placeholder: 'アルバムのタイトルを追加', class: "input-new-album-title text-base md:text-2xl", autocomplete:"off", required: true %>
         </div>
-        <h3 class="m-0 text-left ml-3">写真</h3>
-        <div>
-          <label class="file-label block">
-            <span class="filelabel" title="ファイルを選択">
-              <span style="color: orange">
-                <i class="far fa-images fa-4x"></i>
-              </span>
-            </span>
-            <%= form.file_field :pictures, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: 'file-input', required: true %>
-            <div class='file-count'>未選択</div>
-          </label>
-        </div>
-        <div class="text-4xl">+</div>
-        <h3 class="m-0 text-left ml-3">音楽</h3>
-        <div class="border rounded-lg border-solid p-2 mb-3">
-          <h4 class="m-0 text-left">◯ Spotify から選ぶ</h4>
-          <% @playlists.each do |playlist| %>
-            <%= image_tag playlist.images[2]["url"] %>
-          <% end %>
-          <h4 class="m-0 text-left">◯ 自分で入力する</h4>
-          <%= form.text_field :playlist_name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name" %>
-          <%= form.text_field :playlist_url, placeholder: 'プレイリストのURLを追加', class: "input-new-playlist-link" %>
+        <div class='mb-3 md:flex md:justify-center'>
+          <div class="md:w-2/5">
+            <h3 class="m-0 text-left ml-3">写真</h3>
+            <div id='pictures-input'>
+              <label class="file-label block md:h-full md:flex md:justify-center md:items-center md:flex-col">
+                
+                  <span style="color: orange">
+                    <i class="far fa-images fa-4x"></i>
+                  </span>
+                
+                
+                  <%= form.file_field :pictures, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: 'file-input', required: true %>
+                  <div class='file-count'>未選択</div>
+            
+              </label>
+            </div>
+          </div>
+          <div class="text-4xl md:w-1/12 md:flex md:justify-center md:items-center">
+            <div>+</div>
+          </div>
+          <div class="md:w-2/5">
+            <h3 class="m-0 text-left ml-3">音楽</h3>
+            <div class="border rounded-lg border-solid p-2">
+              <h4 class="m-0 mb-5 text-left">◯ Spotify から選ぶ</h4>
+              <% @playlists.each do |playlist| %>
+                <%= image_tag playlist.images[2]["url"] %>
+              <% end %>
+              <h4 class="mt-5 mb-3 text-left">◯ 自分で入力する</h4>
+              <%= form.text_field :playlist_name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name" %>
+              <%= form.text_field :playlist_url, placeholder: 'プレイリストのURLを追加', class: "input-new-playlist-link" %>
+            </div>
+          </div>
         </div>
         <div class="right">
           <%= button_tag type: 'submit', class: "button-submit", data: { disable_with: "アップロード中" } do %>
@@ -77,12 +99,15 @@
         $(".button-new-album").css('background', 'linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%)')
       }
     };
-  });
-</script>
-<script type="text/javascript">
-$(function () {
-  $('.file-input').on('change', function (e) {
-      let fileCount = $(this).get(0).files.length
+
+    // ハンバーガーメニューの開閉
+    $('#hamburger-button').on('click', () => {
+      $('#menu').slideToggle();
+    });
+
+    // 選択されているファイルの個数を数える
+    $('.file-input').on('change', function (e) {
+      const fileCount = $(this).get(0).files.length;
       if(fileCount > 0){
         $('.file-count').text(String(fileCount) + '個の画像が選択されています');
       }else{
