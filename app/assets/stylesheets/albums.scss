@@ -34,51 +34,37 @@ a.disabled{
   height: 40px;
   position: relative;
   bottom: 10px;
-  font-size: 24px;
   border: none;
-  border-bottom: 1px solid transparent;
-  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
-}
-.input-new-album-title:hover{
   border-bottom: 1px solid #dadec0;
-}
-.input-new-album-title:focus{
-  outline: 0;
-  border-bottom: 1px solid blue;
+  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
+  &:focus{
+    outline: 0;
+    border-bottom: 1px solid blue;
+  }
 }
 .input-new-playlist-link{
   width: 100%;
   height: 40px;
-  position: relative;
-  bottom: 10px;
   font-size: 15px;
   border: none;
-  border-bottom: 1px solid transparent;
-  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
-}
-.input-new-playlist-link:hover{
   border-bottom: 1px solid #dadec0;
-}
-.input-new-playlist-link:focus{
-  outline: 0;
-  border-bottom: 1px solid blue;
+  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
+  &:focus{
+    outline: 0;
+    border-bottom: 1px solid blue;
+  }
 }
 .input-new-playlist-name{
   width: 100%;
   height: 40px;
-  position: relative;
-  bottom: 10px;
   font-size: 15px;
   border: none;
-  border-bottom: 1px solid transparent;
-  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
-}
-.input-new-playlist-name:hover{
   border-bottom: 1px solid #dadec0;
-}
-.input-new-playlist-name:focus{
-  outline: 0;
-  border-bottom: 1px solid blue;
+  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
+  &:focus{
+    outline: 0;
+    border-bottom: 1px solid blue;
+  }
 }
 .button-submit{
   display: inline-block;
@@ -253,11 +239,8 @@ a.disabled{
 .file-label{
   cursor: pointer;
   border-width: 1px;
-  padding-left: 20px;
   border-style: solid;
   border-radius: 10px;
-  font-size: 50px;
-  margin-right: 10px;
   i{
     font-size: 50px;
   }
@@ -271,7 +254,6 @@ a.disabled{
   text-align: right;
 }
 .form-new-album{
-  display: none;
   padding: 10px 10%;
 }
 .form-new-playlist-link{
