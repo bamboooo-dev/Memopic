@@ -12,6 +12,7 @@
   <div id='menu' class='hidden'>
     <ul class='list-none px-4'>
       <li><%= link_to '使い方', howto_path, class: 'block px-8 py-2 text-black' %></li>
+      <li><%= link_to 'お問い合わせ', 'https://forms.gle/7U1X5hvEqYs6KofN6', class: 'block px-8 py-2 text-black', target: :_blank %></li>
       <hr id='navbar-divider'>
       <li><span class='block px-8 py-2'><%= current_user.nickname %></span></li>
       <li><%= link_to 'ログアウト', logout_path, class: 'block px-8 py-2 text-black' %></li>
