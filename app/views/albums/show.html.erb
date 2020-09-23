@@ -21,7 +21,7 @@
 <div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" data-url="<%= request.url %>" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
 <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 <% if @album.users.include?(current_user) %>
-  <div class="playlist_form">
+  <div class="text-center">
     <div class="wrapper-button-new-playlist"><button class="button-new-playlist">プレイリストを追加する</button></div>
     <%= form_with(model: @playlist, url: playlists_path(album_id: @album.id), class: "form-new-playlist-link") do |form| %>
       <div id="playlist-name-input">
