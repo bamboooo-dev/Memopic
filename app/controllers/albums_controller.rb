@@ -8,16 +8,16 @@ class AlbumsController < ApplicationController
   before_action :confirm_sharer, only: [:edit, :destroy]
 
   require 'rspotify'
+  OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:ciphers]=OpenSSL::SSL::SSLContext.new.ciphers;
   RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
 
   def index
     @albums = current_user.albums
     @thumbpics = pick_thumbpic
     @album_form = AlbumForm.new
-    spotify_playlists = RSpotify::User.find(current_user.uid).playlists
-    @playlists = 
-      if spotify_playlists.present?
-        spotify_playlists.map { |spotify_playlist|
+    @playlists =
+      if current_user.provider == "spotify"
+        RSpotify::User.find(current_user.uid).playlists.map { |spotify_playlist|
           {
             image_url: spotify_playlist.images[2]["url"],
             name: spotify_playlist.name,

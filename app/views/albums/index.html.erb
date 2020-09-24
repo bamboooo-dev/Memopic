@@ -19,40 +19,40 @@
     </ul>
   </div>
 </header>
-<% if user_signed_in? %>
-  <div class="p-2 mt-2">
-    <div class="text-center">
-      <div>
-        <button class="button-new-album">新しいアルバムを作成する</button>
+<div class="p-2 mt-2">
+  <div class="text-center">
+    <div>
+      <button class="button-new-album">新しいアルバムを作成する</button>
+    </div>
+    <%= form_with(model: @album_form, url: albums_path, class: "form-new-album hidden md:block") do |form| %>
+      <div id="album-name-input">
+        <%= form.text_field :name, placeholder: 'アルバムのタイトルを追加', class: "input-new-album-title text-base md:text-2xl", autocomplete:"off", required: true %>
       </div>
-      <%= form_with(model: @album_form, url: albums_path, class: "form-new-album hidden md:block") do |form| %>
-        <div id="album-name-input">
-          <%= form.text_field :name, placeholder: 'アルバムのタイトルを追加', class: "input-new-album-title text-base md:text-2xl", autocomplete:"off", required: true %>
+      <div class='mb-3 md:flex md:justify-center'>
+
+        <div class="md:w-2/5">
+          <h3 class="m-0 text-left ml-3">写真</h3>
+          <div id='pictures-input'>
+            <label class="file-label block md:h-full md:flex md:justify-center md:items-center md:flex-col">           
+                <span style="color: orange">
+                  <i class="far fa-images fa-4x"></i>
+                </span>
+                <%= form.file_field :pictures, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: 'file-input', required: true %>
+                <div class='file-count'>未選択</div>
+          
+            </label>
+          </div>
         </div>
-        <div class='mb-3 md:flex md:justify-center'>
 
-          <div class="md:w-2/5">
-            <h3 class="m-0 text-left ml-3">写真</h3>
-            <div id='pictures-input'>
-              <label class="file-label block md:h-full md:flex md:justify-center md:items-center md:flex-col">           
-                  <span style="color: orange">
-                    <i class="far fa-images fa-4x"></i>
-                  </span>
-                  <%= form.file_field :pictures, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: 'file-input', required: true %>
-                  <div class='file-count'>未選択</div>
-            
-              </label>
-            </div>
-          </div>
+        <div class="text-4xl md:w-1/12 md:flex md:justify-center md:items-center">
+          <div>+</div>
+        </div>
 
-          <div class="text-4xl md:w-1/12 md:flex md:justify-center md:items-center">
-            <div>+</div>
-          </div>
-
-          <div class="md:w-2/5">
-            <h3 class="m-0 text-left ml-3">音楽</h3>
-            <div class="border rounded-lg border-solid p-2">
-              <h4 class="m-0 mb-5 text-left" id='select-spotify'>◯ Spotify から選ぶ</h4>
+        <div class="md:w-2/5">
+          <h3 class="m-0 text-left ml-3">音楽</h3>
+          <div class="border rounded-lg border-solid p-2">
+            <h4 class="m-0 mb-5 text-left" id='select-spotify'>◯ Spotify から選ぶ</h4>
+            <% if current_user.provider == "spotify" %>
               <ul class="image-list p-0 w-11/12 m-auto">
                 <% @playlists.each do |playlist| %>
                   <li class='inline-block outline-none'>
@@ -67,37 +67,40 @@
                   </li>
                 <% end %>
               </ul>
-              <h4 class="mt-5 mb-3 text-left" id='select-self'>◯ 自分で入力する</h4>
-              <%= form.text_field :playlist_name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name" %>
-              <%= form.text_field :playlist_url, placeholder: 'プレイリストのURLを追加', class: "input-new-playlist-link" %>
-            </div>
-          </div>
-
-        </div>
-        <div class="right">
-          <%= button_tag type: 'submit', class: "button-submit", data: { disable_with: "アップロード中" } do %>
-            <i class="fas fa-cloud-upload-alt"></i>  アップロードする
-          <% end %>
-          <div class="progress-bar-container">
-            <div class="progress-percentage">0%</div>
-            <progress class="progress" max="100" value="0"></progress>
+            <% else %>
+              <h6>※ Spotify でログインすると使用できます</h6>
+            <% end %>
+            <h4 class="mt-5 mb-3 text-left" id='select-self'>◯ 自分で入力する</h4>
+            <%= form.text_field :playlist_name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name" %>
+            <%= form.text_field :playlist_url, placeholder: 'プレイリストのURLを追加', class: "input-new-playlist-link" %>
           </div>
         </div>
 
-      <% end %>
-    </div>
+      </div>
+      <div class="right">
+        <%= button_tag type: 'submit', class: "button-submit", data: { disable_with: "アップロード中" } do %>
+          <i class="fas fa-cloud-upload-alt"></i>  アップロードする
+        <% end %>
+        <div class="progress-bar-container">
+          <div class="progress-percentage">0%</div>
+          <progress class="progress" max="100" value="0"></progress>
+        </div>
+      </div>
 
-
-    <div id="map" class="md:mx-20 my-5 md:my-10"></div>
-    <div class="albums text-center">
-      <% @albums.zip(@thumbpics).each do |album, thumbpic| %>
-        <%= render partial: "album" ,locals: {album: album, thumbpic: thumbpic} %>
-      <% end %>
-    </div>
-
-
+    <% end %>
   </div>
-<% end %>
+
+
+  <div id="map" class="md:mx-20 my-5 md:my-10"></div>
+  <div class="albums text-center">
+    <% @albums.zip(@thumbpics).each do |album, thumbpic| %>
+      <%= render partial: "album" ,locals: {album: album, thumbpic: thumbpic} %>
+    <% end %>
+  </div>
+
+
+</div>
+
 <script src="https://kit.fontawesome.com/81a1ab3943.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -165,9 +168,11 @@
       if ( nameLength === 0 && linkLength === 0) {
         $(".image-box > input").prop('disabled', false);
         $("#select-spotify").removeClass('text-gray-400');
+        $(".playlist-thumbnail-mask").removeClass('pointer-events-none');
       } else {
         $(".image-box > input").prop('disabled', true);
         $("#select-spotify").addClass('text-gray-400');
+        $(".playlist-thumbnail-mask").addClass('pointer-events-none');
       }
     });
 
