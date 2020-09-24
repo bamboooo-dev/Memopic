@@ -25,6 +25,7 @@ p{
   border-style: solid;
   border-color: orange;
   border-radius: 25px;
+  font-size: 18px;
   text-decoration: none;
   color: #FFF;
   background: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
@@ -35,9 +36,6 @@ p{
   &:hover{
     background: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
   }
-}
-a.disabled{
-  pointer-events: none;
 }
 .image-list{
   button{
@@ -87,17 +85,20 @@ a.disabled{
     }
   }
 }
-.input-new-album-title{
-  width: 100%;
-  height: 40px;
-  position: relative;
-  bottom: 10px;
-  border: none;
-  border-bottom: 1px solid #dadec0;
-  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
-  &:focus{
-    outline: 0;
-    border-bottom: 1px solid blue;
+#album-name-input{
+  margin-top: 10px;
+  .input-new-album-title{
+    width: 100%;
+    height: 40px;
+    position: relative;
+    bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #dadec0;
+    transition: .3s cubic-bezier(0.4,0,0.2,1) all;
+    &:focus{
+      outline: 0;
+      border-bottom: 1px solid blue;
+    }
   }
 }
 .input-new-playlist-link{
@@ -111,6 +112,9 @@ a.disabled{
     outline: 0;
     border-bottom: 1px solid blue;
   }
+  &:disabled{
+    background-color: #cbd5e0;;
+  }
 }
 .input-new-playlist-name{
   width: 100%;
@@ -122,6 +126,9 @@ a.disabled{
   &:focus{
     outline: 0;
     border-bottom: 1px solid blue;
+  }
+  &:disabled{
+    background-color: #cbd5e0;;
   }
 }
 .button-submit{
@@ -153,9 +160,6 @@ a.disabled{
     cursor: not-allowed;
   }
   margin: 0 !important;
-}
-.button-new-album{
-  font-size: 18px;
 }
 .button-new-playlist{
   width: 70%;
@@ -311,9 +315,6 @@ a.disabled{
 }
 #album-title{
   display: inline;
-}
-#album-name-input{
-  margin-top: 10px;
 }
 #playlist-link-input{
   margin-top: 10px;

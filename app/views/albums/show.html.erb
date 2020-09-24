@@ -1,6 +1,6 @@
 <h1 id="album-title"><%= @album.name %></h1>
 <% if current_user && current_user.joining?(@album) %>
-  <%= link_to '参加中', '/', class: "disabled btn-gradient-radius" %>
+  <%= link_to '参加中', '/', class: "pointer-events-none btn-gradient-radius" %>
 <% else %>
   <%= link_to '参加する', user_albums_path(album_id: @album.id), method: :post, class: "btn-gradient-radius" %>
 <% end %>
@@ -22,7 +22,7 @@
 <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 <% if @album.users.include?(current_user) %>
   <div class="text-center">
-    <div class="wrapper-button-new-playlist"><button class="button-new-playlist">プレイリストを追加する</button></div>
+    <div><button class="button-new-playlist">プレイリストを追加する</button></div>
     <%= form_with(model: @playlist, url: playlists_path(album_id: @album.id), class: "form-new-playlist-link") do |form| %>
       <div id="playlist-name-input">
         <%= form.text_field :name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name", required: true %>

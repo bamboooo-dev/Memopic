@@ -14,8 +14,6 @@ class AlbumForm
 
     return false if pictures.nil?
 
-    playlist = Playlist.create(name: playlist_name, url: playlist_url)
-
     pictures.each_with_index do |picture, index|
       lat, lng, date_time = get_exif_info(picture)
       album.pictures.new(picture_name: picture, latitude: lat, longitude: lng, taken_at: date_time)
@@ -27,7 +25,11 @@ class AlbumForm
     album.save
 
     album.users << user
-    album.playlists << playlist
+
+    if playlist_name && playlist_url
+      playlist = Playlist.create(name: playlist_name, url: playlist_url)
+      album.playlists << playlist
+    end
 
     return album
   end

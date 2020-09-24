@@ -20,9 +20,9 @@
   </div>
 </header>
 <% if user_signed_in? %>
-  <div class="main-content p-2 mt-2">
-    <div class="album_form text-center">
-      <div class="wrapper-button-new-album">
+  <div class="p-2 mt-2">
+    <div class="text-center">
+      <div>
         <button class="button-new-album">新しいアルバムを作成する</button>
       </div>
       <%= form_with(model: @album_form, url: albums_path, class: "form-new-album hidden md:block") do |form| %>
@@ -52,7 +52,7 @@
           <div class="md:w-2/5">
             <h3 class="m-0 text-left ml-3">音楽</h3>
             <div class="border rounded-lg border-solid p-2">
-              <h4 class="m-0 mb-5 text-left">◯ Spotify から選ぶ</h4>
+              <h4 class="m-0 mb-5 text-left" id='select-spotify'>◯ Spotify から選ぶ</h4>
               <ul class="image-list p-0 w-11/12 m-auto">
                 <% @playlists.each do |playlist| %>
                   <li class='inline-block outline-none'>
@@ -67,7 +67,7 @@
                   </li>
                 <% end %>
               </ul>
-              <h4 class="mt-5 mb-3 text-left">◯ 自分で入力する</h4>
+              <h4 class="mt-5 mb-3 text-left" id='select-self'>◯ 自分で入力する</h4>
               <%= form.text_field :playlist_name, placeholder: 'プレイリストのタイトルを追加', class: "input-new-playlist-name" %>
               <%= form.text_field :playlist_url, placeholder: 'プレイリストのURLを追加', class: "input-new-playlist-link" %>
             </div>
@@ -103,9 +103,12 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">
   $(function () {
+
+    // 「新しいアルバムを作成する」ボタンの開閉
     $('.button-new-album').on('click', () => {
       $('.form-new-album').slideToggle(alertFunc);
     });
+    
     function alertFunc(){
       if ($(this).css('display') != 'none') {
         $(".button-new-album").text("▲ 閉じる");
@@ -133,18 +136,39 @@
       }
     });
 
-    // 画像がクリックされた時の処理です。
+    // 画像がクリックされた時の処理
     $('.playlist-thumbnail-mask').click(function() {
-      console.log('test');
-      const $imageList = $('.image-list');
+      const $thumbnailImg = $(this).prev();
+      if( $thumbnailImg.hasClass('checked') ){
+        // チェックが入っていればチェックを外す
+        $thumbnailImg.removeClass('checked');
+        $(this).nextAll().prop('checked', false);
+        $(".input-new-playlist-name").prop('disabled', false);
+        $(".input-new-playlist-link").prop('disabled', false);
+        $("#select-self").removeClass('text-gray-400');
+      }else{
+        // チェックが入っていなければ既存のチェックを外し、選択したものにチェックを入れる
+        const $imageList = $('.image-list');
+        $imageList.find('img.playlist-thumbnail.checked').removeClass('checked');
+        $thumbnailImg.addClass('checked');
+        $(this).nextAll().prop('checked', true);
+        $(".input-new-playlist-name").prop('disabled', true);
+        $(".input-new-playlist-link").prop('disabled', true);
+        $("#select-self").addClass('text-gray-400');
+      }
+    });
 
-      // 現在の選択を解除します。
-      $imageList.find('img.playlist-thumbnail.checked').removeClass('checked');
-
-      // チェックを入れた状態にします。
-      $(this).prev().addClass('checked');
-
-      $(this).nextAll().prop('checked', true);
+    // 自分でプレイリストを入力したときは Spotify の方を無効化する
+    $(".input-new-playlist-name,.input-new-playlist-link").on("keyup", function() {
+      const nameLength = $(".input-new-playlist-name").val().length;
+      const linkLength = $(".input-new-playlist-link").val().length;
+      if ( nameLength === 0 && linkLength === 0) {
+        $(".image-box > input").prop('disabled', false);
+        $("#select-spotify").removeClass('text-gray-400');
+      } else {
+        $(".image-box > input").prop('disabled', true);
+        $("#select-spotify").addClass('text-gray-400');
+      }
     });
 
     // Spotify のアルバムのサムネイルをスライド表示
