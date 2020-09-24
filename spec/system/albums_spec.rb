@@ -13,6 +13,8 @@ RSpec.describe "Album index page", type: :system do
 
     it '「新しいアルバムを作成する」ボタンが動く', js: true do
       expect(page).to have_content '新しいアルバムを作成する'
+      expect(page).to have_content 'アップロードする'
+      click_button '新しいアルバムを作成する'
       expect(page).not_to have_content 'アップロードする'
       click_button '新しいアルバムを作成する'
       expect(page).to have_content 'アップロードする'
@@ -21,14 +23,13 @@ RSpec.describe "Album index page", type: :system do
     end
 
     it 'ログアウトできる', js: true do
+      find('#hamburger-button').click
       click_on 'ログアウト'
       expect(page).to have_content 'memopic を使ってみる', wait: 5
     end
 
     it 'アルバムを作成できる', js: true do
-      click_button '新しいアルバムを作成する'
-      sleep 3
-      fill_in 'タイトルを追加', with: 'テストアルバム'
+      fill_in 'アルバムのタイトルを追加', with: 'テストアルバム'
       file_path = Rails.root.join('spec', 'factories', 'test.jpg')
       attach_file('album_form_pictures', file_path, make_visible: true)
       expect(page).to have_content '1個の画像が選択されています'
@@ -45,9 +46,6 @@ RSpec.describe "Album index page", type: :system do
     end
 
     context '不正な値の場合' do
-      before do
-        click_button '新しいアルバムを作成する'
-      end
 
       it 'アルバム名がないと作成できない', js:true do
         click_button 'アップロードする'
@@ -55,7 +53,7 @@ RSpec.describe "Album index page", type: :system do
       end
 
       it 'ファイルがないと作成できない', js:true do
-        fill_in 'タイトルを追加', with: 'テストアルバム'
+        fill_in 'アルバムのタイトルを追加', with: 'テストアルバム'
         click_button 'アップロードする'
         expect(page).not_to have_content '参加中', wait: 5
       end

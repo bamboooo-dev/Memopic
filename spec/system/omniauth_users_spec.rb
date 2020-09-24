@@ -16,7 +16,7 @@ RSpec.describe "Users through OmniAuth", type: :system do
         expect {
           click_button 'アカウント登録'
         }.to change(User, :count).by(1)
-        expect(page).to have_content 'ログアウト'
+        expect(page).to have_content '新しいアルバムを作成する'
       end
     end
 
@@ -34,7 +34,7 @@ RSpec.describe "Users through OmniAuth", type: :system do
         expect {
           click_button 'アカウント登録'
         }.to change(User, :count).by(1)
-        expect(page).to have_content 'ログアウト'
+        expect(page).to have_content '新しいアルバムを作成する'
       end
     end
 

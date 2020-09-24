@@ -9,9 +9,7 @@ RSpec.describe "Comment page", type: :system do
       click_on 'Google Signin'
       expect(page).to have_content 'アカウント登録'
       click_button 'アカウント登録'
-      click_button '新しいアルバムを作成する'
-      sleep 3
-      fill_in 'タイトルを追加', with: 'テストアルバム'
+      fill_in 'アルバムのタイトルを追加', with: 'テストアルバム'
       file_path = Rails.root.join('spec', 'factories', 'test.jpg')
       attach_file('album_form_pictures', file_path, make_visible: true)
       click_button 'アップロードする'

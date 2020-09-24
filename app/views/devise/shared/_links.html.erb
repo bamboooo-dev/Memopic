@@ -24,6 +24,7 @@
   <h3>
     他のアカウントでログイン
   </h3>
+  <h4>※ Spotify でログインすると<br>プレイリスト選択が簡単になります</h4>
   <%- if devise_mapping.omniauthable? %>
     <%- resource_class.omniauth_providers.each do |provider| %>
       <%= link_to omniauth_authorize_path(resource_name, provider) do %>
