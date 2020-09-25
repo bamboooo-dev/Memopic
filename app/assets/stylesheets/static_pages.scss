@@ -48,6 +48,60 @@
 .top-links{
     top: 50%;
 }
+
+// 使い方ページの CSS
+.service-description{
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    box-sizing: border-box;
+    h1{
+        background: #feebc8;
+        border-left: solid 5px #ffaf58;
+    }
+    .howto-steps{
+        img{
+            max-width: 100%;
+        }
+        .howto-step-header{
+            display: flex;
+            align-items: center;
+            .step-num{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 2em;
+                height: 2em;
+                margin-right: 12px;
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: #fff;
+                background-color: #FFA500;
+                border-radius: 100%;
+            }
+        }
+        >div{
+            margin-bottom: 16px;
+        }   
+    }
+}
+@media screen and (min-width: 960px) {
+    .service-description{
+        .howto-steps{
+            img{
+                max-width: 375px;
+            }
+            >div{
+                display: flex;
+                align-items: flex-start;
+            }
+        }
+        .step-header{
+            flex-grow: 1;
+        }
+    }
+}
+
 @media screen and (min-width: 481px) {
     .index-page-preview{
         right: 10vw;

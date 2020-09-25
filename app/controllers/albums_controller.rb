@@ -19,7 +19,7 @@ class AlbumsController < ApplicationController
       if current_user.provider == "spotify"
         RSpotify::User.find(current_user.uid).playlists.map { |spotify_playlist|
           {
-            image_url: spotify_playlist.images[2]["url"],
+            image_url: spotify_playlist.images[-1]["url"],
             name: spotify_playlist.name,
             url: spotify_playlist.external_urls["spotify"],
           }
