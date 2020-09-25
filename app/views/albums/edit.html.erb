@@ -3,7 +3,7 @@
     <i class="fas fa-check text-blue-600 text-3xl md:text-5xl"></i>
   <% end %>
   <%= f.text_field :name %>
-<div class="album_form">
+<div>
     <%= f.file_field :pictures, :multiple => true, accept: 'image/png,image/gif,image/jpeg' %>
     <div class="pictures-wrapper grid grid-cols-2 md:grid-cols-6">
       <%= render @pictures %>

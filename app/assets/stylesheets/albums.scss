@@ -1,6 +1,16 @@
 // Place all the styles related to the Albums controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+body{
+  margin: 0;
+}
+header{
+  background-color: #FFB649;
+  #navbar-divider{
+    border: 0;
+    border-top: 1px solid black;
+  }
+}
 p{
   margin: 0;
 }
@@ -15,6 +25,7 @@ p{
   border-style: solid;
   border-color: orange;
   border-radius: 25px;
+  font-size: 18px;
   text-decoration: none;
   color: #FFF;
   background: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
@@ -26,59 +37,99 @@ p{
     background: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
   }
 }
-a.disabled{
-  pointer-events: none;
+.image-list{
+  button{
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  .slide-arrow{
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+  }
+  .prev-arrow{
+    left: -20px;
+    width: 0;
+    height: 0;
+    border-left: 0 solid transparent;
+    border-right: 15px solid #113463;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+  }
+  .next-arrow{
+    right: -20px;
+    width: 0;
+    height: 0;
+    border-right: 0 solid transparent;
+    border-left: 15px solid #113463;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+  }
+  .image-box{
+    width: 60px;
+    height: 60px;
+    .checked{
+      border: 3px solid blue;
+      box-sizing: border-box;
+    }
+    .playlist-thumbnail-mask{
+      width: 60px;
+      height: 60px;
+    }
+  }
 }
-.input-new-album-title{
-  width: 100%;
-  height: 40px;
-  position: relative;
-  bottom: 10px;
-  font-size: 24px;
-  border: none;
-  border-bottom: 1px solid transparent;
-  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
-}
-.input-new-album-title:hover{
-  border-bottom: 1px solid #dadec0;
-}
-.input-new-album-title:focus{
-  outline: 0;
-  border-bottom: 1px solid blue;
+#album-name-input{
+  margin-top: 10px;
+  .input-new-album-title{
+    width: 100%;
+    height: 40px;
+    position: relative;
+    bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #dadec0;
+    transition: .3s cubic-bezier(0.4,0,0.2,1) all;
+    &:focus{
+      outline: 0;
+      border-bottom: 1px solid blue;
+    }
+  }
 }
 .input-new-playlist-link{
   width: 100%;
   height: 40px;
-  position: relative;
-  bottom: 10px;
   font-size: 15px;
   border: none;
-  border-bottom: 1px solid transparent;
-  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
-}
-.input-new-playlist-link:hover{
   border-bottom: 1px solid #dadec0;
-}
-.input-new-playlist-link:focus{
-  outline: 0;
-  border-bottom: 1px solid blue;
+  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
+  &:focus{
+    outline: 0;
+    border-bottom: 1px solid blue;
+  }
+  &:disabled{
+    background-color: #cbd5e0;;
+  }
 }
 .input-new-playlist-name{
   width: 100%;
   height: 40px;
-  position: relative;
-  bottom: 10px;
   font-size: 15px;
   border: none;
-  border-bottom: 1px solid transparent;
-  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
-}
-.input-new-playlist-name:hover{
   border-bottom: 1px solid #dadec0;
-}
-.input-new-playlist-name:focus{
-  outline: 0;
-  border-bottom: 1px solid blue;
+  transition: .3s cubic-bezier(0.4,0,0.2,1) all;
+  &:focus{
+    outline: 0;
+    border-bottom: 1px solid blue;
+  }
+  &:disabled{
+    background-color: #cbd5e0;;
+  }
 }
 .button-submit{
   display: inline-block;
@@ -109,9 +160,6 @@ a.disabled{
     cursor: not-allowed;
   }
   margin: 0 !important;
-}
-.button-new-album{
-  font-size: 18px;
 }
 .button-new-playlist{
   width: 70%;
@@ -152,15 +200,6 @@ a.disabled{
   border: 1px;
   border-style: solid;
   border-color: orange;
-}
-.user-info{
-  text-align: center;
-}
-.album_form{
-  text-align: center;
-}
-.playlist_form{
-  text-align: center;
 }
 .card{
   font-size: 20px;
@@ -253,11 +292,8 @@ a.disabled{
 .file-label{
   cursor: pointer;
   border-width: 1px;
-  padding-left: 20px;
   border-style: solid;
   border-radius: 10px;
-  font-size: 50px;
-  margin-right: 10px;
   i{
     font-size: 50px;
   }
@@ -271,7 +307,6 @@ a.disabled{
   text-align: right;
 }
 .form-new-album{
-  display: none;
   padding: 10px 10%;
 }
 .form-new-playlist-link{
@@ -280,9 +315,6 @@ a.disabled{
 }
 #album-title{
   display: inline;
-}
-#album-name-input{
-  margin-top: 10px;
 }
 #playlist-link-input{
   margin-top: 10px;
@@ -365,5 +397,10 @@ a.disabled{
   }
   .popup-main{
     width: 70%;
+  }
+}
+@media screen and (min-width: 768px) {
+  #pictures-input{
+    height: calc(100% - 29px);
   }
 }

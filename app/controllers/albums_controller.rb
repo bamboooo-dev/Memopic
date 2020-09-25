@@ -7,10 +7,26 @@ class AlbumsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create, :edit, :destroy]
   before_action :confirm_sharer, only: [:edit, :destroy]
 
+  require 'rspotify'
+  OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:ciphers]=OpenSSL::SSL::SSLContext.new.ciphers;
+  RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
+
   def index
     @albums = current_user.albums
     @thumbpics = pick_thumbpic
     @album_form = AlbumForm.new
+    @playlists =
+      if current_user.provider == "spotify"
+        RSpotify::User.find(current_user.uid).playlists.map { |spotify_playlist|
+          {
+            image_url: spotify_playlist.images[-1]["url"],
+            name: spotify_playlist.name,
+            url: spotify_playlist.external_urls["spotify"],
+          }
+        }
+      else
+        []
+      end
     gon.thumbpics_data = @albums.zip(@thumbpics).map do |album, thumbpic|
       { album_name: album.name,
         album_hash: album.album_hash,
