@@ -1,32 +1,20 @@
-<h1 style="background: linear-gradient(270deg, #FF9B25 32.29%, #FFCF44 100%);">memopicの使い方</h1>
-<h3 style="text-align:center; margin: 50px 10px 40px 10px;">memopicは旅に行った思い出を、プレイリストと写真で記録できるサービスです。</h3>
-<p class="text-center">基本的に使用するのは以下の2画面のみです！</p>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div class="md:my-4"><%= image_tag 'memopic-index.png', :style => 'width:100%;' %></div>
-  <div class="m-auto">
-    <h4 style="margin: 30px 0px 20px 0px;">①ホーム画面について</h4>
-    <p>ホーム画面には以下の機能があります！</p>
-    <ul>
-      <li>アルバムの作成機能</li>
-      <li>アルバム作成時にプレイリストを追加する機能</li>
-      <li>これまでのアルバムの撮影場所を地図上に表示する機能</li>
-    </ul>
-    <p class="mb-20">まずは、この画面からアルバムを作成してみましょう！</p>
-  </div>
-  <div class="m-auto order-last md:order-none">
-    <h4 style="margin: 30px 0px 20px 0px;">②アルバム画面について</h4>
-    <p>アルバム画面には以下の機能があります！</p>
-      <ul>
-        <li>アルバムを削除・編集・共有する機能</li>
-        <li>アルバム内画像をコラージュしてエクスポートする機能</li>
-        <li>プレイリスト追加機能</li>
-        <li>画像にいいね・コメントする機能</li>
-      </ul>
-    <p class="mb-5 md:mb-20">アルバムを作成したら、この画面からアルバムを操作してみましょう！</p>
-  </div>
-  <div class="md:my-4"><%= image_tag 'memopic-show.png', :style => 'width:100%;' %></div>
+<div class='service-description'>
+  <h1><span class='font-serif-sc'>memopic</span> の使い方</h1>
+  <section>
+    <div class='howto-steps'>
+      <% @step_titles.zip(@step_img_filename).each.with_index(1) do |element, step| %>
+        <div>
+          <div class='howto-step-header step-header'>
+            <div class='step-num'><%= step %></div>
+            <h3><%= element.first %></h3>
+          </div>
+          <%= image_tag element.second %>
+        </div>
+      <% end %>
+    </div>
+  </section>
 </div>
+
 <div class="my-10 text-center text-base md:text-2xl">
   <div class="top-links relative">
     <a href="/albums" class="button-use-memopic border rounded-full p-4 font-noto-sans-jp text-black">
